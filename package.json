@@ -1,0 +1,33 @@
+{
+  "name": "adoptapets",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "prod": "NODE_ENV='prod' npm start",
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "~1.16.0",
+    "colors": "^1.1.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "ejs": "~2.5.5",
+    "express": "~4.14.1",
+    "express-partials": "^0.3.0",
+    "express-session": "^1.15.2",
+    "method-override": "^2.3.8",
+    "mongoose": "^4.9.5",
+    "morgan": "~1.7.0",
+    "nodemailer": "^4.0.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "~2.3.2"
+  },
+  "devDependencies": {
+    "eslint": "3.19.0",
+    "eslint-config-google": "0.7.1",
+    "nodemon": "^1.11.0"
+  }
+}
