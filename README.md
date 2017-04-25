@@ -1,4 +1,4 @@
-# adoptaPets
+# AdoptaPets
 This is an application made in the Entrepreneurship course for the adoption of pets
 
 ## Requeriments/dependencies

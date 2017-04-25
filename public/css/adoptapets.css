@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "adoptapets";
+  src:url("/fonts/adoptapets.eot");
+  src:url("/fonts/adoptapets.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/adoptapets.woff") format("woff"),
+    url("/fonts/adoptapets.ttf") format("truetype"),
+    url("/fonts/adoptapets.svg#adoptapets") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "adoptapets" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="ap-"]:before,
+[class*=" ap-"]:before {
+  font-family: "adoptapets" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ap-dog-2:before {
+  content: "\62";
+}
+.ap-dog-3:before {
+  content: "\63";
+}
+.ap-dog-4:before {
+  content: "\64";
+}
+.ap-dog-1:before {
+  content: "\61";
+}
+.ap-dog-5:before {
+  content: "\65";
+}
+.ap-dog-8:before {
+  content: "\66";
+}
+.ap-dog-7:before {
+  content: "\67";
+}
+.ap-dog-6:before {
+  content: "\68";
+}
+.ap-adoptapets:before {
+  content: "\69";
+}
+.ap-sm-adoptapets:before {
+  content: "\6a";
+}
+.ap-cat-1:before {
+  content: "\6b";
+}
+.ap-cat-2:before {
+  content: "\6c";
+}
+.ap-cat-3:before {
+  content: "\6d";
+}
+.ap-cat-4:before {
+  content: "\6e";
+}
+.ap-cat-5:before {
+  content: "\6f";
+}
+.ap-cat-6:before {
+  content: "\70";
+}
+.ap-cat-7:before {
+  content: "\71";
+}
+.ap-cat-8:before {
+  content: "\72";
+}

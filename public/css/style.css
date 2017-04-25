@@ -1,8 +1,25 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.brand-logo {
+  color: #785221 !important;
+  font-size: 9em !important;
 }
 
-a {
-  color: #00B7FF;
+ul.side-nav.fixed li a {
+  color: #785221;
+}
+
+#index-banner {
+  background-color: #8F6F40;
+}
+
+#icon-intro {
+  color: #fff;
+  font-size: 20em;
+}
+
+#icon-intro:before {
+  bottom: 0;
+}
+
+.page-footer {
+  background-color: #8F6F40;
 }
