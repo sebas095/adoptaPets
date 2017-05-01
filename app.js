@@ -12,6 +12,7 @@ const path = require('path');
 const expSession = require('express-session');
 
 require('colors');
+require('./config/passport')(passport);
 
 const env = process.env.NODE_ENV || 'dev';
 const config = require('./config/' + env);
