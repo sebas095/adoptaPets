@@ -56,11 +56,28 @@ app.on('open', () => {
   console.log('connected to db'.yellow);
 });
 
+// Helpers
+app.use((req, res, next) => {
+  if (req.session.passport) {
+    const id = req.session.passport.user;
+    User.findById(id, (err, user) => {
+      if (err) console.log(err);
+      res.locals.session = {
+        firstname: user.firstname,
+        lastname: user.lastname,
+        state: user.state,
+      };
+      next();
+    });
+  } else
+    next();
+});
+
 // Routes
 index(app, '/');
 users(app, '/users');
 account(app, '/account');
-session(app, '/session');
+session(app, '/session', passport);
 publications(app, '/publications');
 
 // catch 404 and forward to error handler

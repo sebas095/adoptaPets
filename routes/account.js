@@ -8,10 +8,10 @@ module.exports = (app, mountPoint) => {
   router.get('/reset/:token', sessionController.resetPassword);
 
   // POST
+  router.post('/emailRecovery', sessionController.sendEmail);
 
   // PUT
-
-  // DELETE
+  router.put('/reset/:token', sessionController.changePassword);
 
   app.use(mountPoint, router);
 };

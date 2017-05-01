@@ -86,7 +86,7 @@ exports.sendEmail = (req, res) => {
     },
     (token, user, done) => {
       const mailOptions = {
-        from: 'Administración',
+        from: 'Administración Adopta Pets',
         to: user.email,
         subject: 'Recuperación de contraseña en Adopta Pets',
         html: `<p>Estimado Usuario ${user.firstname} ${user.lastname},</p><br>
