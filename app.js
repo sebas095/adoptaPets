@@ -8,7 +8,6 @@ const cookieParser = require('cookie-parser');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const methodOverride = require('method-override');
-const partials = require('express-partials');
 const path = require('path');
 const expSession = require('express-session');
 
@@ -35,15 +34,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(partials());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
-// app.use(expSession({
-//   secret: config.secret,
-//   resave: false,
-//   saveUninitialized: false,
-// }));
+app.use(expSession({
+  secret: config.secret,
+  resave: false,
+  saveUninitialized: false,
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
