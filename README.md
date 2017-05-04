@@ -1,4 +1,5 @@
-# AdoptaPets
+![AdoptaPets](public/img/title.svg)
+
 This is an application made in the Entrepreneurship course for the adoption of pets
 
 ## Requeriments/dependencies
