@@ -1,1 +1,47 @@
-<h3>Vista para login</h3>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adopta Pets</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/ghpages-materialize.css">
+    <link rel="stylesheet" href="/css/adoptapets.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <main>
+      <div class="row">
+        <form action="/session/login" method="post">
+          <div class="row">
+            <div class="input-field col l6 col m6 col s12">
+              <i class="material-icons prefix">email</i>
+              <input type="email" id="user" name="email" class="validate" autocomplete="off" required="" aria-required="true">
+              <label for="user">Email </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col l6 col m6 col s12">
+              <i class="material-icons prefix">lock</i>
+              <input type="password" id="pwd" name="pwd" class="validate" required="" aria-required="true">
+              <label for="pwd">Contraseña </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col l3 m3 s12">
+              <input class="btn waves-effect waves-light cyan darken-2" type="submit" name="login" value="Iniciar Sesión">
+            </div>
+            <div class="col l3 m3 s12">
+              <a href="/account/newPassword">¿Has olvidado tu contraseña?</a><br><br>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+  </body>
+</html>
