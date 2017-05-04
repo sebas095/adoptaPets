@@ -23,3 +23,7 @@ ul.side-nav.fixed li a {
 .page-footer {
   background-color: #8F6F40;
 }
+
+.parallax-container {
+  height: 300px;
+}

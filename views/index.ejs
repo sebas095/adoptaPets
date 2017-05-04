@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/css/ghpages-materialize.css">
     <link rel="stylesheet" href="/css/adoptapets.css">
@@ -17,187 +18,192 @@
       <% include menu.ejs %>
     </header>
     <main>
-      <div class="section no-pad-bot" id="index-banner">
-        <div class="container">
-          <div class="row center">
-            <div class="col s12 m4">
-              <div class="buysellads-header center-on-small-only">
-                <div id="icon-intro" class="icon ap-adoptapets"></div>
+      <div class="row">
+        <div class="col s12 m9 l10">
+          <div class="section" id="index-banner">
+            <div class="scrollspy" id="who">
+              <div class="container">
+                <div class="row center">
+                  <div class="col s12 m4">
+                    <div class="buysellads-header hide-on-small-only hide-on-medium-only">
+                      <div id="icon-intro" class="icon ap-adoptapets"></div>
+                    </div>
+                  </div>
+                  <div class="col s12 m8">
+                    <h1 class="header center-on-small-only">Sobre Materialize</h1>
+                    <h4 class="light red-text text-lighten-4 center-on-small-only">Aprende sobre Material Design y nuestro Equipo De Desarrollo</h4>
+                  </div>
+                  <div class="row">
+                    <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn waves-effect waves-light">Get Started</a>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col s12 m8">
-              <h1 class="header center-on-small-only">Sobre Materialize</h1>
-              <h4 class="light red-text text-lighten-4 center-on-small-only">Aprende sobre Material Design y nuestro Equipo De Desarrollo</h4>
-            </div>
-            <div class="row">
-              <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn waves-effect waves-light">Get Started</a>
-            </div>
           </div>
-          <div class='row center'>
+          <div class="container">
+            <div class="section section scrollspy" id="feature">
+              <div class="row center">
+                <h3 class="col s12 light header icon ap-cat-5"> Las Mejores Características</h3>
+                <p>Tenemos como propósito facilitar la adopción de diferentes animales. Para esto se desarrolla una plataforma que maneja la información necesaria para hacer el proceso de adopción más fácil y efectivo</p>
+              </div>
 
+              <!--   Promo Section   -->
+              <div class="row">
+                <div class="col s12 m6">
+                  <div class="center promo">
+                    <i class="material-icons">place</i>
+                    <p class="promo-caption">Geolocalización</p>
+                    <p class="light center">Podrás visualizar los animales que se encuentren más cerca de ti, gracias a nuestro sistema de geolocalización.</p>
+                  </div>
+                </div>
+                <div class="col s12 m6">
+                  <div class="center promo">
+                    <i class="material-icons">phone_iphone</i>
+                    <p class="promo-caption">Adaptable</p>
+                    <p class="light center">Gracias a la adaptabilidad de nuestro sitio, podrás encontrar tu mascota ideal desde cualquier dispositivo.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12 m6">
+                  <div class="center promo">
+                    <i class="material-icons">computer</i>
+                    <p class="promo-caption">Web</p>
+                    <p class="light center">Con solo unos pocos clics podrás encontrar tu amigo ideal en la web.</p>
+                  </div>
+                </div>
+                <div class="col s12 m6">
+                  <div class="center promo">
+                    <i class="material-icons">send</i>
+                    <p class="promo-caption">Amplia Difusión</p>
+                    <p class="light center">La información de tu mascota será difundida rápidamente y por ello será adoptado más fácilmente.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12 m12">
+                  <div class="center promo">
+                    <i class="material-icons">attach_money</i>
+                    <p class="promo-caption">Gratis</p>
+                    <p class="light center">Encuentra a tu mascota sin ningún costo, la felicidad no tiene precio!</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="divider"></div>
+            <div class="section scrollspy" id="team">
+              <div class="row center">
+                <h3 class="light header ap-dog-2"> Las Personas Detrás de la Idea</h3>
+                <p class="col s12 m8 offset-m2 caption">Somos jóvenes emprendedores con experiencia en desarrollo de aplicaciones con sentido social</p>
+              </div>
+              <div class="row">
+                <div class="col s12 m4">
+                  <div class="card hoverable">
+                    <div class="card-image">
+                      <img src="img/author/caro.jpg">
+                      <span class="card-title">Carolina Gómez</span>
+                    </div>
+                    <div class="card-content">
+                      <p>Comercial</p>
+                    </div>
+                    <div class="card-action center">
+                      <a href="#"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                      <a href="#"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+                      <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                      <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col s12 m4">
+                  <div class="card hoverable">
+                    <div class="card-image">
+                      <img src="img/author/alejo.jpg">
+                      <span class="card-title">Alejandro E. Rendón</span>
+                    </div>
+                    <div class="card-content">
+                      <p>Diseñador/Desarrollador</p>
+                    </div>
+                    <div class="card-action center">
+                      <a href="#"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                      <a href="#"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+                      <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                      <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col s12 m4">
+                  <div class="card hoverable">
+                    <div class="card-image">
+                      <img src="img/author/baldor.jpg">
+                      <span class="card-title">Sebastian Duque</span>
+                    </div>
+                    <div class="card-content">
+                      <p>Desarrollador</p>
+                    </div>
+                    <div class="card-action center">
+                      <a href="#"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                      <a href="#"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+                      <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                      <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <!-- <div class="section">
+              <div class="row center">
+                <h3 class="light header">Themes</h3>
+                <div class="col s12 m6 offset-m3">
+                  <p class="caption">
+                  Take a look at our official themes for Materialize.</p>
+                  <img width="100%" src="https://s23.postimg.org/9g7ajckrf/thunder.png" alt="">
+                  <br><br>
+                  <a href="http://materializecss.com/themes.html" class="btn-large waves-effect waves-light">Explore our Themes</a>
+                </div>
+              </div>
+            </div> -->
+          </div>
+          <!-- <div id="introduction" class="section scrollspy">
+            <p>Content </p>
+          </div>
+
+          <div id="structure" class="section scrollspy">
+            <p>Content </p>
+          </div>
+
+          <div id="initialization" class="section scrollspy">
+            <p>Content </p>
+          </div> -->
+        </div>
+        <div class="col hide-on-small-only m3 l2">
+          <div class="toc-wrapper pinned">
+            <div id="carbonads"><span><span class="carbon-wrap"><a href="//srv.carbonads.net/ads/click/x/GTND4237CKAI62QICYS4YKQWF67IE2Q7CKAI4Z3JCEAIC27YCVAI4K3KC6BDLK77CVBDVK3EHJNCLSIZZRLCP7I35MNFV?segment=placement:materializecss;&amp;encredirect=https%3A%2F%2Fad.doubleclick.net%2Fddm%2Fjump%2FN233401.1676840CARBONADS.COM%2FB9758237.132241163%3Bsz%3D130x100%3Bord%3D%5Btimestamp%5D%3F" class="carbon-img" target="_blank"><img src="https://ad.doubleclick.net/ddm/ad/N233401.1676840CARBONADS.COM/B9758237.132241163;sz=130x100;ord=[timestamp];dc_lat=;dc_rdid=;tag_for_child_directed_treatment=?" alt="" border="0" height="100" width="130" style="max-width: 130px; display: none !important;"></a><a href="//srv.carbonads.net/ads/click/x/GTND4237CKAI62QICYS4YKQWF67IE2Q7CKAI4Z3JCEAIC27YCVAI4K3KC6BDLK77CVBDVK3EHJNCLSIZZRLCP7I35MNFV?segment=placement:materializecss;&amp;encredirect=https%3A%2F%2Fad.doubleclick.net%2Fddm%2Fjump%2FN233401.1676840CARBONADS.COM%2FB9758237.132241163%3Bsz%3D130x100%3Bord%3D%5Btimestamp%5D%3F" class="carbon-text" target="_blank">Do You Want a Transparent Cloud Environment? Our Experts Can Help!</a></span><a href="http://carbonads.net/" class="carbon-poweredby" target="_blank">ads via Carbon</a></span>
+            </div>
+            <ul class="section table-of-contents">
+              <li><a href="#who">Quiénes Somos</a></li>
+              <li><a href="#feature">Características</a></li>
+              <li><a href="#team">Equipo</a></li>
+            </ul>
           </div>
         </div>
       </div>
-
-      <div class="container">
-        <div class="section" id="catacteristicas">
-          <div class="row center">
-            <h3 class="col s12 light header">Las Mejores Características</h3>
-            <p>Tenemos como propósito facilitar la adopción de diferentes animales. Para esto se desarrolla una plataforma que maneja la información necesaria para hacer el proceso de adopción más fácil y efectivo</p>
-          </div>
-
-          <!--   Promo Section   -->
-          <div class="row">
-            <div class="col s12 m6">
-              <div class="center promo">
-                <i class="material-icons">place</i>
-                <p class="promo-caption">Geolocalización</p>
-                <p class="light center">Podrás visualizar los animales que se encuentren más cerca de ti, gracias a nuestro sistema de geolocalización.</p>
-              </div>
-            </div>
-            <div class="col s12 m6">
-              <div class="center promo">
-                <i class="material-icons">phone_iphone</i>
-                <p class="promo-caption">Adaptable</p>
-                <p class="light center">Gracias a la adaptabilidad de nuestro sitio, podrás encontrar tu mascota ideal desde cualquier dispositivo.</p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s12 m6">
-              <div class="center promo">
-                <i class="material-icons">computer</i>
-                <p class="promo-caption">Web</p>
-                <p class="light center">Con solo unos pocos clics podrás encontrar tu amigo ideal en la web.</p>
-              </div>
-            </div>
-            <div class="col s12 m6">
-              <div class="center promo">
-                <i class="material-icons">send</i>
-                <p class="promo-caption">Amplia Difusión</p>
-                <p class="light center">La información de tu mascota será difundida rápidamente y por ello será adoptado más fácilmente.</p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s12 m12">
-              <div class="center promo">
-                <i class="material-icons">attach_money</i>
-                <p class="promo-caption">Gratis</p>
-                <p class="light center">Encuentra a tu mascota sin ningún costo, la felicidad no tiene precio!</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="divider"></div>
-        <div class="section">
-          <div class="row center">
-            <h3 class="light header">Las personas detrás de esta idea</h3>
-            <p class="col s12 m8 offset-m2 caption">SOMOS JÓVENES EMPRENDEDORES CON EXPERIENCIA EN DESARROLLO DE APLICACIONES WEB CON RAZÓN SOCIAmate/p>
-          </div>
-          <div class="row">
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="images/sample-1.jpg">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="images/sample-1.jpg">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="images/sample-1.jpg">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="divider"></div>
-        <div class="section">
-          <div class="row center">
-            <h3 class="light header">Themes</h3>
-            <div class="col s12 m6 offset-m3">
-              <p class="caption">
-              Take a look at our official themes for Materialize.</p>
-              <img width="100%" src="https://s23.postimg.org/9g7ajckrf/thunder.png" alt="">
-              <br><br>
-              <a href="http://materializecss.com/themes.html" class="btn-large waves-effect waves-light">Explore our Themes</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
     </main>
-    <footer class="page-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col l4 s12">
-            <h5 class="white-text">Help Materialize Grow</h5>
-            <p class="grey-text text-lighten-4">We hope you have enjoyed using Materialize! If you feel Materialize has helped you out and want to support the team, send us over a donation! Any amount would help support and continue development on this project and is greatly appreciated.</p>
-          </div>
-          <div class="col l4 s12">
-            <h5 class="white-text">Join the Discussion</h5>
-            <p class="grey-text text-lighten-4">We have a Gitter chat room set up where you can talk directly with us. Come in and discuss new features, future goals, general problems or questions, or anything else you can think of.</p>
-            <a class="btn waves-effect waves-light red lighten-3" target="_blank" href="https://gitter.im/Dogfalo/materialize">Chat</a>
-          </div>
-          <div class="col l4 s12" style="overflow: hidden;">
-            <h5 class="white-text">Connect</h5>
-            <iframe src="http://ghbtns.com/github-btn.html?user=dogfalo&repo=materialize&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
-            <br>
-            <a href="https://twitter.com/MaterializeCSS" class="twitter-follow-button" data-show-count="true" data-size="large" data-dnt="true">Follow @MaterializeCSS</a>
-            <br>
-            <div class="g-follow" data-annotation="bubble" data-height="24" data-href="https://plus.google.com/108619793845925798422" data-rel="publisher"></div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        <div class="container">
-        © 2014-2017 Materialize, All rights reserved.
-        <a class="grey-text text-lighten-4 right" href="https://github.com/Dogfalo/materialize/blob/master/LICENSE">MIT License</a>
-        </div>
-      </div>
-    </footer>
+    <% include footer %>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
     <script type="text/javascript">
     (function($) {
-  $(function() {
-    $('.button-collapse').sideNav();
-  }); // end of document ready
-})(jQuery); // end of jQuery name space
-</script>
+      $(function() {
+        $('.button-collapse').sideNav();
+      }); // end of document ready
+    })(jQuery); // end of jQuery name space
+    </script>
+    <script type="text/javascript">
+    (function($) {
+      $('.scrollspy').scrollSpy();
+    })(jQuery); // end of jQuery name space
+    </script>
   </body>
 </html>
