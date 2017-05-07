@@ -1,1 +1,136 @@
-<h3>Vista de admin</h3>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adopta Pets</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/ghpages-materialize.css">
+    <link rel="stylesheet" href="/css/adoptapets.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <header>
+      <% include ../menu.ejs %>
+    </header>
+    <main>
+      <div class="row">
+        <div class="col s12 m9 l10">
+          <div class="parallax-container">
+            <div class="parallax"><img src="/img/fondo.png"></div>
+          </div>
+          <div class="container">
+            <div class="section scrollspy">
+              <% for (let usr of users) { %>
+                <% let i = 0; %>
+                <% if (i % 2 === 0) { %>
+                  <div class="row">
+                <% } %>
+                  <div class="col m6 s12">
+                    <div class="card">
+                      <div class="card-stacked">
+                        <div class="card-content">
+                          <form action="/users/<%= usr._id %>?_method=put" method="post" id="form-<%= usr._id %>">
+                            <div class="row">
+                              <div class="input-field col m12 s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input type="text" id="firstname" name="firstname" class="validate" value="<%= usr.firstname %>" autocomplete="off" required="" aria-required="true" disabled="">
+                                <label for="firstname">Nombre(s) </label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col m12 s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input type="text" id="lastname" name="lastname" class="validate" value="<%= usr.lastname %>" autocomplete="off" required="" aria-required="true" disabled="">
+                                <label for="lastname">Apellido(s) </label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col m12 s12">
+                                <i class="material-icons prefix">email</i>
+                                <input type="email" id="user" name="email" class="validate" value="<%= usr.email %>" autocomplete="off" required="" aria-required="true" disabled="">
+                                <label for="user">Email </label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col m12 s12">
+                                <i class="material-icons prefix">location_on</i>
+                                <input type="text" id="address" name="address" class="validate" value="<%= usr.address %>" autocomplete="off" required="" aria-required="true"  disabled="">
+                                <label for="address">Dirección </label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col m12 s12">
+                                <i class="material-icons prefix">phone</i>
+                                <input type="text" id="phone" name="phone" class="validate" value="<%= usr.phone %>" autocomplete="off" required="" aria-required="true"  disabled="">
+                                <label for="user">Teléfono </label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col offset-m2 m5 s6">
+                                <button class="btn waves-effect waves-light green save" id="save-<%= usr._id %>">Guardar</button>
+                              </div>
+                              <div class="col m3 s6">
+                                <button class="btn waves-effect waves-light blue edit" id="edit-<%= usr._id %>">Editar</button>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col offset-m4 m6 offset-s3 s6">
+                                <button class="btn waves-effect waves-light yellow activate" id="activate-<%= usr._id %>">
+                                  <% if (usr.state === '3') { %>
+                                    Activar Cuenta
+                                  <% } else { %>
+                                    Desactivar Cuenta
+                                  <% } %>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% if ((i + 1) % 2 === 0 || i == users.length - 1) { %>
+                    </div>
+                  <% } %>
+                  <form action="/users/<%= usr._id %>?_method=delete" method="post" id="deactivateForm-<%= usr._id %>">
+                    <input type="hidden" name="status" id="status-<%= usr._id %>">
+                  </form>
+                  <% i++ %>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+          <div class="row center">
+            <div class="col s12 m12">
+              <div class="buysellads-header center-on-small-only">
+                <div id="icon-intro" class="icon ap-title"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    </main>
+    <% include ../footer %>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script src="/js/management.js"></script>
+    <script type="text/javascript">
+      (function($) {
+        $(function() {
+          $('.button-collapse').sideNav();
+          $('.parallax').parallax();
+          $('.scrollspy').scrollSpy();
+        }); // end of document ready
+      })(jQuery); // end of jQuery name space
+    </script>
+  </body>
+</html>
