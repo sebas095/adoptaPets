@@ -27,3 +27,8 @@ ul.side-nav.fixed li a {
 .parallax-container {
   height: 300px;
 }
+
+#map {
+  height: 65vh;
+  width: 70vw;
+}
