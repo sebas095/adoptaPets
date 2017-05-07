@@ -10,6 +10,7 @@ const logger = require('morgan');
 const methodOverride = require('method-override');
 const path = require('path');
 const expSession = require('express-session');
+const User = require('./models/user');
 
 require('colors');
 require('./config/passport')(passport);
@@ -30,7 +31,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

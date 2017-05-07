@@ -51,10 +51,12 @@ exports.createUser = (req, res) => {
 // PUT /users/:id -- Modifies user data
 exports.updateUser = (req, res) => {
   const id = req.params.id || req.user._id;
-  if (req.body.status && req.body.status === 'admin') {
-    req.body.state = '1';
-  } else {
-    req.body.state = '2';
+  if (req.body.status) {
+    if (req.body.status === 'admin') {
+      req.body.state = '1';
+    } else {
+      req.body.state = '2';
+    }
   }
 
   User.findByIdAndUpdate(id, req.body, {new: true}, (err, user) => {
@@ -279,7 +281,7 @@ exports.deactivateAccount = (req, res) => {
               to: user.email,
               subject: 'Desactivación de cuenta en Adopta Pets',
               html: `<p>Estimado Usuario ${user.firstname} ${user.lastname},</p>
-                <br>Se le informa que su cuenta en Adopta Pets no ha sido 
+                <br>Se le informa que su cuenta en Adopta Pets no ha sido
                 desactivada.<br><br><br>Att,<br><br>
                 Equipo Administrativo Adopta Pets`,
             };

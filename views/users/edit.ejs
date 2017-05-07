@@ -1,1 +1,120 @@
-<h3>Editar datos de usuario</h3>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adopta Pets</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/ghpages-materialize.css">
+    <link rel="stylesheet" href="/css/adoptapets.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <header>
+      <% include ../menu.ejs %>
+    </header>
+    <main>
+      <div class="row">
+        <div class="col s12 m9 l10">
+          <div class="parallax-container">
+            <div class="parallax"><img src="/img/fondo.png"></div>
+          </div>
+          <div class="container">
+            <div class="section scrollspy" id="session">
+              <div class="row center">
+                <h3 class="light header icon ap-dog-7"> Registro</h3>
+                <p class="col s12 m8 offset-m2 caption">Somos jóvenes emprendedores con experiencia en desarrollo de aplicaciones con sentido social</p>
+              </div>
+              <div class="row">
+                <form action="/users/<%= user._id %>?_method=put" id="profile" method="post">
+                  <div class="row">
+                    <div class="input-field col m6 s12">
+                      <i class="material-icons prefix">account_circle</i>
+                      <input type="text" id="firstname" name="firstname" class="validate" value="<%= user.firstname %>" autocomplete="off" required="" aria-required="true" disabled="">
+                      <label for="firstname">Nombre(s) </label>
+                    </div>
+                    <div class="input-field col m6 s12">
+                      <i class="material-icons prefix">account_circle</i>
+                      <input type="text" id="lastname" name="lastname" class="validate" value="<%= user.lastname %>" autocomplete="off" required="" aria-required="true" disabled="">
+                      <label for="lastname">Apellido(s) </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col m6 s12">
+                      <i class="material-icons prefix">email</i>
+                      <input type="email" id="user" name="email" class="validate" value="<%= user.email %>" autocomplete="off" required="" aria-required="true" disabled="">
+                      <label for="user">Email </label>
+                    </div>
+                    <div class="input-field col m6 s12">
+                      <i class="material-icons prefix">location_on</i>
+                      <input type="text" id="address" name="address" class="validate" value="<%= user.address %>" autocomplete="off" required="" aria-required="true"  disabled="">
+                      <label for="address">Dirección </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col m12 s12">
+                      <i class="material-icons prefix">phone</i>
+                      <input type="text" id="phone" name="phone" class="validate" value="<%= user.phone %>" autocomplete="off" required="" aria-required="true"  disabled="">
+                      <label for="user">Teléfono </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col offset-m3 offset-s2 s4">
+                      <button class="btn waves-effect waves-light blue" id="edit">Editar</button>
+                    </div>
+                    <div class="col s4">
+                      <input class="btn waves-effect waves-light green" type="submit" id="save" value="Enviar">
+                    </div>
+                  </div>
+                  <% if (user.state === '2') { %>
+                    <div class="row">
+                      <div class="col offset-m4 m6 offset-s3 s6">
+                        <button class="btn waves-effect waves-light red" id="deactivate">Desactivar Cuenta</button>
+                      </div>
+                    </div>
+                  <% } %>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col hide-on-small-only m3 l2">
+          <div class="toc-wrapper pinned">
+            <ul class="section table-of-contents">
+              <li><a href="#session">Iniciar Sesión</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+          <div class="row center">
+            <div class="col s12 m12">
+              <div class="buysellads-header center-on-small-only">
+                <div id="icon-intro" class="icon ap-title"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    </main>
+    <% include ../footer %>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script src="/js/editUser.js"></script>
+    <script type="text/javascript">
+      (function($) {
+        $(function() {
+          $('.button-collapse').sideNav();
+          $('.parallax').parallax();
+          $('.scrollspy').scrollSpy();
+        }); // end of document ready
+      })(jQuery); // end of jQuery name space
+    </script>
+  </body>
+</html>
