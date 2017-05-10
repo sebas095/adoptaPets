@@ -32,3 +32,10 @@ ul.side-nav.fixed li a {
   height: 65vh;
   width: 70vw;
 }
+
+@media only screen and (max-width: 700px) {
+  #map {
+    height: 65vh;
+    width: 92vw;
+  }
+}
