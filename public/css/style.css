@@ -47,3 +47,7 @@ nav .button-collapse {
 a.button-collapse.top-nav {
   margin-left: 0;
 }
+
+.table-of-contents a.active {
+  border-left: 2px solid #ff9100;
+}

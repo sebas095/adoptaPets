@@ -20,19 +20,9 @@
       <% include menu.ejs %>
     </header>
     <main>
-      <div class="hide-on-large-only">
-        <div class="navbar-fixed">
-          <nav style="background: #8F6F40">
-            <div class="nav-wrapper">
-              <!--<a href="#!" class="brand-logo">Logo</a>-->
-                <a href="#" id="menu" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only"><i class="material-icons">menu</i></a>
-              <img src="/img/white/title_w.svg" alt="" style="max-width: 60%; height: 60px" />
-            </div>
-          </nav>
-        </div>
-      </div>
+      <% include navbar %>
       <div class="row">
-        <div class="col s12 m9 l10">
+        <div class="col s12 m9 l10" style="padding: 0">
           <div class="section" id="index-banner">
             <div class="scrollspy" id="who">
               <div class="container">
@@ -45,7 +35,8 @@
                 </div>
                 <div class="row center">
                   <div class="col s12 m12">
-                    <h4 class="light red-text text-lighten-4 center-on-small-only">Aprende sobre Material Design y nuestro Equipo De Desarrollo</h4>
+                    <h4 class="light white-text center-on-small-only">Buscamos la mejor calidad de vida para animales</h4>
+                    <h5 class="light white-text">La adopción es la mejor opción</h5>
                   </div>
                   <div class="row">
                     <a href="#feature" class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">keyboard_arrow_down</i></a>
@@ -65,8 +56,8 @@
               <div class="row">
                 <div class="col s12 m6">
                   <div class="center promo">
-                    <i class="material-icons">place</i>
-                    <p class="promo-caption">Geolocalización</p>
+                    <i class="material-icons red-text">place</i>
+                    <p class="promo-caption red-text">Geolocalización</p>
                     <p class="light center">Podrás visualizar los animales que se encuentren más cerca de ti, gracias a nuestro sistema de geolocalización.</p>
                   </div>
                 </div>
