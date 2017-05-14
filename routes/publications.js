@@ -6,6 +6,7 @@ module.exports = (app, mountPoint) => {
   // GET
   router.get('/new', publicationController.new);
   router.get('/edit', publicationController.edit);
+  router.get('/search', publicationController.search);
 
   // POST
 
