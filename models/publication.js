@@ -34,6 +34,14 @@ const PublicationSchema = new Schema({
     type: String,
     require: true,
   },
+  email: {
+    type: String,
+    require: true,
+    unique: true,
+    validate(email) {
+      return /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
+    },
+  },
   address: {
     type: String,
     require: true,
