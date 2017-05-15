@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {publicationController} = require('../controllers');
 
-module.exports = (app, mountPoint) => {
+module.exports = (app, host, mountPoint) => {
   // GET
   router.get('/', publicationController.getPublications);
   router.get('/new', publicationController.new);
@@ -18,5 +18,5 @@ module.exports = (app, mountPoint) => {
 
   // DELETE
 
-  app.use(mountPoint, router);
+  app.use(host + mountPoint, router);
 };

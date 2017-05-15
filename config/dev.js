@@ -4,4 +4,5 @@ module.exports = {
   },
   secret: 'b55f69a2-04c7-4e5b-970d-042b8f08dd04',
   url: 'http://localhost:3000',
+  host: '',
 };

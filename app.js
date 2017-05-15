@@ -75,11 +75,11 @@ app.use((req, res, next) => {
 });
 
 // Routes
-index(app, '/');
-users(app, '/users');
-account(app, '/account');
-session(app, '/session', passport);
-publications(app, '/publications');
+index(app, config.host, '/');
+users(app, config.host, '/users');
+account(app, config.host, '/account');
+session(app, config.host, '/session', passport);
+publications(app, config.host, '/publications');
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

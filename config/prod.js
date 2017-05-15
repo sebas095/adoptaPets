@@ -4,4 +4,5 @@ module.exports = {
   },
   secret: 'ce1d9858-8a8c-4720-8c44-b2de67595166',
   url: 'http://localhost:3000',
+  host: '/adopta-pets',
 };
