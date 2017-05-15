@@ -50,6 +50,10 @@ const PublicationSchema = new Schema({
     type: Number,
     require: true,
   },
+  createBy: {
+    type: String,
+    require: true,
+  },
   lng: {
     type: Number,
     require: true,

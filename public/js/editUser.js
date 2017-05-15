@@ -24,7 +24,7 @@ btnEdit.addEventListener('click', (ev) => {
 });
 
 if (btnDeactivate) {
-  btnDeactivate.addEventListener('click', function(ev) {
+  btnDeactivate.addEventListener('click', (ev) => {
     ev.preventDefault();
     if (confirm('¿Estas seguro que deseas solicitar la desactivación de tú cuenta?')) {
       document.getElementById('deactivateForm').submit();

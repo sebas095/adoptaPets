@@ -7,8 +7,8 @@ module.exports = (app, host, mountPoint) => {
   router.get('/', publicationController.getPublications);
   router.get('/new', publicationController.new);
   router.get('/search', publicationController.search);
-  router.get('/edit', publicationController.edit);
-  router.get('/show', publicationController.show);
+  router.get('/:id/edit', publicationController.edit);
+  router.get('/:id', publicationController.show);
 
   // POST
   router.post('/new', publicationController.create);
@@ -17,6 +17,7 @@ module.exports = (app, host, mountPoint) => {
   router.post('/:id/edit', publicationController.update);
 
   // DELETE
+  router.delete('/:id', publicationController.delete);
 
   app.use(host + mountPoint, router);
 };
