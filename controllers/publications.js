@@ -95,7 +95,9 @@ exports.update = (req, res) => {
     features: pet,
   };
 
-  Publication.findByIdAndUpdate(id, publication, (err, data) => {
+  console.log('lat: ', req.body['lat']);
+  console.log('lng: ', req.body['lng']);
+  Publication.findByIdAndUpdate(id, publication, {new: true}, (err, data) => {
     if (err) {
       console.log(err);
       req.flash(

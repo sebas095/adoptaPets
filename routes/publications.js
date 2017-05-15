@@ -14,7 +14,7 @@ module.exports = (app, host, mountPoint) => {
   router.post('/new', publicationController.create);
 
   // PUT
-  router.post('/:id/edit', publicationController.update);
+  router.put('/:id/edit', publicationController.update);
 
   // DELETE
   router.delete('/:id', publicationController.delete);

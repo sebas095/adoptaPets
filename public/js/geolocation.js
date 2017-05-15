@@ -1,5 +1,11 @@
 let map;
 let marker = null;
+const submit = document.getElementById('save');
+
+submit.addEventListener('click', (ev) => {
+  ev.preventDefault();
+  save();
+});
 
 google.maps.event.addDomListener(window, 'load', initMap);
 if (!navigator.geolocation) {
@@ -32,15 +38,23 @@ function addMarker(location) {
 
 function locate(map) {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const {latitude, longitude} = position.coords;
-      const initLocation = new google.maps.LatLng(latitude, longitude);
+    const lat = parseFloat(document.getElementById('lat').value);
+    const lng = parseFloat(document.getElementById('lng').value);
+    if (lat && lng) {
+      const initLocation = new google.maps.LatLng(lat, lng);
       map.setCenter(initLocation);
-      addMarker({
+      addMarker({lat, lng});
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const {latitude, longitude} = position.coords;
+        const initLocation = new google.maps.LatLng(latitude, longitude);
+        map.setCenter(initLocation);
+        addMarker({
           lat: latitude,
           lng: longitude,
+        });
       });
-    });
+    }
   }
 }
 
