@@ -1,5 +1,5 @@
 // Form
-const form = document.getElementById('edit-publication-form');
+const form = document.getElementById('publication-form');
 const inputs = form.elements;
 
 // Buttons
