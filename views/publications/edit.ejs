@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adopta Pets</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
@@ -17,105 +17,118 @@
       <% include ../menu.ejs %>
     </header>
     <main>
+      <% include ../navbar %>
       <div class="row">
-        <div class="col s12 m9 l10">
-          <div class="parallax-container">
-            <div class="parallax"><img src="/img/fondo.png"></div>
-          </div>
+        <div class="col s12 m9 l10" style="padding: 0">
+          <% include ../header %>
           <div class="container">
-            <div class="section scrollspy" id="session">
-              <div class="row center">
-                <h3 class="light header icon ap-dog-7">Publicación</h3>
+            <div id="session">
+              <div class="scrollspy" id="post">
+                <div class="row center">
+                  <h3 class="light header icon ap-cat-3"> Publicación</h3>
+                  <p>Publica una mascota en adopción.</p>
+                </div>
               </div>
+              <div class="divider"></div>
               <div class="row">
                 <form action="" id="publication-form" method="post">
-                  <div class="row">
-                    <div class="input-field col m12 s12">
-                      <i class="material-icons prefix">phone</i>
-                      <input type="text" id="phone" name="phone" class="validate" autocomplete="off" required="" aria-required="true">
-                      <label for="phone">Teléfono</label>
+                  <div class="scrollspy" id="pet">
+                    <div class="row center">
+                      <h4 class="light header icon ap-dog-8"> Información de la Mascota</h4>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col m12 s12">
-                      <i class="material-icons prefix">assignment</i>
-                      <textarea id="description" name="description" class="materialize-textarea validate" autocomplete="off" required="" aria-required="true"></textarea>
-                      <label for="description">Descripción</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col m12 s12 file-field">
-                      <div class="btn">
-                        <span>
-                          FILE(S)
-                        </span>
-                        <input type="file" name="photos" multiple>
+                    <div class="row">
+                      <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">color_lens</i>
+                        <input type="text" id="pet.color" name="pet.color" class="validate" autocomplete="off" required="" aria-required="true">
+                        <label for="pet.color">Color</label>
                       </div>
-                      <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="Sube una o más imágenes">
+                      <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">zoom_out_map</i>
+                        <input type="text" id="pet.size" name="pet.size" class="validate" autocomplete="off" required="" aria-required="true">
+                        <label for="pet.size">Tamaño</label>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col m12 s12">
-                      <i class="material-icons prefix">location_on</i>
-                      <!--<input type="text" id="address" name="address" class="validate" autocomplete="off" required="" aria-required="true">-->
-                      <label>Ubicacion</label>
-                      <input type="hidden" name="address" id="address">
-                      <input type="hidden" name="lat" id="lat">
-                      <input type="hidden" name="lng" id="lng">
+                    <div class="row">
+                      <div class="input-field col m6 s12">
+                        <i class="icon ap-dog-3 prefix"></i>
+                        <input type="text" id="pet.breed" name="pet.breed" class="validate" autocomplete="off" required="" aria-required="true">
+                        <label for="pet.breed">Raza</label>
+                      </div>
+                      <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">add_circle</i>
+                        <input type="text" id="pet.age" name="pet.age" class="validate" autocomplete="off" required="" aria-required="true">
+                        <label for="pet.age">Edad</label>
+                      </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col s12 m12">
-                      <br>
-                      <div id="required-map" style="display: none" class="red">
-                        <a class="close" onclick="hideAlert()" aria-label="close">&times;</a>
-                        <p></p><strong>Error!</strong> Debe establecer una ubicacion para el cliente antes de registrarlo.
-                        Búsque la ubicación en el mapa y haga click alli.
+                    <div class="row">
+                      <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">pets</i>
+                        <select name="gender" class="validate" required="">
+                          <option value="" disabled selected>Sexo</option>
+                          <option value="m">Macho</option>
+                          <option value="f">Hembra</option>
+                        </select>
+                      </div>
+                      <div class="input-field col m6 s12 file-field">
+                        <div class="btn">
+                          <span>
+                            ARCHIVO(S)
+                          </span>
+                          <input type="file" name="photos" multiple>
+                        </div>
+                        <div class="file-path-wrapper">
+                          <input class="file-path validate" type="text" placeholder="Sube una o más imágenes">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col m12 s12">
+                        <i class="material-icons prefix">location_on</i>
+                        <!--<input type="text" id="address" name="address" class="validate" autocomplete="off" required="" aria-required="true">-->
+                        <label>Ubicacion</label>
+                        <input type="hidden" name="address" id="address">
+                        <input type="hidden" name="lat" id="lat">
+                        <input type="hidden" name="lng" id="lng">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col s12 m12">
+                        <br>
+                        <div id="required-map" style="display: none" class="red">
+                          <a class="close" onclick="hideAlert()" aria-label="close">&times;</a>
+                          <p></p><strong>Error!</strong> Debe establecer una ubicacion para el cliente antes de registrarlo. Búsque la ubicación en el mapa y haga click alli.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row center">
+                      <div class="input-field col m12 s12">
+                        <div id="map" style="max-width: 100%"></div>
                       </div>
                     </div>
                   </div>
-                  <div class="row center">
-                    <div class="input-field col m12 s12">
-                      <div id="map"></div>
+                  <div class="divider"></div>
+                  <div class="scrollspy" id="contact">
+                    <div class="row center">
+                      <h4 class="light header icon ap-cat-8"> Información de Contacto</h4>
                     </div>
-                  </div>
-                  <div class="row center">
-                    <h3 class="light header icon ap-dog-8">Mascota</h3>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col m6 s12">
-                      <i class="material-icons prefix">color_lens</i>
-                      <input type="text" id="pet.color" name="pet.color" class="validate" autocomplete="off" required="" aria-required="true">
-                      <label for="pet.color">Color</label>
+                    <div class="row">
+                      <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">phone</i>
+                        <input type="text" id="phone" name="phone" class="validate" autocomplete="off" required="" aria-required="true">
+                        <label for="phone">Teléfono</label>
+                      </div>
+                      <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">email</i>
+                        <input type="text" id="email" name="email" class="validate" autocomplete="off" required="" aria-required="true">
+                        <label for="email">E-mail</label>
+                      </div>
                     </div>
-                    <div class="input-field col m6 s12">
-                      <i class="material-icons prefix">zoom_out_map</i>
-                      <input type="text" id="pet.size" name="pet.size" class="validate" autocomplete="off" required="" aria-required="true">
-                      <label for="pet.size">Tamaño</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col m6 s12">
-                      <i class="icon ap-dog-3 prefix"></i>
-                      <input type="text" id="pet.breed" name="pet.breed" class="validate" autocomplete="off" required="" aria-required="true">
-                      <label for="pet.breed">Raza</label>
-                    </div>
-                    <div class="input-field col m6 s12">
-                      <i class="material-icons prefix">add_circle</i>
-                      <input type="text" id="pet.age" name="pet.age" class="validate" autocomplete="off" required="" aria-required="true">
-                      <label for="pet.age">Edad</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col m12 s12">
-                      <i class="material-icons prefix">pets</i>
-                      <select name="gender" class="validate" required="">
-                        <option value="" disabled selected>Sexo</option>
-                        <option value="m">Macho</option>
-                        <option value="f">Hembra</option>
-                      </select>
+                    <div class="row">
+                      <div class="input-field col m12 s12">
+                        <i class="material-icons prefix">assignment</i>
+                        <textarea id="description" name="description" class="materialize-textarea validate" autocomplete="off" required="" aria-required="true"></textarea>
+                        <label for="description">Descripción</label>
+                      </div>
                     </div>
                   </div>
                   <div class="row center">
@@ -128,19 +141,16 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- <div class="section no-pad-bot" id="index-banner">
-        <div class="container">
-          <div class="row center">
-            <div class="col s12 m12">
-              <div class="buysellads-header center-on-small-only">
-                <div id="icon-intro" class="icon ap-title"></div>
-              </div>
-            </div>
+        <div class="col hide-on-small-only m3 l2">
+          <div class="toc-wrapper pinned">
+            <ul class="section table-of-contents">
+              <li><a href="#post">Publicación</a></li>
+              <li><a href="#pet">Información Mascota</a></li>
+              <li><a href="#contact">Información Contacto</a></li>
+            </ul>
           </div>
         </div>
-      </div> -->
-
+      </div>
     </main>
     <% include ../footer %>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
