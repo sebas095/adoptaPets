@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: "adoptapets";
-  src:url("/fonts/adoptapets.eot");
-  src:url("/fonts/adoptapets.eot?#iefix") format("embedded-opentype"),
-    url("/fonts/adoptapets.woff") format("woff"),
-    url("/fonts/adoptapets.ttf") format("truetype"),
-    url("/fonts/adoptapets.svg#adoptapets") format("svg");
+  src:url("../fonts/adoptapets.eot");
+  src:url("../fonts/adoptapets.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/adoptapets.woff") format("woff"),
+    url("../fonts/adoptapets.ttf") format("truetype"),
+    url("../fonts/adoptapets.svg#adoptapets") format("svg");
   font-weight: normal;
   font-style: normal;
 
