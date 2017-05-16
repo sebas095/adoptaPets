@@ -37,7 +37,6 @@ const PublicationSchema = new Schema({
   email: {
     type: String,
     require: true,
-    unique: true,
     validate(email) {
       return /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
     },
@@ -50,7 +49,7 @@ const PublicationSchema = new Schema({
     type: Number,
     require: true,
   },
-  createBy: {
+  createdBy: {
     type: String,
     require: true,
   },

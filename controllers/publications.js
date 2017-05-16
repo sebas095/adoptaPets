@@ -19,7 +19,7 @@ exports.create = (req, res)=> {
     phone: req.body['phone'],
     description: req.body['description'],
     email: req.body['email'],
-    createBy: 'sebas_tian_95@hotmail.com',
+    createdBy: 'sebas_tian_95@hotmail.com',
     address: req.body['address'],
     lat: req.body['lat'],
     lng: req.body['lng'],
@@ -87,7 +87,7 @@ exports.update = (req, res) => {
     phone: req.body['phone'],
     description: req.body['description'],
     email: req.body['email'],
-    createBy: 'sebas_tian_95@hotmail.com',
+    createdBy: 'sebas_tian_95@hotmail.com',
     address: req.body['address'],
     lat: req.body['lat'],
     lng: req.body['lng'],
@@ -95,8 +95,6 @@ exports.update = (req, res) => {
     features: pet,
   };
 
-  console.log('lat: ', req.body['lat']);
-  console.log('lng: ', req.body['lng']);
   Publication.findByIdAndUpdate(id, publication, {new: true}, (err, data) => {
     if (err) {
       console.log(err);
@@ -150,7 +148,7 @@ exports.getPublications = (req, res) => {
         'intenta de nuevo'
       );
       res.redirect('/');
-    } else if (data.length === 0) {
+    } else if (data.length > 0) {
       res.render('publications/all', {publications: data});
     } else {
       req.flash(

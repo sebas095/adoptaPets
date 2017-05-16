@@ -1,1 +1,123 @@
-<h2>Todas las publicaciones que puede ver el publico</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adopta Pets</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/ghpages-materialize.css">
+    <link rel="stylesheet" href="/css/adoptapets.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <header>
+      <% include ../menu.ejs %>
+    </header>
+    <main>
+      <% include ../navbar %>
+      <div class="row">
+        <div class="col s12 m9 l10" style="padding: 0">
+          <% include ../header %>
+          <div class="container">
+            <div class="section scrollspy">
+              <div class="row center">
+                  <h3 class="light header icon ap-dog-4"> Publicaciones</h3>
+                  <p>Mira mascotas en adopción.</p>
+                </div>
+              <% for (let pub of publications) { %>
+                <% let i = 0; %>
+                <% if (i % 2 === 0) { %>
+                  <div class="row">
+                <% } %>
+                  <div class="col s6">
+                    <div class="card">
+                      <div class="card-image">
+                        <img src="http://www.homeopatiaouropreto.com.br/thumbnail.php?f=files/noticias_59_1.jpgspurso290spurso218spurso0">
+                      </div>
+                      <div class="card-stacked">
+                        <div class="card-content">
+                          <div class="row">
+                            <div class="input-field col m12 s12">
+                              <i class="material-icons prefix">color_lens</i>
+                              <input type="text" id="pet.color" name="pet.color" readonly="" value="<%= pub.features.color %>" aria-required="true">
+                              <label for="pet.color">Color</label>
+                            </div>
+                            <div class="input-field col m12 s12">
+                              <i class="material-icons prefix">zoom_out_map</i>
+                              <input type="text" id="pet.size" name="pet.size" readonly="" value="<%= pub.features.size %>" aria-required="true">
+                              <label for="pet.size">Tamaño</label>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="input-field col m12 s12">
+                              <i class="icon ap-dog-3 prefix"></i>
+                              <input type="text" id="pet.breed" name="pet.breed" readonly="" value="<%= pub.features.breed %>" aria-required="true">
+                              <label for="pet.breed">Raza</label>
+                            </div>
+                            <div class="input-field col m12 s12">
+                              <i class="material-icons prefix">add_circle</i>
+                              <input type="text" id="pet.age" name="pet.age" readonly="" value="<%= pub.features.age %>" aria-required="true">
+                              <label for="pet.age">Edad</label>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="input-field col m12 s12">
+                              <i class="material-icons prefix">pets</i>
+                              <input type="text" id="pet.gender" name="pet.gender" readonly=""
+                                <% if(pub.features.gender === 'm') { %>
+                                  value="Macho"
+                                <% } else { %>
+                                  value="Hembra"
+                                <% } %>
+                              aria-required="true">
+                              <label for="pet.gender">Sexo</label>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% if ((i + 1) % 2 === 0 || i == publications.length - 1) { %>
+                    </div>
+                  <% } %>
+                  <% i++ %>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+          <div class="row center">
+            <div class="col s12 m12">
+              <div class="buysellads-header center-on-small-only">
+                <div id="icon-intro" class="icon ap-title"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    </main>
+    <% include ../footer %>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script src="/js/management.js"></script>
+    <script type="text/javascript">
+      (function($) {
+        $(function() {
+          $('.button-collapse').sideNav();
+          $('.parallax').parallax();
+          $('.scrollspy').scrollSpy();
+        }); // end of document ready
+      })(jQuery); // end of jQuery name space
+    </script>
+  </body>
+</html>
