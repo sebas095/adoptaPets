@@ -1,22 +1,27 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {userController, sessionController} = require('../controllers');
+const { userController, sessionController } = require("../controllers");
 
 module.exports = (app, host, mountPoint) => {
   // GET
-  router.get('/', (req, res) => res.render('index', {
-    message: req.flash('indexMessage'),
-  }));
+  router.get("/", (req, res) =>
+    res.render("index", {
+      message: req.flash("indexMessage")
+    }));
 
-  router.get('/profile', sessionController.loginRequired, (req, res) => {
-    res.render('users/edit', {
+  router.get("/profile", sessionController.loginRequired, (req, res) => {
+    res.render("users/edit", {
       user: req.user,
-      message: req.flash('userMessage'),
+      message: req.flash("userMessage")
     });
   });
 
   // PUT
-  router.put('/profile', sessionController.loginRequired, userController.updateUser);
+  router.put(
+    "/profile",
+    sessionController.loginRequired,
+    userController.updateUser
+  );
 
   app.use(host + mountPoint, router);
 };

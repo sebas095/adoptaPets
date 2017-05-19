@@ -1,17 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {sessionController} = require('../controllers');
+const { sessionController } = require("../controllers");
 
 module.exports = (app, host, mountPoint) => {
   // GET
-  router.get('/newPassword', sessionController.newPassword);
-  router.get('/reset/:token', sessionController.resetPassword);
+  router.get("/newPassword", sessionController.newPassword);
+  router.get("/reset/:token", sessionController.resetPassword);
 
   // POST
-  router.post('/emailRecovery', sessionController.sendEmail);
+  router.post("/emailRecovery", sessionController.sendEmail);
 
   // PUT
-  router.put('/reset/:token', sessionController.changePassword);
+  router.put("/reset/:token", sessionController.changePassword);
 
   app.use(host + mountPoint, router);
 };

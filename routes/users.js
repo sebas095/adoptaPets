@@ -1,23 +1,51 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {userController, sessionController} = require('../controllers');
+const { userController, sessionController } = require("../controllers");
 
 module.exports = (app, host, mountPoint) => {
   // GET
-  router.get('/register', userController.newUser);
-  router.get('/admin', sessionController.loginRequired, userController.getUsers);
-  router.get('/pending/deactivate', sessionController.loginRequired, userController.deactivatePendingAccount);
+  router.get("/register", userController.newUser);
+
+  router.get(
+    "/admin",
+    sessionController.loginRequired,
+    userController.getUsers
+  );
+
+  router.get(
+    "/pending/deactivate",
+    sessionController.loginRequired,
+    userController.deactivatePendingAccount
+  );
 
   // POST
-  router.post('/register', userController.createUser);
+  router.post("/register", userController.createUser);
 
   // PUT
-  router.put('/deactivateAccount', sessionController.loginRequired, userController.deactivateAccount);
-  router.put('/:id/deactiveAccount', sessionController.loginRequired, userController.changeState);
-  router.put('/:id', sessionController.loginRequired, userController.updateUser);
+  router.put(
+    "/deactivateAccount",
+    sessionController.loginRequired,
+    userController.deactivateAccount
+  );
+
+  router.put(
+    "/:id/deactiveAccount",
+    sessionController.loginRequired,
+    userController.changeState
+  );
+
+  router.put(
+    "/:id",
+    sessionController.loginRequired,
+    userController.updateUser
+  );
 
   // DELETE
-  router.delete('/:id', sessionController.loginRequired, userController.deleteUser);
+  router.delete(
+    "/:id",
+    sessionController.loginRequired,
+    userController.deleteUser
+  );
 
   app.use(host + mountPoint, router);
 };

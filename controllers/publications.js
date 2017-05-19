@@ -1,71 +1,68 @@
-const Publication = require('../models/publication');
+const Publication = require("../models/publication");
 
 // GET /publications/new -- Publication form
 exports.new = (req, res) => {
-  res.render('publications/new');
+  res.render("publications/new");
 };
 
 // POST /publications/new -- Create a new publication
-exports.create = (req, res)=> {
+exports.create = (req, res) => {
   const pet = {
-    color: req.body['pet.color'],
-    size: req.body['pet.size'],
-    name: req.body['pet.name'],
-    age: req.body['pet.age'],
-    gender: req.body['pet.gender'],
+    color: req.body["pet.color"],
+    size: req.body["pet.size"],
+    name: req.body["pet.name"],
+    age: req.body["pet.age"],
+    gender: req.body["pet.gender"]
   };
 
   const publication = {
-    phone: req.body['phone'],
-    description: req.body['description'],
-    email: req.body['email'],
-    createdBy: 'sebas_tian_95@hotmail.com',
-    address: req.body['address'],
-    lat: req.body['lat'],
-    lng: req.body['lng'],
+    phone: req.body["phone"],
+    description: req.body["description"],
+    email: req.body["email"],
+    createdBy: "sebas_tian_95@hotmail.com",
+    address: req.body["address"],
+    lat: req.body["lat"],
+    lng: req.body["lng"],
     photos: [],
-    features: pet,
+    features: pet
   };
 
   Publication.create(publication, (err, data) => {
     if (err) {
       console.log(err);
       req.flash(
-        'indexMessage',
-        'Hubo problemas guardando la publicación, intenta de nuevo'
+        "indexMessage",
+        "Hubo problemas guardando la publicación, intenta de nuevo"
       );
-      res.redirect('/');
+      res.redirect("/");
     } else {
-      req.flash(
-        'indexMessage',
-        'Su publicación ha sido creada exitosamente'
-      );
-      res.redirect('/');
+      req.flash("indexMessage", "Su publicación ha sido creada exitosamente");
+      res.redirect("/");
     }
   });
 };
 
 // GET /publications/:id/edit -- Edit publication form
 exports.edit = (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   Publication.findById(id, (err, data) => {
     if (err) {
       console.log(err);
       req.flash(
-        'indexMessage',
-        'Hubo problemas buscando la publicación, intenta más tarde'
+        "indexMessage",
+        "Hubo problemas buscando la publicación, intenta más tarde"
       );
-      res.redirect('/');
+      res.redirect("/");
     } else if (!data) {
       req.flash(
-        'indexMessage',
-        'La publicación solicitada no se encuentra registrada'
+        "indexMessage",
+        "La publicación solicitada no se encuentra registrada"
       );
-      res.redirect('/');
+      res.redirect("/");
     } else {
-      res.render('publications/edit', {
+      res.render("publications/edit", {
         publication: data,
-        message: req.flash('pubMessage'),
+        message: req.flash("pubMessage")
       });
     }
   });
@@ -73,42 +70,39 @@ exports.edit = (req, res) => {
 
 // PUT /publications/:id/edit -- Edit publication
 exports.update = (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
 
   const pet = {
-    color: req.body['pet.color'],
-    size: req.body['pet.size'],
-    name: req.body['pet.name'],
-    age: req.body['pet.age'],
-    gender: req.body['pet.gender'],
+    color: req.body["pet.color"],
+    size: req.body["pet.size"],
+    name: req.body["pet.name"],
+    age: req.body["pet.age"],
+    gender: req.body["pet.gender"]
   };
 
   const publication = {
-    phone: req.body['phone'],
-    description: req.body['description'],
-    email: req.body['email'],
-    createdBy: 'sebas_tian_95@hotmail.com',
-    address: req.body['address'],
-    lat: req.body['lat'],
-    lng: req.body['lng'],
+    phone: req.body["phone"],
+    description: req.body["description"],
+    email: req.body["email"],
+    createdBy: "sebas_tian_95@hotmail.com",
+    address: req.body["address"],
+    lat: req.body["lat"],
+    lng: req.body["lng"],
     photos: [],
-    features: pet,
+    features: pet
   };
 
-  Publication.findByIdAndUpdate(id, publication, {new: true}, (err, data) => {
+  Publication.findByIdAndUpdate(id, publication, { new: true }, (err, data) => {
     if (err) {
       console.log(err);
       req.flash(
-        'indexMessage',
-        'Hubo problemas actualizando los datos ' +
-        'de la publicación, intenta más tarde'
+        "indexMessage",
+        "Hubo problemas actualizando los datos " +
+          "de la publicación, intenta más tarde"
       );
-      res.redirect('/');
+      res.redirect("/");
     } else {
-      req.flash(
-        'pubMessage',
-        'Los datos han sido actualizados exitosamente'
-      );
+      req.flash("pubMessage", "Los datos han sido actualizados exitosamente");
       res.redirect(`/publications/${id}/edit`);
     }
   });
@@ -116,23 +110,23 @@ exports.update = (req, res) => {
 
 // GET /publications/:id -- Get a specific publication
 exports.show = (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   Publication.findById(id, (err, data) => {
     if (err) {
       console.log(err);
       req.flash(
-        'indexMessage',
-        'Hubo problemas buscando la publicación, intenta más tarde'
+        "indexMessage",
+        "Hubo problemas buscando la publicación, intenta más tarde"
       );
-      res.redirect('/');
+      res.redirect("/");
     } else if (!data) {
       req.flash(
-        'indexMessage',
-        'La publicación solicitada no se encuentra registrada'
+        "indexMessage",
+        "La publicación solicitada no se encuentra registrada"
       );
-      res.redirect('/');
+      res.redirect("/");
     } else {
-      res.render('publications/show', {publication: data});
+      res.render("publications/show", { publication: data });
     }
   });
 };
@@ -143,45 +137,42 @@ exports.getPublications = (req, res) => {
     if (err) {
       console.log(err);
       req.flash(
-        'indexMessage',
-        'Hubo problemas obteniendo los datos de las publicaciones, ' +
-        'intenta de nuevo'
+        "indexMessage",
+        "Hubo problemas obteniendo los datos de las publicaciones, " +
+          "intenta de nuevo"
       );
-      res.redirect('/');
+      res.redirect("/");
     } else if (data.length > 0) {
-      res.render('publications/all', {publications: data});
+      res.render("publications/all", { publications: data });
     } else {
-      req.flash(
-        'indexMessage',
-        'No hay publicaciones disponibles'
-      );
-      res.redirect('/');
+      req.flash("indexMessage", "No hay publicaciones disponibles");
+      res.redirect("/");
     }
   });
 };
 
 // GET /publications/search -- Search publications
 exports.search = (req, res) => {
-  res.render('publications/search');
+  res.render("publications/search");
 };
 
 // DELETE /publications/:id -- Delete a specific publication
 exports.delete = (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   Publication.findByIdAndRemove(id, (err, data) => {
     if (err) {
       console.log(err);
       req.flash(
-        'indexMessage',
-        'Hubo problemas para eliminar la publicación, intenta más tarde'
+        "indexMessage",
+        "Hubo problemas para eliminar la publicación, intenta más tarde"
       );
-      res.redirect('/');
+      res.redirect("/");
     } else {
       req.flash(
-        'indexMessage',
-        'La publicación ha sido eliminada exitosamente'
+        "indexMessage",
+        "La publicación ha sido eliminada exitosamente"
       );
-      res.redirect('/');
+      res.redirect("/");
     }
   });
 };
