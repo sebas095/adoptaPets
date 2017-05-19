@@ -11,7 +11,7 @@ const PetSchema = new Schema({
     type: String,
     require: true,
   },
-  breed: {
+  name: {
     type: String,
     require: true,
   },
@@ -37,6 +37,7 @@ const PublicationSchema = new Schema({
   email: {
     type: String,
     require: true,
+    unique: false,
     validate(email) {
       return /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
     },

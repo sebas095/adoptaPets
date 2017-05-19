@@ -10,7 +10,7 @@ exports.create = (req, res)=> {
   const pet = {
     color: req.body['pet.color'],
     size: req.body['pet.size'],
-    breed: req.body['pet.breed'],
+    name: req.body['pet.name'],
     age: req.body['pet.age'],
     gender: req.body['pet.gender'],
   };
@@ -78,7 +78,7 @@ exports.update = (req, res) => {
   const pet = {
     color: req.body['pet.color'],
     size: req.body['pet.size'],
-    breed: req.body['pet.breed'],
+    name: req.body['pet.name'],
     age: req.body['pet.age'],
     gender: req.body['pet.gender'],
   };
