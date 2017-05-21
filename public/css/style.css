@@ -51,3 +51,43 @@ a.button-collapse.top-nav {
 .table-of-contents a.active {
   border-left: 2px solid #ff9100;
 }
+
+input:not([type]), 
+input[type=text], 
+input[type=password], 
+input[type=email], 
+input[type=url], 
+input[type=time], 
+input[type=date], 
+input[type=datetime], 
+input[type=datetime-local], 
+input[type=tel], 
+input[type=number], 
+input[type=search], 
+textarea.materialize-textarea {
+  margin: 0;
+}
+
+footer > input:not([type]), 
+footer > input[type=text], 
+footer > input[type=password], 
+footer > input[type=email], 
+footer > input[type=url], 
+footer > input[type=time], 
+footer > input[type=date], 
+footer > input[type=datetime], 
+footer > input[type=datetime-local], 
+footer > input[type=tel], 
+footer > input[type=number], 
+footer > input[type=search], 
+footer > textarea.materialize-textarea {
+  border-bottom: 1px solid #fff;
+}
+
+textarea.materialize-textarea {
+  padding: .8rem 0 0rem 0;
+}
+
+footer .input-field .prefix {
+  color: #fff;
+}
