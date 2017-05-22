@@ -14,10 +14,9 @@ exports.new = (req, res) => {
 // POST /publications/new -- Create a new publication
 exports.create = (req, res) => {
   upload(req, res, err => {
-    // console.log(req.files);
     const pet = {
       color: req.body["pet.color"].toUpperCase(),
-      size: req.body["pet.size"],
+      size: req.body["pet.size"].toUpperCase(),
       name: req.body["pet.name"].toUpperCase(),
       age: req.body["pet.age"],
       gender: req.body["pet.gender"]
@@ -109,7 +108,7 @@ exports.update = (req, res) => {
 
   const pet = {
     color: req.body["pet.color"].toUpperCase(),
-    size: req.body["pet.size"],
+    size: req.body["pet.size"].toUpperCase(),
     name: req.body["pet.name"].toUpperCase(),
     age: req.body["pet.age"],
     gender: req.body["pet.gender"]
