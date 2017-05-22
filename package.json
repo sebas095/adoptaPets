@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prod": "NODE_ENV='prod' npm start",
-    "start": "nodemon ./bin/www"
+    "build": "mkdir -p public/uploads",
+    "prod": "npm run build && NODE_ENV='prod' npm start",
+    "start": "npm run build && nodemon ./bin/www"
   },
   "dependencies": {
-    "async": "^2.4.0",
+    "async": "^2.4.1",
     "bcrypt": "^1.0.2",
     "body-parser": "~1.16.0",
     "colors": "^1.1.2",

@@ -31,7 +31,7 @@
               </div>
               <div class="divider"></div>
               <div class="row">
-                <form action="/publications/new" id="publication-form" method="post">
+                <form action="/publications/new" id="publication-form" method="post" enctype="multipart/form-data">
                   <div class="scrollspy" id="pet">
                     <div class="row center">
                       <h4 class="light header icon ap-dog-8 amber-text"> Información de la Mascota</h4>
@@ -74,7 +74,7 @@
                           <span>
                             ARCHIVO(S)
                           </span>
-                          <input type="file" name="photos" multiple>
+                          <input type="file" name="pet.photos" class="validate" accept='image/*' multiple required="">
                         </div>
                         <div class="file-path-wrapper">
                           <input class="file-path validate" type="text" placeholder="Sube una o más imágenes">

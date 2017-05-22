@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { sessionController } = require("../controllers");
 
-module.exports = (app, host, mountPoint) => {
+module.exports = (app, mountPoint) => {
   // GET
   router.get("/newPassword", sessionController.newPassword);
   router.get("/reset/:token", sessionController.resetPassword);
@@ -13,5 +13,5 @@ module.exports = (app, host, mountPoint) => {
   // PUT
   router.put("/reset/:token", sessionController.changePassword);
 
-  app.use(host + mountPoint, router);
+  app.use(mountPoint, router);
 };

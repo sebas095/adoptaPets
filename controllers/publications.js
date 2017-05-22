@@ -1,4 +1,10 @@
 const Publication = require("../models/publication");
+const multer = require("multer");
+const { imageFilter, renameFiles } = require("../helpers/utils");
+const upload = multer({
+  dest: "public/uploads",
+  fileFilter: imageFilter
+}).array("pet.photos", 5);
 
 // GET /publications/new -- Publication form
 exports.new = (req, res) => {
@@ -7,38 +13,48 @@ exports.new = (req, res) => {
 
 // POST /publications/new -- Create a new publication
 exports.create = (req, res) => {
-  const pet = {
-    color: req.body["pet.color"],
-    size: req.body["pet.size"],
-    name: req.body["pet.name"],
-    age: req.body["pet.age"],
-    gender: req.body["pet.gender"]
-  };
+  upload(req, res, err => {
+    // console.log(req.files);
+    const pet = {
+      color: req.body["pet.color"].toUpperCase(),
+      size: req.body["pet.size"],
+      name: req.body["pet.name"].toUpperCase(),
+      age: req.body["pet.age"],
+      gender: req.body["pet.gender"]
+    };
 
-  const publication = {
-    phone: req.body["phone"],
-    description: req.body["description"],
-    email: req.body["email"],
-    createdBy: "sebas_tian_95@hotmail.com",
-    address: req.body["address"],
-    lat: req.body["lat"],
-    lng: req.body["lng"],
-    photos: [],
-    features: pet
-  };
+    const publication = {
+      phone: req.body["phone"],
+      description: req.body["description"],
+      email: req.body["email"],
+      createdBy: "sebas_tian_95@hotmail.com",
+      address: req.body["address"],
+      lat: req.body["lat"],
+      lng: req.body["lng"],
+      photos: [],
+      features: pet
+    };
 
-  Publication.create(publication, (err, data) => {
-    if (err) {
-      console.log(err);
-      req.flash(
-        "indexMessage",
-        "Hubo problemas guardando la publicación, intenta de nuevo"
-      );
-      res.redirect("/");
-    } else {
-      req.flash("indexMessage", "Su publicación ha sido creada exitosamente");
-      res.redirect("/");
-    }
+    const pub = new Publication(publication);
+    renameFiles(pub._id, req.files, (err, photos) => {
+      pub.photos = photos;
+      pub.save(err => {
+        if (err) {
+          console.log(err);
+          req.flash(
+            "indexMessage",
+            "Hubo problemas guardando la publicación, intenta de nuevo"
+          );
+          res.redirect("/");
+        } else {
+          req.flash(
+            "indexMessage",
+            "Su publicación ha sido creada exitosamente"
+          );
+          res.redirect("/");
+        }
+      });
+    });
   });
 };
 
@@ -73,9 +89,9 @@ exports.update = (req, res) => {
   const { id } = req.params;
 
   const pet = {
-    color: req.body["pet.color"],
+    color: req.body["pet.color"].toUpperCase(),
     size: req.body["pet.size"],
-    name: req.body["pet.name"],
+    name: req.body["pet.name"].toUpperCase(),
     age: req.body["pet.age"],
     gender: req.body["pet.gender"]
   };
