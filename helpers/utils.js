@@ -32,3 +32,20 @@ exports.renameFiles = (id, files, callback) => {
     }
   );
 };
+
+exports.deleteFiles = (files, callback) => {
+  async.map(
+    files,
+    (file, cb) => {
+      const dir = __dirname + "/../public/uploads";
+      fs.unlink(`${dir}/${file}`, err => {
+        if (err) return cb(err);
+        cb(null);
+      });
+    },
+    err => {
+      if (err) return callback(err);
+      callback(null);
+    }
+  );
+};

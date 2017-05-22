@@ -1,6 +1,6 @@
 const Publication = require("../models/publication");
 const multer = require("multer");
-const { imageFilter, renameFiles } = require("../helpers/utils");
+const { imageFilter, renameFiles, deleteFiles } = require("../helpers/utils");
 const upload = multer({
   dest: "public/uploads",
   fileFilter: imageFilter
@@ -202,11 +202,20 @@ exports.delete = (req, res) => {
       );
       res.redirect("/");
     } else {
-      req.flash(
-        "indexMessage",
-        "La publicación ha sido eliminada exitosamente"
-      );
-      res.redirect("/");
+      deleteFiles(data.photos, err => {
+        if (err) {
+          req.flash(
+            "indexMessage",
+            "Hubo problemas para eliminar la publicación, intenta más tarde"
+          );
+          return res.redirect("/");
+        }
+        req.flash(
+          "indexMessage",
+          "La publicación ha sido eliminada exitosamente"
+        );
+        res.redirect("/");
+      });
     }
   });
 };
