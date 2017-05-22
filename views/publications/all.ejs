@@ -38,10 +38,14 @@
                       <div class="card">
                         <div class="card-image">
                           <% if(pub.photos.length > 0) { %>
-                            <div class="carousel">
-                              <% for (let i = 0; i < pub.photos.length; i++) { %>
-                                <a class="carousel-item" href="#!"><img src="/uploads/<%= pub.photos[i] %>"></a>
-                              <% } %>
+                            <div class="row">
+                              <div class="slider">
+                                <ul class="slides">
+                                  <% for (let i = 0; i < pub.photos.length; i++) { %>
+                                    <li><img src="/uploads/<%= pub.photos[i] %>"></li>
+                                  <% } %>
+                                </ul>
+                              </div>
                             </div>
                           <% } %>
                         </div>
@@ -114,7 +118,7 @@
           $('.button-collapse').sideNav();
           $('.parallax').parallax();
           $('.scrollspy').scrollSpy();
-          $('.carousel').carousel();
+          $('.slider').slider();
         }); // end of document ready
       })(jQuery); // end of jQuery name space
     </script>

@@ -39,11 +39,15 @@
                     </div>
                     <div class="card-image">
                       <% if(publication.photos.length > 0) { %>
-                          <div class="carousel">
-                            <% for (let i = 0; i < publication.photos.length; i++) { %>
-                              <a class="carousel-item" href="#!"><img src="/uploads/<%= publication.photos[i] %>"></a>
-                            <% } %>
+                        <div class="row">
+                          <div class="slider">
+                            <ul class="slides">
+                              <% for (let i = 0; i < publication.photos.length; i++) { %>
+                                <li><img src="/uploads/<%= publication.photos[i] %>"></li>
+                              <% } %>
+                            </ul>
                           </div>
+                        </div>
                       <% } %>
                     </div>
                     <div class="card-stacked">
@@ -168,7 +172,7 @@
           $('.parallax').parallax();
           $('.scrollspy').scrollSpy();
           $('select').material_select();
-          $('.carousel').carousel();
+          $('.slider').slider();
         }); // end of document ready
       })(jQuery); // end of jQuery name space
     </script>
