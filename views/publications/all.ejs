@@ -37,7 +37,13 @@
                     <div class="col l4 m6 s12">
                       <div class="card">
                         <div class="card-image">
-                          <img src="http://www.homeopatiaouropreto.com.br/thumbnail.php?f=files/noticias_59_1.jpgspurso290spurso218spurso0">
+                          <% if(pub.photos.length > 0) { %>
+                            <div class="carousel">
+                              <% for (let i = 0; i < pub.photos.length; i++) { %>
+                                <a class="carousel-item" href="#!"><img src="/uploads/<%= pub.photos[i] %>"></a>
+                              <% } %>
+                            </div>
+                          <% } %>
                         </div>
                         <div class="card-stacked">
                           <div class="card-content">
@@ -108,6 +114,7 @@
           $('.button-collapse').sideNav();
           $('.parallax').parallax();
           $('.scrollspy').scrollSpy();
+          $('.carousel').carousel();
         }); // end of document ready
       })(jQuery); // end of jQuery name space
     </script>

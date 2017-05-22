@@ -36,8 +36,27 @@ exports.create = (req, res) => {
     };
 
     const pub = new Publication(publication);
-    renameFiles(pub._id, req.files, (err, photos) => {
-      pub.photos = photos;
+    if (req.files) {
+      renameFiles(pub._id, req.files, (err, photos) => {
+        pub.photos = photos;
+        pub.save(err => {
+          if (err) {
+            console.log(err);
+            req.flash(
+              "indexMessage",
+              "Hubo problemas guardando la publicación, intenta de nuevo"
+            );
+            res.redirect("/");
+          } else {
+            req.flash(
+              "indexMessage",
+              "Su publicación ha sido creada exitosamente"
+            );
+            res.redirect("/");
+          }
+        });
+      });
+    } else {
       pub.save(err => {
         if (err) {
           console.log(err);
@@ -54,7 +73,7 @@ exports.create = (req, res) => {
           res.redirect("/");
         }
       });
-    });
+    }
   });
 };
 
@@ -104,7 +123,7 @@ exports.update = (req, res) => {
     address: req.body["address"],
     lat: req.body["lat"],
     lng: req.body["lng"],
-    photos: [],
+    // photos: [],
     features: pet
   };
 

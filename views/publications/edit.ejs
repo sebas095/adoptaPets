@@ -36,6 +36,15 @@
                     <div class="row center">
                       <h4 class="light header icon ap-dog-8"> Información de la Mascota</h4>
                     </div>
+                    <% if(publication.photos.length > 0) { %>
+                      // <div class="row">
+                        <div class="carousel">
+                          <% for (let i = 0; i < publication.photos.length; i++) { %>
+                            <a class="carousel-item" href="#!"><img src="/uploads/<%= publication.photos[i] %>"></a>
+                          <% } %>
+                        </div>
+                      </div>
+                    <% } %>
                     <div class="row">
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">color_lens</i>
@@ -169,6 +178,7 @@
           $('.parallax').parallax();
           $('.scrollspy').scrollSpy();
           $('select').material_select();
+          $('.carousel').carousel();
         }); // end of document ready
       })(jQuery); // end of jQuery name space
     </script>
