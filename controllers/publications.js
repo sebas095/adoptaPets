@@ -1,4 +1,5 @@
 const Publication = require("../models/publication");
+const uuid = require("uuid");
 const multer = require("multer");
 const { imageFilter, renameFiles, deleteFiles } = require("../helpers/utils");
 const upload = multer({
@@ -23,6 +24,7 @@ exports.create = (req, res) => {
     };
 
     const publication = {
+      uid: uuid.v4(),
       phone: req.body["phone"],
       description: req.body["description"],
       email: req.body["email"],

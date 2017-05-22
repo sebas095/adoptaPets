@@ -26,6 +26,12 @@ const PetSchema = new Schema({
 });
 
 const PublicationSchema = new Schema({
+  uid: {
+    type: String,
+    require: true,
+    unique: true,
+    index: true
+  },
   phone: {
     type: String,
     require: true
@@ -41,7 +47,9 @@ const PublicationSchema = new Schema({
       return /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
         email
       );
-    }
+    },
+    index: false,
+    unique: false
   },
   address: {
     type: String,
