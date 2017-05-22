@@ -94,11 +94,11 @@ exports.sendEmail = (req, res) => {
           to: user.email,
           subject: "Recuperación de contraseña en Adopta Pets",
           html: `<p>Estimado Usuario ${user.firstname} ${user.lastname},</p><br>
-          Para una nueva contraseña deberás acceder a la siguiente dirección:
-          <br><a href="${HOST}/account/reset/${token}">
-          Recuperar Contraseña</a><br><br>Si usted no lo solicitó, ignore
-          este correo electrónico y su contraseña permanecerá sin cambios.
-          <br><br><br>Att,<br><br>Equipo Administrativo Adopta Pets`
+            Para una nueva contraseña deberás acceder a la siguiente dirección:
+            <br><a href="${HOST}/account/reset/${token}">
+            Recuperar Contraseña</a><br><br>Si usted no lo solicitó, ignore
+            este correo electrónico y su contraseña permanecerá sin cambios.
+            <br><br><br>Att,<br><br>Equipo Administrativo Adopta Pets`
         };
 
         transporter.sendMail(mailOptions, err => {

@@ -3,6 +3,7 @@ logs
 *.log
 npm-debug.log*
 data
+public/uploads
 
 # Runtime data
 pids
