@@ -306,14 +306,14 @@ exports.getPublications = (req, res) => {
 // GET /publications/search -- Search publications
 exports.search = (req, res) => {
   if (req.query.lat1 && req.query.lng1) {
-    let filter = {
-      lat1: parseFloat(req.query.lat1),
-      lon1: parseFloat(req.query.lng1)
-    };
-    filter.dist = req.query.dist ? Number(req.query.dist) : 10;
-    if (req.query.color) filter.color = req.query.color;
-    if (req.query.size) filter.size = req.query.size;
+    const lat1 = parseFloat(req.query.lat1);
+    const lon1 = parseFloat(req.query.lng1);
+    const dist = req.query.dist ? Number(req.query.dist) : 10;
+    let filter = {};
+    if (req.query.color) filter.color = req.query.color.toUpperCase();
+    if (req.query.size) filter.size = req.query.size.toUpperCase();
     if (req.query.age) filter.age = req.query.age;
+    if (req.query.gender) filter.gender = req.query.gender;
 
     Publication.find({}, (err, data) => {
       if (err) {
@@ -326,13 +326,19 @@ exports.search = (req, res) => {
         res.redirect("/");
       } else if (data.length > 0) {
         let pubs = data.filter(pub => {
-          const distance = getDistance(
-            filter.lat1,
-            filter.lon1,
-            pub.lat,
-            pub.lng
-          );
-          return distance <= filter.dist;
+          const distance = getDistance(lat1, lon1, pub.lat, pub.lng);
+          return distance <= dist;
+        });
+        pubs = pubs.filter(pub => {
+          let flag = true;
+          const keys = Object.keys(filter);
+          for (let i = 0; i < keys.length; i++) {
+            if (filter[keys[i]] !== pub.features[keys[i]]) {
+              flag = false;
+              break;
+            }
+          }
+          return flag;
         });
         res.render("publications/search", { publications: pubs });
       } else {

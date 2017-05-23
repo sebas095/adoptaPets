@@ -45,15 +45,19 @@ function locate(map) {
       map.setCenter(initLocation);
       addMarker({ lat, lng });
     } else {
-      navigator.geolocation.getCurrentPosition(position => {
-        const { latitude, longitude } = position.coords;
-        const initLocation = new google.maps.LatLng(latitude, longitude);
-        map.setCenter(initLocation);
-        addMarker({
-          lat: latitude,
-          lng: longitude
-        });
-      });
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const { latitude, longitude } = position.coords;
+          const initLocation = new google.maps.LatLng(latitude, longitude);
+          map.setCenter(initLocation);
+          addMarker({
+            lat: latitude,
+            lng: longitude
+          });
+        },
+        err => console.log(err),
+        { timeout: 10000 }
+      );
     }
   }
 }
