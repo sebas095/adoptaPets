@@ -46,6 +46,7 @@ exports.create = (req, res) => {
           size: req.body["pet.size"].toUpperCase().trim(),
           name: req.body["pet.name"].toUpperCase().trim(),
           age: req.body["pet.age"],
+          type: req.body["pet.type"],
           gender: req.body["pet.gender"]
         };
 
@@ -165,7 +166,8 @@ exports.update = (req, res) => {
           size: req.body["pet.size"].toUpperCase().trim(),
           name: req.body["pet.name"].toUpperCase().trim(),
           age: req.body["pet.age"],
-          gender: req.body["pet.gender"]
+          gender: req.body["pet.gender"],
+          type: req.body["pet.type"]
         };
 
         const publication = {
@@ -366,6 +368,7 @@ exports.search = (req, res) => {
     if (req.query.color) filter.color = req.query.color.toUpperCase().trim();
     if (req.query.size) filter.size = req.query.size.toUpperCase().trim();
     if (req.query.age) filter.age = req.query.age;
+    if (req.query.type) filter.type = req.query.type;
     if (req.query.gender) filter.gender = req.query.gender;
 
     Publication.find({ available: true }, (err, data) => {

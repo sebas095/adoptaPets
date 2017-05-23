@@ -82,6 +82,17 @@
                           aria-required="true">
                           <label for="pet.gender">Sexo</label>
                         </div>
+                        <div class="input-field col m6 s12">
+                          <i class="icon ap-dog-2 prefix"></i>
+                          <input type="text" id="pet.type" name="pet.type" readonly=""
+                            <% if(pub.features.type === 'gato') { %>
+                              value="Gato"
+                            <% } else { %>
+                              value="Perro"
+                            <% } %>
+                          aria-required="true">
+                          <label for="pet.type">Tipo</label>
+                        </div>
                       </div>
                       <div class="center input-field">
                         <a class="btn waves-effect waves-light cyan darken-2" href="/publications/<%= pub._id  %>/edit">Ver más</a>

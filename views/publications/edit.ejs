@@ -85,7 +85,17 @@
                           <option value="f" <% if (publication.features.gender === 'f') { %> selected <% } %> >Hembra</option>
                         </select>
                       </div>
-                      <div class="input-field col m6 s12 file-field">
+                      <div class="input-field col m6 s12">
+                        <i class="icon ap-dog-2 prefix"></i>
+                        <select name="pet.type" id="pet.type" class="validate" required="" disabled="">
+                          <option value="" disabled selected>Tipo</option>
+                          <option value="gato" <% if (publication.features.type === 'gato') { %> selected <% } %> >Gato</option>
+                          <option value="perro" <% if (publication.features.type === 'perro') { %> selected <% } %> >Perro</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col m12 s12 file-field">
                         <div class="btn">
                           <span>
                             ARCHIVO(S)

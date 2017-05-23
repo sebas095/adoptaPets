@@ -32,13 +32,21 @@
                 <div class="row">
                   <form id="search-form" action="/publications/search" method="get">
                     <div class="row">
-                      <div class="input-field col m12 s12">
+                      <div class="input-field col m6 s12">
                         <i class="material-icons prefix">location_on</i>
                         <input type="number" id="dist" name="dist" min="0" value="10" max="12800">
                         <label for="dist">Distancia para la búsqueda en kilómetros</label>
+                        <input type="hidden" name="lat1" id="lat1">
+                        <input type="hidden" name="lng1" id="lng1">
                       </div>
-                      <input type="hidden" name="lat1" id="lat1">
-                      <input type="hidden" name="lng1" id="lng1">
+                      <div class="input-field col m6 s12">
+                        <i class="icon ap-dog-2 prefix"></i>
+                        <select name="type" class="validate">
+                          <option value="" disabled selected>Tipo</option>
+                          <option value="gato">Gato</option>
+                          <option value="perro">Perro</option>
+                        </select>
+                      </div>
                     </div>
                     <div class="row">
                       <div class="input-field col m6 s12">

@@ -88,6 +88,19 @@
                             <label for="pet.gender">Sexo</label>
                           </div>
                           <div class="input-field col m6 s12">
+                            <i class="icon ap-dog-2 prefix"></i>
+                            <input type="text" id="pet.type" name="pet.type" readonly=""
+                              <% if(publication.features.type === 'gato') { %>
+                                value="Gato"
+                              <% } else { %>
+                                value="Perro"
+                              <% } %>
+                            aria-required="true">
+                            <label for="pet.type">Tipo</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col m12 s12">
                             <i class="material-icons prefix">location_on</i>
                             <input type="text" id="address" name="address" value="<%= publication.address %>" aria-required="true">
                             <label for="address">Ubicación(Aproximada)</label>
@@ -95,7 +108,6 @@
                             <input type="hidden" name="lng" value="<%= publication.lng %>" id="lng">
                           </div>
                         </div>
-
                         <div class="row">
                           <div class="col s12 m12">
                             <div id="required-map" style="display: none" class="red">
