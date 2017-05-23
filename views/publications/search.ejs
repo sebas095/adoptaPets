@@ -1,1 +1,178 @@
-<h3>Búsqueda de mascotas</h3>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adopta Pets</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/ghpages-materialize.css">
+    <link rel="stylesheet" href="/css/adoptapets.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <header>
+      <% include ../menu.ejs %>
+    </header>
+    <main>
+      <% include ../navbar %>
+      <div class="row">
+        <div class="col s12 m9 l10" style="padding: 0">
+          <% include ../header %>
+          <div class="container">
+            <div class="scrollspy" id="post">
+              <div class="section scrollspy">
+                <div class="row center">
+                    <h3 class="light header icon ap-dog-2 orange-text"> Búsqueda</h3>
+                    <p>Mira mascotas en adopción.</p>
+                </div>
+                <div class="row">
+                  <form id="search-form" action="/publications/search" method="get">
+                    <div class="row">
+                      <div class="input-field col m12 s12">
+                        <i class="material-icons prefix">location_on</i>
+                        <input type="number" id="dist" name="dist" min="0" value="10" max="12800">
+                        <label for="dist">Distancia para la búsqueda en kilómetros</label>
+                      </div>
+                      <input type="hidden" name="lat1" id="lat1">
+                      <input type="hidden" name="lng1" id="lng1">
+                    </div>
+                    <div class="row">
+                      <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">color_lens</i>
+                        <input type="text" id="color" name="color" class="validate" autocomplete="off" aria-required="true">
+                        <label for="color">Color</label>
+                      </div>
+                      <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">zoom_out_map</i>
+                        <input type="text" id="size" name="size" class="validate" autocomplete="off" aria-required="true">
+                        <label for="size">Tamaño</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">add_circle</i>
+                        <input type="text" id="age" name="age" class="validate" autocomplete="off" aria-required="true">
+                        <label for="age">Edad</label>
+                      </div>
+                      <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">pets</i>
+                        <select name="pet.gender" class="validate">
+                          <option value="" disabled selected>Sexo</option>
+                          <option value="m">Macho</option>
+                          <option value="f">Hembra</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row center">
+                      <div class="col s12">
+                        <button class="btn waves-effect waves-light light-blue" id="search">Buscar</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <% if (typeof(publications) == 'object' && publications) { %>
+                  <% for (let pub of publications) { %>
+                    <% let i = 0; %>
+                    <% if (i % 2 === 0) { %>
+                      <div class="row">
+                    <% } %>
+                      <div class="col l4 m6 s12">
+                        <div class="card">
+                          <div class="card-image">
+                            <% if(pub.photos.length > 0) { %>
+                              <div class="row">
+                                <div class="slider">
+                                  <ul class="slides">
+                                    <% for (let i = 0; i < pub.photos.length; i++) { %>
+                                      <li><img src="/uploads/<%= pub.photos[i] %>"></li>
+                                    <% } %>
+                                  </ul>
+                                </div>
+                              </div>
+                            <% } %>
+                          </div>
+                          <div class="card-stacked">
+                            <div class="card-content">
+                              <span class="card-title activator grey-text text-darken-4"><%= pub.features.name %></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col l8 m6 s12">
+                        <div class="row">
+                          <h5 class="center amber-text icon ap-cat-7"> Características</h5>
+                          <div class="input-field col l6 m12 s6">
+                            <i class="material-icons prefix">color_lens</i>
+                            <input type="text" id="pet.color" name="pet.color" readonly="" value="<%= pub.features.color %>" aria-required="true">
+                            <label for="pet.color">Color</label>
+                          </div>
+                          <div class="input-field col l6 m12 s6">
+                            <i class="material-icons prefix">zoom_out_map</i>
+                            <input type="text" id="pet.size" name="pet.size" readonly="" value="<%= pub.features.size %>" aria-required="true">
+                            <label for="pet.size">Tamaño</label>
+                          </div>
+                          <div class="input-field col l6 m12 s6">
+                            <i class="material-icons prefix">add_circle</i>
+                            <input type="text" id="pet.age" name="pet.age" readonly="" value="<%= pub.features.age %>" aria-required="true">
+                            <label for="pet.age">Edad</label>
+                          </div>
+                          <div class="input-field col l6 m12 s6">
+                            <i class="material-icons prefix">pets</i>
+                            <input type="text" id="pet.gender" name="pet.gender" readonly=""
+                              <% if(pub.features.gender === 'm') { %>
+                                value="Macho"
+                              <% } else { %>
+                                value="Hembra"
+                              <% } %>
+                            aria-required="true">
+                            <label for="pet.gender">Sexo</label>
+                          </div>
+                          <div class="input-field col l6 m12 s6">
+                            <a class="btn waves-effect waves-light cyan darken-2" href="/publications/<%= pub._id  %>">Ver más</a>
+                          </div>
+                        </div>
+                      </div>
+                      <% if ((i + 1) % 2 === 0 || i == publications.length - 1) { %>
+                        </div>
+                      <% } %>
+                      <% i++ %>
+                    <div class="divider"></div>
+                  <% } %>
+                <% } %>
+              </div>
+            </div>
+            <h1 class="center icon ap-dog-2"></h1>
+          </div>
+        </div>
+        <div class="col hide-on-small-only m3 l2">
+          <div class="toc-wrapper pinned">
+            <ul class="section table-of-contents">
+              <li><a href="#post">Publicaciones</a></li>
+              <li><a href="#contact">Contacto</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+    <% include ../footer %>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script src="/js/management.js"></script>
+    <script src="/js/search.js"></script>
+    <script type="text/javascript">
+      (function($) {
+        $(function() {
+          $('.button-collapse').sideNav();
+          $('.parallax').parallax();
+          $('select').material_select();
+          $('.scrollspy').scrollSpy();
+          $('.slider').slider();
+        }); // end of document ready
+      })(jQuery); // end of jQuery name space
+    </script>
+  </body>
+</html>

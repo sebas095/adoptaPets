@@ -1,7 +1,12 @@
 const Publication = require("../models/publication");
 const uuid = require("uuid");
 const multer = require("multer");
-const { imageFilter, renameFiles, deleteFiles } = require("../helpers/utils");
+const {
+  imageFilter,
+  renameFiles,
+  deleteFiles,
+  getDistance
+} = require("../helpers/utils");
 const upload = multer({
   dest: "public/uploads",
   fileFilter: imageFilter
@@ -300,7 +305,45 @@ exports.getPublications = (req, res) => {
 
 // GET /publications/search -- Search publications
 exports.search = (req, res) => {
-  res.render("publications/search");
+  if (req.query.lat1 && req.query.lng1) {
+    let filter = {
+      lat1: parseFloat(req.query.lat1),
+      lon1: parseFloat(req.query.lng1)
+    };
+    filter.dist = req.query.dist ? Number(req.query.dist) : 10;
+    if (req.query.color) filter.color = req.query.color;
+    if (req.query.size) filter.size = req.query.size;
+    if (req.query.age) filter.age = req.query.age;
+
+    Publication.find({}, (err, data) => {
+      if (err) {
+        console.log(err);
+        req.flash(
+          "indexMessage",
+          "Hubo problemas obteniendo los datos de las publicaciones, " +
+            "intenta de nuevo"
+        );
+        res.redirect("/");
+      } else if (data.length > 0) {
+        let pubs = data.filter(pub => {
+          const distance = getDistance(
+            filter.lat1,
+            filter.lon1,
+            pub.lat,
+            pub.lng
+          );
+          return distance <= filter.dist;
+        });
+        res.render("publications/search", { publications: pubs });
+      } else {
+        res.render("publications/search", {
+          message: "No hay publicaciones disponibles"
+        });
+      }
+    });
+  } else {
+    res.render("publications/search");
+  }
 };
 
 // DELETE /publications/:id -- Delete a specific publication
