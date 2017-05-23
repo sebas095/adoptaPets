@@ -74,6 +74,11 @@ const PublicationSchema = new Schema({
   features: {
     type: PetSchema,
     require: true
+  },
+  available: {
+    type: Boolean,
+    require: true,
+    default: true
   }
 });
 

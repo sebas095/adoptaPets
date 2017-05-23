@@ -14,8 +14,10 @@
       <div class="search-results"></div>
     </div>
   </li> -->
-  <li><a href="/session/login" class="waves-effect waves-light green btn" style="color:white">Iniciar Sesión</a></li>
-  <li><a href="/users/register" class="waves-effect waves-light orange btn" style="color:white">Crear Cuenta</a></li>
+  <% if (typeof(session) != 'object') { %>
+    <li><a href="/session/login" class="waves-effect waves-light green btn" style="color:white">Iniciar Sesión</a></li>
+    <li><a href="/users/register" class="waves-effect waves-light orange btn" style="color:white">Crear Cuenta</a></li>
+  <% }%>
   <div class="divider"></div>
   <li class="no-padding">
     <ul class="collapsible collapsible-accordion">
@@ -28,7 +30,10 @@
       <li class="bold"><a class="collapsible-header  waves-effect waves-light"><i class="material-icons prefix">person</i>USUARIO</a>
         <div class="collapsible-body">
           <ul>
-            <li><a href="/profile">Perfíl</a></li>
+            <% if (typeof(session) == 'object' && session) { %>
+              <li><a href="/profile">Perfíl</a></li>
+              <li><a href="/publications/me">Mis publicaciones</a></li>
+            <% } %>
             <li><a href="/account/newPassword">Recuperar Contraseña</a></li>
           </ul>
         </div>
@@ -38,8 +43,8 @@
           <li class="bold"><a class="collapsible-header  waves-effect waves-light"><i class="material-icons prefix">supervisor_account</i>ADMIN</a>
             <div class="collapsible-body">
               <ul>
-              <li><a href="/users/admin">Usuarios</a></li>
-              <li><a href="/users/pending/deactivate">Desactivaciones pendientes</a></li>
+                <li><a href="/users/admin">Usuarios</a></li>
+                <li><a href="/users/pending/deactivate">Desactivaciones pendientes</a></li>
               </ul>
             </div>
           </li>

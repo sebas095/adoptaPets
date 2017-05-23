@@ -47,7 +47,11 @@ exports.createUser = (req, res) => {
 
 // PUT /users/:id -- Modifies user data
 exports.updateUser = (req, res) => {
-  if (req.user.state.includes("1") || req.user.state.includes("2")) {
+  if (
+    req.user.state.includes("1") ||
+    req.user.state.includes("2") ||
+    req.user.state.includes("4")
+  ) {
     const id = req.params.id || req.user._id;
     if (req.body.status) {
       if (req.body.status === "admin") {
@@ -181,7 +185,7 @@ exports.deactivatePendingAccount = (req, res) => {
 
 // PUT /users/:id/deactiveAccount -- Request for deactivate account
 exports.changeState = (req, res) => {
-  if (req.user.state.includes("2")) {
+  if (req.user.state.includes("2") || req.user.state.includes("4")) {
     const { id } = req.params;
     User.findByIdAndUpdate(id, { state: "4" }, { new: true }, (err, user) => {
       if (err) {

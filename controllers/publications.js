@@ -14,8 +14,12 @@ const upload = multer({
 
 // GET /publications/new -- Publication form
 exports.new = (req, res) => {
-  if (req.user.state.includes("1") || req.user.state.includes("2")) {
-    res.render("publications/new");
+  if (
+    req.user.state.includes("1") ||
+    req.user.state.includes("2") ||
+    req.user.state.includes("4")
+  ) {
+    res.render("publications/new", { user: req.user });
   } else {
     res.redirect("/");
   }
@@ -23,7 +27,11 @@ exports.new = (req, res) => {
 
 // POST /publications/new -- Create a new publication
 exports.create = (req, res) => {
-  if (req.user.state.includes("1") || req.user.state.includes("2")) {
+  if (
+    req.user.state.includes("1") ||
+    req.user.state.includes("2") ||
+    req.user.state.includes("4")
+  ) {
     upload(req, res, err => {
       if (err) {
         console.log(err);
@@ -34,9 +42,9 @@ exports.create = (req, res) => {
         res.redirect("/");
       } else {
         const pet = {
-          color: req.body["pet.color"].toUpperCase(),
-          size: req.body["pet.size"].toUpperCase(),
-          name: req.body["pet.name"].toUpperCase(),
+          color: req.body["pet.color"].toUpperCase().trim(),
+          size: req.body["pet.size"].toUpperCase().trim(),
+          name: req.body["pet.name"].toUpperCase().trim(),
           age: req.body["pet.age"],
           gender: req.body["pet.gender"]
         };
@@ -102,7 +110,11 @@ exports.create = (req, res) => {
 
 // GET /publications/:id/edit -- Edit publication form
 exports.edit = (req, res) => {
-  if (req.user.state.includes("1") || req.user.state.includes("2")) {
+  if (
+    req.user.state.includes("1") ||
+    req.user.state.includes("2") ||
+    req.user.state.includes("4")
+  ) {
     const { id } = req.params;
     Publication.findById(id, (err, data) => {
       if (err) {
@@ -132,7 +144,11 @@ exports.edit = (req, res) => {
 
 // PUT /publications/:id/edit -- Edit publication
 exports.update = (req, res) => {
-  if (req.user.state.includes("1") || req.user.state.includes("2")) {
+  if (
+    req.user.state.includes("1") ||
+    req.user.state.includes("2") ||
+    req.user.state.includes("4")
+  ) {
     upload(req, res, err => {
       if (err) {
         console.log(err);
@@ -145,9 +161,9 @@ exports.update = (req, res) => {
         const { id } = req.params;
 
         const pet = {
-          color: req.body["pet.color"].toUpperCase(),
-          size: req.body["pet.size"].toUpperCase(),
-          name: req.body["pet.name"].toUpperCase(),
+          color: req.body["pet.color"].toUpperCase().trim(),
+          size: req.body["pet.size"].toUpperCase().trim(),
+          name: req.body["pet.name"].toUpperCase().trim(),
           age: req.body["pet.age"],
           gender: req.body["pet.gender"]
         };
@@ -160,7 +176,8 @@ exports.update = (req, res) => {
           address: req.body["address"],
           lat: req.body["lat"],
           lng: req.body["lng"],
-          features: pet
+          features: pet,
+          available: req.body.available ? false : true
         };
 
         Publication.findByIdAndUpdate(
@@ -301,7 +318,7 @@ exports.show = (req, res) => {
 
 // GET /publications -- All publications
 exports.getPublications = (req, res) => {
-  Publication.find({}, (err, data) => {
+  Publication.find({ available: true }, (err, data) => {
     if (err) {
       console.log(err);
       req.flash(
@@ -319,6 +336,26 @@ exports.getPublications = (req, res) => {
   });
 };
 
+// GET /publications -- All me publications
+exports.getMyPublications = (req, res) => {
+  Publication.find({}, (err, data) => {
+    if (err) {
+      console.log(err);
+      req.flash(
+        "indexMessage",
+        "Hubo problemas obteniendo los datos de las publicaciones, " +
+          "intenta de nuevo"
+      );
+      res.redirect("/");
+    } else if (data.length > 0) {
+      res.render("publications/me", { publications: data });
+    } else {
+      req.flash("indexMessage", "No hay publicaciones disponibles");
+      res.redirect("/");
+    }
+  });
+};
+
 // GET /publications/search -- Search publications
 exports.search = (req, res) => {
   if (req.query.lat1 && req.query.lng1) {
@@ -326,12 +363,12 @@ exports.search = (req, res) => {
     const lon1 = parseFloat(req.query.lng1);
     const dist = req.query.dist ? Number(req.query.dist) : 10;
     let filter = {};
-    if (req.query.color) filter.color = req.query.color.toUpperCase();
-    if (req.query.size) filter.size = req.query.size.toUpperCase();
+    if (req.query.color) filter.color = req.query.color.toUpperCase().trim();
+    if (req.query.size) filter.size = req.query.size.toUpperCase().trim();
     if (req.query.age) filter.age = req.query.age;
     if (req.query.gender) filter.gender = req.query.gender;
 
-    Publication.find({}, (err, data) => {
+    Publication.find({ available: true }, (err, data) => {
       if (err) {
         console.log(err);
         req.flash(
@@ -370,7 +407,11 @@ exports.search = (req, res) => {
 
 // DELETE /publications/:id -- Delete a specific publication
 exports.delete = (req, res) => {
-  if (req.user.state.includes("1") || req.user.state.includes("2")) {
+  if (
+    req.user.state.includes("1") ||
+    req.user.state.includes("2") ||
+    req.user.state.includes("4")
+  ) {
     const { id } = req.params;
     Publication.findByIdAndRemove(id, (err, data) => {
       if (err) {
@@ -403,7 +444,11 @@ exports.delete = (req, res) => {
 };
 
 exports.deleteImg = (req, res) => {
-  if (req.user.state.includes("1") || req.user.state.includes("2")) {
+  if (
+    req.user.state.includes("1") ||
+    req.user.state.includes("2") ||
+    req.user.state.includes("4")
+  ) {
     const { id } = req.params;
     Publication.findById(id, (err, data) => {
       if (err) {

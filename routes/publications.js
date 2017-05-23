@@ -5,6 +5,7 @@ const { sessionController, publicationController } = require("../controllers");
 module.exports = (app, mountPoint) => {
   // GET
   router.get("/", publicationController.getPublications);
+  router.get("/me", publicationController.getMyPublications);
 
   router.get(
     "/new",
