@@ -17,6 +17,7 @@ module.exports = (app, mountPoint) => {
   router.put("/:id/edit", publicationController.update);
 
   // DELETE
+  router.delete("/:id/delete", publicationController.deleteImg);
   router.delete("/:id", publicationController.delete);
 
   app.use(mountPoint, router);

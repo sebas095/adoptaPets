@@ -31,6 +31,9 @@
               </div>
               <div class="divider"></div>
               <div class="row">
+                <form action="/publications/<%= publication._id %>/delete?_method=delete" id="image-form" method="post">
+                  <input type="hidden" name="photo" id="photo">
+                </form>
                 <form action="/publications/<%= publication._id %>/edit?_method=put" id="publication-form" enctype="multipart/form-data" method="post">
                   <div class="scrollspy" id="pet">
                     <div class="row center">
@@ -41,7 +44,9 @@
                         <div class="slider">
                           <ul class="slides">
                             <% for (let i = 0; i < publication.photos.length; i++) { %>
-                              <li><img src="/uploads/<%= publication.photos[i] %>"></li>
+                              <li>
+                                <img src="/uploads/<%= publication.photos[i] %>">
+                              </li>
                             <% } %>
                           </ul>
                         </div>

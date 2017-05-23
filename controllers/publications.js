@@ -332,3 +332,55 @@ exports.delete = (req, res) => {
     }
   });
 };
+
+exports.deleteImg = (req, res) => {
+  const { id } = req.params;
+  Publication.findById(id, (err, data) => {
+    if (err) {
+      console.log(err);
+      req.flash(
+        "indexMessage",
+        "Hubo problemas para eliminar la publicación, intenta más tarde"
+      );
+      res.redirect("/");
+    } else {
+      const index = data.photos.indexOf(req.body.photo);
+      if (index > -1) {
+        data.photos.splice(index, 1);
+        const { photos } = data;
+        Publication.findByIdAndUpdate(
+          id,
+          { photos },
+          { new: true },
+          (err, pub) => {
+            if (err) {
+              console.log(err);
+              req.flash(
+                "indexMessage",
+                "Hubo problemas actualizando los datos " +
+                  "de la publicación, intenta más tarde"
+              );
+              return res.redirect("/");
+            }
+            deleteFiles([req.body.photo], err => {
+              if (err) {
+                console.log(err);
+                req.flash(
+                  "indexMessage",
+                  "Hubo problemas actualizando los datos " +
+                    "de la publicación, intenta más tarde"
+                );
+                return res.redirect("/");
+              }
+              req.flash(
+                "pubMessage",
+                "Los datos han sido actualizados exitosamente"
+              );
+              res.redirect(`/publications/${id}/edit`);
+            });
+          }
+        );
+      }
+    }
+  });
+};

@@ -26,3 +26,17 @@ btnDelete.addEventListener("click", ev => {
     document.getElementById("deletePublicationForm").submit();
   }
 });
+
+// Delete image
+$(() => {
+  // <button class="exit" type="button" id="exit-<%= publication.photos[i] %>">
+  $(".exit").attr("disabled", false);
+  $(".exit").click(function(ev) {
+    ev.preventDefault();
+    const filename = ev.target.id.split("exit-")[1];
+    $("#photo").val(filename);
+    if (confirm("¿Estas seguro que deseas borrar esta imagen?")) {
+      $("#image-form").submit();
+    }
+  });
+});
