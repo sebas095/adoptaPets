@@ -15,31 +15,57 @@ exports.new = (req, res) => {
 // POST /publications/new -- Create a new publication
 exports.create = (req, res) => {
   upload(req, res, err => {
-    const pet = {
-      color: req.body["pet.color"].toUpperCase(),
-      size: req.body["pet.size"].toUpperCase(),
-      name: req.body["pet.name"].toUpperCase(),
-      age: req.body["pet.age"],
-      gender: req.body["pet.gender"]
-    };
+    if (err) {
+      console.log(err);
+      req.flash(
+        "indexMessage",
+        "Hubo problemas guardando la publicación, intenta de nuevo"
+      );
+      res.redirect("/");
+    } else {
+      const pet = {
+        color: req.body["pet.color"].toUpperCase(),
+        size: req.body["pet.size"].toUpperCase(),
+        name: req.body["pet.name"].toUpperCase(),
+        age: req.body["pet.age"],
+        gender: req.body["pet.gender"]
+      };
 
-    const publication = {
-      uid: uuid.v4(),
-      phone: req.body["phone"],
-      description: req.body["description"],
-      email: req.body["email"],
-      createdBy: "sebas_tian_95@hotmail.com",
-      address: req.body["address"],
-      lat: req.body["lat"],
-      lng: req.body["lng"],
-      photos: [],
-      features: pet
-    };
+      const publication = {
+        uid: uuid.v4(),
+        phone: req.body["phone"],
+        description: req.body["description"],
+        email: req.body["email"],
+        createdBy: "sebas_tian_95@hotmail.com",
+        address: req.body["address"],
+        lat: req.body["lat"],
+        lng: req.body["lng"],
+        photos: [],
+        features: pet
+      };
 
-    const pub = new Publication(publication);
-    if (req.files) {
-      renameFiles(pub._id, req.files, (err, photos) => {
-        pub.photos = photos;
+      const pub = new Publication(publication);
+      if (req.files) {
+        renameFiles(pub._id, req.files, (err, photos) => {
+          pub.photos = photos;
+          pub.save(err => {
+            if (err) {
+              console.log(err);
+              req.flash(
+                "indexMessage",
+                "Hubo problemas guardando la publicación, intenta de nuevo"
+              );
+              res.redirect("/");
+            } else {
+              req.flash(
+                "indexMessage",
+                "Su publicación ha sido creada exitosamente"
+              );
+              res.redirect("/");
+            }
+          });
+        });
+      } else {
         pub.save(err => {
           if (err) {
             console.log(err);
@@ -56,24 +82,7 @@ exports.create = (req, res) => {
             res.redirect("/");
           }
         });
-      });
-    } else {
-      pub.save(err => {
-        if (err) {
-          console.log(err);
-          req.flash(
-            "indexMessage",
-            "Hubo problemas guardando la publicación, intenta de nuevo"
-          );
-          res.redirect("/");
-        } else {
-          req.flash(
-            "indexMessage",
-            "Su publicación ha sido creada exitosamente"
-          );
-          res.redirect("/");
-        }
-      });
+      }
     }
   });
 };
@@ -106,40 +115,142 @@ exports.edit = (req, res) => {
 
 // PUT /publications/:id/edit -- Edit publication
 exports.update = (req, res) => {
-  const { id } = req.params;
-
-  const pet = {
-    color: req.body["pet.color"].toUpperCase(),
-    size: req.body["pet.size"].toUpperCase(),
-    name: req.body["pet.name"].toUpperCase(),
-    age: req.body["pet.age"],
-    gender: req.body["pet.gender"]
-  };
-
-  const publication = {
-    phone: req.body["phone"],
-    description: req.body["description"],
-    email: req.body["email"],
-    createdBy: "sebas_tian_95@hotmail.com",
-    address: req.body["address"],
-    lat: req.body["lat"],
-    lng: req.body["lng"],
-    // photos: [],
-    features: pet
-  };
-
-  Publication.findByIdAndUpdate(id, publication, { new: true }, (err, data) => {
+  upload(req, res, err => {
     if (err) {
       console.log(err);
       req.flash(
         "indexMessage",
-        "Hubo problemas actualizando los datos " +
-          "de la publicación, intenta más tarde"
+        "Hubo problemas guardando la publicación, intenta de nuevo"
       );
       res.redirect("/");
     } else {
-      req.flash("pubMessage", "Los datos han sido actualizados exitosamente");
-      res.redirect(`/publications/${id}/edit`);
+      const { id } = req.params;
+
+      const pet = {
+        color: req.body["pet.color"].toUpperCase(),
+        size: req.body["pet.size"].toUpperCase(),
+        name: req.body["pet.name"].toUpperCase(),
+        age: req.body["pet.age"],
+        gender: req.body["pet.gender"]
+      };
+
+      const publication = {
+        phone: req.body["phone"],
+        description: req.body["description"],
+        email: req.body["email"],
+        createdBy: "sebas_tian_95@hotmail.com",
+        address: req.body["address"],
+        lat: req.body["lat"],
+        lng: req.body["lng"],
+        features: pet
+      };
+
+      Publication.findByIdAndUpdate(
+        id,
+        publication,
+        { new: true },
+        (err, data) => {
+          if (err) {
+            console.log(err);
+            req.flash(
+              "indexMessage",
+              "Hubo problemas actualizando los datos " +
+                "de la publicación, intenta más tarde"
+            );
+            res.redirect("/");
+          } else {
+            if (req.files) {
+              if (data.photos.length > 0) {
+                deleteFiles(data.photos, err => {
+                  if (err) {
+                    console.log(err);
+                    req.flash(
+                      "indexMessage",
+                      "Hubo problemas actualizando los datos " +
+                        "de la publicación, intenta más tarde"
+                    );
+                    res.redirect("/");
+                  } else {
+                    renameFiles(data._id, req.files, (err, photos) => {
+                      if (err) {
+                        console.log(err);
+                        req.flash(
+                          "indexMessage",
+                          "Hubo problemas actualizando los datos " +
+                            "de la publicación, intenta más tarde"
+                        );
+                        res.redirect("/");
+                      } else {
+                        Publication.findByIdAndUpdate(
+                          id,
+                          { photos },
+                          { new: true },
+                          (err, pub) => {
+                            if (err) {
+                              console.log(err);
+                              req.flash(
+                                "indexMessage",
+                                "Hubo problemas actualizando los datos " +
+                                  "de la publicación, intenta más tarde"
+                              );
+                              return res.redirect("/");
+                            }
+                            req.flash(
+                              "pubMessage",
+                              "Los datos han sido actualizados exitosamente"
+                            );
+                            res.redirect(`/publications/${id}/edit`);
+                          }
+                        );
+                      }
+                    });
+                  }
+                });
+              } else {
+                renameFiles(data._id, req.files, (err, photos) => {
+                  if (err) {
+                    console.log(err);
+                    req.flash(
+                      "indexMessage",
+                      "Hubo problemas actualizando los datos " +
+                        "de la publicación, intenta más tarde"
+                    );
+                    res.redirect("/");
+                  } else {
+                    Publication.findByIdAndUpdate(
+                      id,
+                      { photos },
+                      { new: true },
+                      (err, pub) => {
+                        if (err) {
+                          console.log(err);
+                          req.flash(
+                            "indexMessage",
+                            "Hubo problemas actualizando los datos " +
+                              "de la publicación, intenta más tarde"
+                          );
+                          return res.redirect("/");
+                        }
+                        req.flash(
+                          "pubMessage",
+                          "Los datos han sido actualizados exitosamente"
+                        );
+                        res.redirect(`/publications/${id}/edit`);
+                      }
+                    );
+                  }
+                });
+              }
+            } else {
+              req.flash(
+                "pubMessage",
+                "Los datos han sido actualizados exitosamente"
+              );
+              res.redirect(`/publications/${id}/edit`);
+            }
+          }
+        }
+      );
     }
   });
 };
