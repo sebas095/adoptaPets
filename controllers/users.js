@@ -47,31 +47,41 @@ exports.createUser = (req, res) => {
 
 // PUT /users/:id -- Modifies user data
 exports.updateUser = (req, res) => {
-  const id = req.params.id || req.user._id;
-  if (req.body.status) {
-    if (req.body.status === "admin") {
-      req.body.state = "1";
-    } else {
-      req.body.state = "2";
+  if (req.user.state.includes("1") || req.user.state.includes("2")) {
+    const id = req.params.id || req.user._id;
+    if (req.body.status) {
+      if (req.body.status === "admin") {
+        req.body.state = "1";
+      } else {
+        req.body.state = "2";
+      }
     }
-  }
 
-  User.findByIdAndUpdate(id, req.body, { new: true }, (err, user) => {
-    if (err) {
-      console.log("Error: ", err);
-      req.flash(
-        "indexMessage",
-        "Hubo problemas actualizando los datos, intenta de nuevo"
-      );
-      return res.redirect("/");
-    } else if (req.originalUrl.includes("/users/")) {
-      req.flash("adminMessage", "Los datos han sido actualizados exitosamente");
-      res.redirect("/users/admin");
-    } else {
-      req.flash("userMessage", "Sus datos han sido actualizados exitosamente");
-      res.redirect("/profile");
-    }
-  });
+    User.findByIdAndUpdate(id, req.body, { new: true }, (err, user) => {
+      if (err) {
+        console.log("Error: ", err);
+        req.flash(
+          "indexMessage",
+          "Hubo problemas actualizando los datos, intenta de nuevo"
+        );
+        return res.redirect("/");
+      } else if (req.originalUrl.includes("/users/")) {
+        req.flash(
+          "adminMessage",
+          "Los datos han sido actualizados exitosamente"
+        );
+        res.redirect("/users/admin");
+      } else {
+        req.flash(
+          "userMessage",
+          "Sus datos han sido actualizados exitosamente"
+        );
+        res.redirect("/profile");
+      }
+    });
+  } else {
+    res.redirect("/");
+  }
 };
 
 // DELETE /users/:id -- Deactivate user account
@@ -171,57 +181,61 @@ exports.deactivatePendingAccount = (req, res) => {
 
 // PUT /users/:id/deactiveAccount -- Request for deactivate account
 exports.changeState = (req, res) => {
-  const { id } = req.params;
-  User.findByIdAndUpdate(id, { state: "4" }, { new: true }, (err, user) => {
-    if (err) {
-      console.log(err);
-      req.flash(
-        "indexMessage",
-        "Hubo problemas en la solicitud de desactivación de la cuenta"
-      );
-      return res.redirect("/");
-    }
-    User.find({ state: "1" }, (err, users) => {
+  if (req.user.state.includes("2")) {
+    const { id } = req.params;
+    User.findByIdAndUpdate(id, { state: "4" }, { new: true }, (err, user) => {
       if (err) {
         console.log(err);
         req.flash(
           "indexMessage",
-          "Hubo problemas para notificar al administrador"
+          "Hubo problemas en la solicitud de desactivación de la cuenta"
         );
         return res.redirect("/");
-      } else if (users.length > 0) {
-        let emails = "";
-        for (let i = 0; i < users.length; i++) {
-          if (i > 0) emails += ",";
-          emails += users[i].email;
-        }
+      }
+      User.find({ state: "1" }, (err, users) => {
+        if (err) {
+          console.log(err);
+          req.flash(
+            "indexMessage",
+            "Hubo problemas para notificar al administrador"
+          );
+          return res.redirect("/");
+        } else if (users.length > 0) {
+          let emails = "";
+          for (let i = 0; i < users.length; i++) {
+            if (i > 0) emails += ",";
+            emails += users[i].email;
+          }
 
-        const mailOptions = {
-          from: "Administración Adopta Pets",
-          to: emails,
-          subject: "Desactivación de cuentas de Adopta Pets",
-          html: `<p>Estimado Usuario administrador,</p><br>Se le informa que
+          const mailOptions = {
+            from: "Administración Adopta Pets",
+            to: emails,
+            subject: "Desactivación de cuentas de Adopta Pets",
+            html: `<p>Estimado Usuario administrador,</p><br>Se le informa que
             hay solicitudes para la desactivación de cuentas, para su
             aprobación, si deseas ingresar ve a la siguiente dirección:<br>
             <a href="${HOST}/users/pending/deactivate">Iniciar sesión</a>
             <br><br><br>Att,<br><br>Equipo Administrativo Adopta Pets`
-        };
+          };
 
-        transporter.sendMail(mailOptions, err => {
-          if (err) console.log(err);
-          req.flash(
-            "userMessage",
-            "Pronto el administrador revisara tu solicitud " +
-              `y se te notificara al correo electrónico de ${user.email}`
-          );
-          res.redirect("/profile");
-        });
-      } else {
-        req.flash("indexMessage", "No hay administradores disponibles");
-        res.redirect("/");
-      }
+          transporter.sendMail(mailOptions, err => {
+            if (err) console.log(err);
+            req.flash(
+              "userMessage",
+              "Pronto el administrador revisara tu solicitud " +
+                `y se te notificara al correo electrónico de ${user.email}`
+            );
+            res.redirect("/profile");
+          });
+        } else {
+          req.flash("indexMessage", "No hay administradores disponibles");
+          res.redirect("/");
+        }
+      });
     });
-  });
+  } else {
+    res.redirect("/");
+  }
 };
 
 // PUT /users/deactivateAccount -- Users deactivate account

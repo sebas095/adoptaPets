@@ -17,7 +17,11 @@ module.exports = (app, mountPoint, passport) => {
   );
 
   // DELETE
-  router.delete("/logout", sessionController.destroy);
+  router.delete(
+    "/logout",
+    sessionController.loginRequired,
+    sessionController.destroy
+  );
 
   app.use(mountPoint, router);
 };
