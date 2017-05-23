@@ -24,6 +24,7 @@
       </li>
       <li class="bold"><a href="/publications/new" class="waves-effect waves-light"><i class="material-icons prefix">add_circle</i>Agregar Mascota</a>
       </li>
+      <li class="bold"><a href="/publications/search" class="waves-effect waves-light"><i class="material-icons prefix">search</i>Buscar Mascotas</a>
       <li class="bold"><a class="collapsible-header  waves-effect waves-light"><i class="material-icons prefix">person</i>USUARIO</a>
         <div class="collapsible-body">
           <ul>
@@ -32,8 +33,31 @@
           </ul>
         </div>
       </li>
+      <% if (typeof(session) == 'object' && session) { %>
+        <% if (session.state === '1') { %>
+          <li class="bold"><a class="collapsible-header  waves-effect waves-light"><i class="material-icons prefix">supervisor_account</i>ADMIN</a>
+            <div class="collapsible-body">
+              <ul>
+              <li><a href="/users/admin">Usuarios</a></li>
+              <li><a href="/users/pending/deactivate">Desactivaciones pendientes</a></li>
+              </ul>
+            </div>
+          </li>
+        <% } %>
+      <% } %>
     </ul>
   </li>
-  <div class="divider"></div>
-  <li><a href="/logout" class="waves-effect waves-light red btn" style="color:white">Salir</a></li>
+  <% if (typeof(session) == 'object' && session) { %>
+    <div class="divider"></div>
+    <li>
+      <a href="#" id="logout" class="waves-effect waves-light red btn" style="color:white">Salir</a>
+      <form action="/session/logout?_method=delete" method="post" id="logout-form"></form>
+    </li>
+    <script>
+      document.querySelector("#logout").addEventListener("click", ev => {
+        ev.preventDefault();
+        document.querySelector('#logout-form').submit();
+      });
+    </script>
+  <% } %>
 </ul>
