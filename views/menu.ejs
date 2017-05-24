@@ -15,26 +15,26 @@
     </div>
   </li> -->
   <% if (typeof(session) != 'object') { %>
-    <li><a href="/session/login" class="waves-effect waves-light green btn" style="color:white">Iniciar Sesión</a></li>
-    <li><a href="/users/register" class="waves-effect waves-light orange btn" style="color:white">Crear Cuenta</a></li>
+    <li><a href="/adopta-pets/session/login" class="waves-effect waves-light green btn" style="color:white">Iniciar Sesión</a></li>
+    <li><a href="/adopta-pets/users/register" class="waves-effect waves-light orange btn" style="color:white">Crear Cuenta</a></li>
   <% }%>
   <div class="divider"></div>
   <li class="no-padding">
     <ul class="collapsible collapsible-accordion">
-      <li class="bold"><a href="/" class="waves-effect waves-light"><i class="material-icons prefix">info</i>Acerca de</a></li>
-      <li class="bold"><a href="/publications" class="waves-effect waves-light"><i class="material-icons prefix">pets</i>Mascotas en Adopción</a>
+      <li class="bold"><a href="/adopta-pets" class="waves-effect waves-light"><i class="material-icons prefix">info</i>Acerca de</a></li>
+      <li class="bold"><a href="/adopta-pets/publications" class="waves-effect waves-light"><i class="material-icons prefix">pets</i>Mascotas en Adopción</a>
       </li>
       <li class="bold"><a href="/publications/new" class="waves-effect waves-light"><i class="material-icons prefix">add_circle</i>Agregar Mascota</a>
       </li>
-      <li class="bold"><a href="/publications/search" class="waves-effect waves-light"><i class="material-icons prefix">search</i>Buscar Mascotas</a>
+      <li class="bold"><a href="/adopta-pets/publications/search" class="waves-effect waves-light"><i class="material-icons prefix">search</i>Buscar Mascotas</a>
       <li class="bold"><a class="collapsible-header  waves-effect waves-light"><i class="material-icons prefix">person</i>USUARIO</a>
         <div class="collapsible-body">
           <ul>
             <% if (typeof(session) == 'object' && session) { %>
-              <li><a href="/profile">Perfíl</a></li>
-              <li><a href="/publications/me">Mis publicaciones</a></li>
+              <li><a href="/adopta-pets/profile">Perfíl</a></li>
+              <li><a href="/adopta-pets/publications/me">Mis publicaciones</a></li>
             <% } %>
-            <li><a href="/account/newPassword">Recuperar Contraseña</a></li>
+            <li><a href="/adopta-pets/account/newPassword">Recuperar Contraseña</a></li>
           </ul>
         </div>
       </li>
@@ -43,8 +43,8 @@
           <li class="bold"><a class="collapsible-header  waves-effect waves-light"><i class="material-icons prefix">supervisor_account</i>ADMIN</a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="/users/admin">Usuarios</a></li>
-                <li><a href="/users/pending/deactivate">Desactivaciones pendientes</a></li>
+                <li><a href="/adopta-pets/users/admin">Usuarios</a></li>
+                <li><a href="/adopta-pets/users/pending/deactivate">Desactivaciones pendientes</a></li>
               </ul>
             </div>
           </li>
@@ -56,7 +56,7 @@
     <div class="divider"></div>
     <li>
       <a href="#" id="logout" class="waves-effect waves-light red btn" style="color:white">Salir</a>
-      <form action="/session/logout?_method=delete" method="post" id="logout-form"></form>
+      <form action="/adopta-pets/session/logout?_method=delete" method="post" id="logout-form"></form>
     </li>
     <script>
       document.querySelector("#logout").addEventListener("click", ev => {

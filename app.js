@@ -35,7 +35,9 @@ app.set("view engine", "ejs");
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 app.use(logger("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
@@ -86,11 +88,11 @@ app.use((req, res, next) => {
 });
 
 // Routes
-index(app, config.host, "/");
-users(app, config.host, "/users");
-account(app, config.host, "/account");
-session(app, config.host, "/session", passport);
-publications(app, config.host, "/publications");
+index(app, config.host, "/adopta-pets");
+users(app, config.host, "/adopta-pets/users");
+account(app, config.host, "/adopta-pets/account");
+session(app, config.host, "/adopta-pets/session", passport);
+publications(app, config.host, "/adopta-pets/publications");
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
