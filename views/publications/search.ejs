@@ -41,7 +41,7 @@
                       </div>
                       <div class="input-field col m6 s12">
                         <i class="icon ap-dog-2 prefix"></i>
-                        <select name="type" class="validate">
+                        <select name="type">
                           <option value="" disabled selected>Tipo</option>
                           <option value="gato">Gato</option>
                           <option value="perro">Perro</option>
@@ -51,20 +51,44 @@
                     <div class="row">
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">color_lens</i>
-                        <input type="text" id="color" name="color" class="validate" autocomplete="off" aria-required="true">
-                        <label for="color">Color</label>
+                        <select name="color">
+                          <option value="" disabled selected>Color Predominante</option>
+                          <option value="blanco">Blanco</option>
+                          <option value="negro">Negro</option>
+                          <option value="cafe">Café/Chocolate</option>
+                          <option value="gris">Gris/Plata/Azul</option>
+                          <option value="mirlo">Mirlo</option>
+                          <option value="dorado">Dorado/Naranja</option>
+                          <option value="gris-cafe">Gris y Café</option>
+                          <option value="amarillo">Amarillo/Pardo</option>
+                          <option value="tricolor">Café y Negro y Blanco</option>
+                        </select>
                       </div>
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">zoom_out_map</i>
-                        <input type="text" id="size" name="size" class="validate" autocomplete="off" aria-required="true">
-                        <label for="size">Tamaño</label>
+                        <select name="size">
+                          <option value="" disabled selected>Tamaño</option>
+                          <option value="pequeño">Pequeño(11 kg o menos)</option>
+                          <option value="mediano">Mediano(12-27 kg)</option>
+                          <option value="grande">Grande(28-45 kg)</option>
+                          <option value="extra">Extra Grande(46 kg o más)</option>
+                        </select>
                       </div>
                     </div>
                     <div class="row">
                       <div class="input-field col m6 s12">
-                        <i class="material-icons prefix">add_circle</i>
-                        <input type="text" id="age" name="age" class="validate" autocomplete="off" aria-required="true">
-                        <label for="age">Edad</label>
+                        <div class="col s8">
+                          <i class="material-icons prefix">add_circle</i>
+                          <input type="number" id="age" name="age" aria-required="true">
+                          <label for="age">Edad</label>
+                        </div>
+                        <div class="col s4">
+                          <select name="time">
+                            <option value="" disabled selected>Tiempo</option>
+                            <option value="mes">Mes(es)</option>
+                            <option value="año">Año(s)</option>
+                          </select>
+                        </div>
                       </div>
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">pets</i>
