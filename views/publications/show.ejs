@@ -26,24 +26,22 @@
               <div class="scrollspy" id="post">
                 <div class="row center">
                   <h3 class="light header icon ap-cat-3 orange-text"> Información sobre <%= publication.features.name %></h3>
-                  <p>Publica una mascota en adopción.</p>
+                  <p>Todo lo que debes saber sobre esta mascota.</p>
                 </div>
               </div>
               <div class="row">
-                <div class="card">
-                  <div class="card-image">
-                    <% if(publication.photos.length > 0) { %>
-                      <div class="row">
-                        <div class="slider">
-                          <ul class="slides">
-                            <% for (let i = 0; i < publication.photos.length; i++) { %>
-                              <li><img src="/uploads/<%= publication.photos[i] %>"></li>
-                            <% } %>
-                          </ul>
-                        </div>
-                      </div>
-                    <% } %>
+                <% if(publication.photos.length > 0) { %>
+                  <div class="row">
+                    <div class="slider">
+                      <ul class="slides">
+                        <% for (let i = 0; i < publication.photos.length; i++) { %>
+                          <li><img src="/uploads/<%= publication.photos[i] %>"></li>
+                        <% } %>
+                      </ul>
+                    </div>
                   </div>
+                <% } %>
+                <div class="card">
                   <div class="card-stacked">
                     <div class="card-content">
                       <div class="scrollspy" id="pet">
