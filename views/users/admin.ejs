@@ -34,101 +34,82 @@
                   </div>
                 </div>
               <% } %>
-
               <div class="row center">
-                  <h3 class="light header icon ap-dog-4"> Panel de Administración</h3>
+                <h3 class="light header icon ap-dog-4 orange-text"> Panel de Administración</h3>
+                <p>Gestiona la información de los usuarios de la aplicación</p>
               </div>
               <% for (let usr of users) { %>
-                <% let i = 0; %>
-                <% if (i % 2 === 0) { %>
-                  <div class="row">
-                <% } %>
-                  <div class="col s12">
-                    <div class="card">
-                      <div class="card-stacked">
-                        <div class="card-content">
-                          <form action="/users/<%= usr._id %>?_method=put" method="post" id="form-<%= usr._id %>">
-                            <div class="row">
-                              <div class="input-field col m6 s12">
-                                <i class="material-icons prefix">account_circle</i>
-                                <input type="text" id="firstname" name="firstname" class="validate" value="<%= usr.firstname %>" autocomplete="off" required="" aria-required="true" disabled="">
-                                <label for="firstname">Nombre(s) </label>
-                              </div>
-                              <div class="input-field col m6 s12">
-                                <i class="material-icons prefix">account_circle</i>
-                                <input type="text" id="lastname" name="lastname" class="validate" value="<%= usr.lastname %>" autocomplete="off" required="" aria-required="true" disabled="">
-                                <label for="lastname">Apellido(s) </label>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="input-field col m6 s12">
-                                <i class="material-icons prefix">email</i>
-                                <input type="email" id="user" name="email" class="validate" value="<%= usr.email %>" autocomplete="off" required="" aria-required="true" disabled="">
-                                <label for="user">Email </label>
-                              </div>
-                              <div class="input-field col m6 s12">
-                                <i class="material-icons prefix">phone</i>
-                                <input type="text" id="phone" name="phone" class="validate" value="<%= usr.phone %>" autocomplete="off" required="" aria-required="true"  disabled="">
-                                <label for="user">Teléfono </label>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="input-field col m12 s12">
-                                <input type="checkbox" class="filled-in" name="status" id="status" <% if (usr.state === '1') { %> checked="checked" <% } %> aria-required="true"  disabled="">
-                                <label for="status">¿Es administrador del sistema?</label>
-                              </div>
-                            </div>
-                            <div class="row center hide-on-small-only">
-                              <button class="btn waves-effect waves-light green save" disabled="" id="save-<%= usr._id %>">Guardar</button>
-                              <button class="btn waves-effect waves-light blue edit" id="edit-<%= usr._id %>">Editar</button>
-                              <button class="btn waves-effect waves-light orange activate" id="activate-<%= usr._id %>">
-                                <% if (usr.state === '3') { %>
-                                  Activar
-                                <% } else { %>
-                                  Desactivar
-                                <% } %>
-                              </button>
-                            </div>
-                            <div class="row center hide-on-med-and-up">
-                              <button class="btn-floating btn-large waves-effect waves-light green save" id="save-<%= usr._id %>"><i class="material-icons">done</i></button>
-                              <button class="btn-floating btn-large waves-effect waves-light blue edit" id="edit-<%= usr._id %>"><i class="material-icons">mode_edit</i></button>
-                              <button class="btn-floating btn-large waves-effect waves-light orange activate" id="activate-<%= usr._id %>">
-                                <% if (usr.state === '3') { %>
-                                  <i class="material-icons">reply</i>
-                                <% } else { %>
-                                  <i class="material-icons">delete</i>
-                                <% } %>
-                              </button>
-                            </div>
-                          </form>
+              <div class="col s12">
+                <div class="card">
+                  <div class="card-stacked">
+                    <div class="card-content">
+                      <span class="card-title amber-text"><%= usr.name %> <%= usr.lastname %></span>
+                      <form action="/users/<%= usr._id %>?_method=put" method="post" id="form-<%= usr._id %>">
+                        <div class="row">
+                          <div class="input-field col m6 s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input type="text" id="firstname" name="firstname" class="validate" value="<%= usr.firstname %>" autocomplete="off" required="" aria-required="true" disabled="">
+                            <label for="firstname">Nombre(s) </label>
+                          </div>
+                          <div class="input-field col m6 s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input type="text" id="lastname" name="lastname" class="validate" value="<%= usr.lastname %>" autocomplete="off" required="" aria-required="true" disabled="">
+                            <label for="lastname">Apellido(s) </label>
+                          </div>
                         </div>
-                      </div>
+                        <div class="row">
+                          <div class="input-field col m6 s12">
+                            <i class="material-icons prefix">email</i>
+                            <input type="email" id="user" name="email" class="validate" value="<%= usr.email %>" autocomplete="off" required="" aria-required="true" disabled="">
+                            <label for="user">Email </label>
+                          </div>
+                          <div class="input-field col m6 s12">
+                            <i class="material-icons prefix">phone</i>
+                            <input type="text" id="phone" name="phone" class="validate" value="<%= usr.phone %>" autocomplete="off" required="" aria-required="true"  disabled="">
+                            <label for="user">Teléfono </label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col m12 s12">
+                            <input type="checkbox" class="filled-in" name="status" id="status" <% if (usr.state === '1') { %> checked="checked" <% } %> aria-required="true"  disabled="">
+                            <label for="status">¿Es administrador del sistema?</label>
+                          </div>
+                        </div>
+                        <div class="row center hide-on-small-only">
+                          <button class="btn waves-effect waves-light green save" disabled="" id="save-<%= usr._id %>">Guardar</button>
+                          <button class="btn waves-effect waves-light blue edit" id="edit-<%= usr._id %>">Editar</button>
+                          <button class="btn waves-effect waves-light orange activate" id="activate-<%= usr._id %>">
+                            <% if (usr.state === '3') { %>
+                              Activar
+                            <% } else { %>
+                              Desactivar
+                            <% } %>
+                          </button>
+                        </div>
+                        <div class="row center hide-on-med-and-up">
+                          <button class="btn-floating btn-large waves-effect waves-light green save" id="save-<%= usr._id %>"><i class="material-icons">done</i></button>
+                          <button class="btn-floating btn-large waves-effect waves-light blue edit" id="edit-<%= usr._id %>"><i class="material-icons">mode_edit</i></button>
+                          <button class="btn-floating btn-large waves-effect waves-light orange activate" id="activate-<%= usr._id %>">
+                            <% if (usr.state === '3') { %>
+                              <i class="material-icons">reply</i>
+                            <% } else { %>
+                              <i class="material-icons">delete</i>
+                            <% } %>
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
-                  <% if ((i + 1) % 2 === 0 || i == users.length - 1) { %>
-                    </div>
-                  <% } %>
-                  <form action="/users/<%= usr._id %>?_method=delete" method="post" id="deactivateForm-<%= usr._id %>">
-                    <input type="hidden" name="status" id="status-<%= usr._id %>">
-                  </form>
-                  <% i++ %>
+                </div>
+              </div>
+              <form action="/users/<%= usr._id %>?_method=delete" method="post" id="deactivateForm-<%= usr._id %>">
+                <input type="hidden" name="status" id="status-<%= usr._id %>">
+              </form>
               <% } %>
             </div>
           </div>
         </div>
       </div>
-      <!-- <div class="section no-pad-bot" id="index-banner">
-        <div class="container">
-          <div class="row center">
-            <div class="col s12 m12">
-              <div class="buysellads-header center-on-small-only">
-                <div id="icon-intro" class="icon ap-title"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
     </main>
     <% include ../footer %>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
