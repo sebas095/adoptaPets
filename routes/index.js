@@ -16,6 +16,9 @@ module.exports = (app, mountPoint) => {
     });
   });
 
+  // POST
+  router.post("/contact", userController.contact);
+
   // PUT
   router.put(
     "/profile",

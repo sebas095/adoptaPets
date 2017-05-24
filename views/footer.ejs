@@ -8,26 +8,26 @@
       </div>
       <div class="col l8 s12">
         <h5 class="white-text ap-dog-8"> ¡Danos tu opinión!</h5>
-        <form action="session/login" method="post">
+        <form action="/contact" method="post">
           <div class="row">
             <div class="input-field col m6 s12">
               <i class="material-icons prefix">email</i>
-              <input type="email" id="user" name="email" class="validate" autocomplete="off" required="" aria-required="true">
-              <label for="user">Email </label>
+              <input type="email" id="email" name="email" class="validate" autocomplete="off" required="" aria-required="true">
+              <label for="email">Email </label>
             </div>
             <div class="input-field col m6 s12">
-              <i class="material-icons prefix">lock</i>
-              <input type="password" id="pwd" name="pwd" class="validate" required="" aria-required="true">
-              <label for="pwd">Contraseña </label>
+              <i class="material-icons prefix">person</i>
+              <input type="text" id="fullname" name="fullname" class="validate" required="" aria-required="true">
+              <label for="fullname">Nombre(s) </label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col m9 s12">
-              <textarea id="textarea1" class="materialize-textarea"></textarea>
-              <label for="textarea1">Textarea</label>
-            </div>
+              <textarea id="msg" name="msg" class="materialize-textarea" class="validate" required=""></textarea>
+              <label for="msg">Mensaje</label>
+            </div><br>
             <div class="center input-field col m3 s12">
-              <input class="btn waves-effect waves-light green" type="submit" name="login" value="Enviar">
+              <input class="btn waves-effect waves-light green" type="submit" value="Enviar">
             </div>
           </div>
         </form>
