@@ -330,3 +330,40 @@ exports.deactivateAccount = (req, res) => {
     res.redirect("/");
   }
 };
+
+exports.contact = (req, res) => {
+  User.find({ state: "1" }, (err, users) => {
+    if (err) {
+      console.log(err);
+      req.flash(
+        "indexMessage",
+        "Hubo problemas en el registro, intenta de nuevo"
+      );
+      return res.redirect("/");
+    } else if (users.length > 0) {
+      let emails = "";
+      for (let i = 0; i < users.length; i++) {
+        if (i > 0) emails += ",";
+        emails += users[i].email;
+      }
+
+      const mailOptions = {
+        from: "Administración",
+        to: emails,
+        subject: "Opiniones y Sugerencias para Adopta Pets ",
+        html: `<p>Estimado Usuario administrador,</p><br>Se le informa que
+          <b>${req.body.fullname}</b> con el correo <b>${req.body.email}</b>
+           tiene la(s) siguiente(s) opiniones y/o sugerencias:
+          <br><br>${req.body.msg}`
+      };
+
+      transporter.sendMail(mailOptions, err => {
+        if (err) console.log(err);
+        res.redirect("/");
+      });
+    } else {
+      req.flash("indexMessage", "Hubo problemas en el servidor");
+      res.redirect("/");
+    }
+  });
+};

@@ -142,13 +142,15 @@
                           </div>
                         </div>
 
-                        <div class="row">
-                          <div class="input-field col m12 s12">
-                            <i class="material-icons prefix">assignment</i>
-                            <textarea id="description" name="description" class="materialize-textarea" readonly="" aria-required="true"><%= publication.description %></textarea>
-                            <label for="description">Descripción</label>
+                        <% if (publication.description) { %>
+                          <div class="row">
+                            <div class="input-field col m12 s12">
+                              <i class="material-icons prefix">assignment</i>
+                              <textarea id="description" name="description" class="materialize-textarea" readonly="" aria-required="true"><%= publication.description %></textarea>
+                              <label for="description">Descripción</label>
+                            </div>
                           </div>
-                        </div>
+                        <% } %>
                       </div>
                     </div>
                   </div>
