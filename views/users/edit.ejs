@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/ghpages-materialize.css">
     <link rel="stylesheet" href="/css/adoptapets.css">
     <link rel="stylesheet" href="/css/style.css">
@@ -25,11 +25,19 @@
           <div class="container">
             <div class="section scrollspy" id="session">
               <% if (message.length > 0) { %>
-                <div class="row">
-                  <div class="col m6 s12 offset-m3">
-                    <div class="alert alert-info">
-                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      <p><%= message %></p>
+                <div class="row" id="alert_box">
+                  <div class="col s12">
+                    <div class="card light-blue">
+                      <div class="row">
+                        <div class="col s12 m10">
+                          <div class="white-text">
+                            <blockquote><%= message %></blockquote>
+                          </div>
+                        </div>
+                        <div class="col s12 m2">
+                          <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -107,6 +115,12 @@
           $('.scrollspy').scrollSpy();
         }); // end of document ready
       })(jQuery); // end of jQuery name space
+    </script>
+    <script>
+      $('#alert_close').click(function(){
+        $( "#alert_box" ).fadeOut( "slow", function() {
+        });
+      });
     </script>
   </body>
 </html>
