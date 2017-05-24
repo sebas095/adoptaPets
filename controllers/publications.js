@@ -342,7 +342,7 @@ exports.getPublications = (req, res) => {
 
 // GET /publications -- All me publications
 exports.getMyPublications = (req, res) => {
-  Publication.find({}, (err, data) => {
+  Publication.find({ email: req.user.email }, (err, data) => {
     if (err) {
       console.log(err);
       req.flash(
