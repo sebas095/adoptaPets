@@ -25,6 +25,17 @@
           </div>
           <div class="container">
             <div class="section scrollspy">
+              <% if (message.length == 0) { %>
+                <div class="row">
+                  <div class="col m6 s12 offset-m3">
+                    <div class="alert alert-danger">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <p><%= message %></p>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+
               <% for (let usr of users) { %>
                 <div class="row">
                   <form action="/users/deactivateAccount?_method=put" method="post" id="form-<%= usr._id %>">

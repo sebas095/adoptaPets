@@ -24,10 +24,20 @@
           <% include ../header %>
           <div class="container">
             <div class="section scrollspy">
+              <% if (message.length == 0) { %>
+                <div class="row">
+                  <div class="col m6 s12 offset-m3">
+                    <div class="alert alert-success">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <p><%= message %></p>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+
               <div class="row center">
                   <h3 class="light header icon ap-dog-4"> Panel de Administración</h3>
-                  <p>Publica una mascota en adopción.</p>
-                </div>
+              </div>
               <% for (let usr of users) { %>
                 <% let i = 0; %>
                 <% if (i % 2 === 0) { %>

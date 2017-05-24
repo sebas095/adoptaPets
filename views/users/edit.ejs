@@ -24,6 +24,17 @@
           <% include ../header %>
           <div class="container">
             <div class="section scrollspy" id="session">
+              <% if (message.length == 0) { %>
+                <div class="row">
+                  <div class="col m6 s12 offset-m3">
+                    <div class="alert alert-info">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <p><%= message %></p>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+
               <div class="row center">
                 <h3 class="light header icon ap-cat-6 orange-text"> Perfíl del Usuario</h3>
                 <p class="col s12 m8 offset-m2 caption">Datos de contacto del usuario</p>
