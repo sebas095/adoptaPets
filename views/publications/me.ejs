@@ -58,18 +58,41 @@
                         <h5 class="center amber-text icon ap-cat-7"> Características</h5>
                         <div class="input-field col l6 m12 s6">
                           <i class="material-icons prefix">color_lens</i>
-                          <input type="text" id="pet.color" name="pet.color" readonly="" value="<%= pub.features.color %>" aria-required="true">
+                          <input type="text" id="pet.color" name="pet.color" readonly=""
+                            <% if (pub.features.color === 'blanco') { %> value="Blanco" <% } %>
+                            <% if (pub.features.color === 'negro') { %> value="Negro" <% } %>
+                            <% if (pub.features.color === 'cafe') { %> value="Café/Chocolate" <% } %>
+                            <% if (pub.features.color === 'gris') { %> value="Gris/Plata/Azul" <% } %>
+                            <% if (pub.features.color === 'mirlo') { %> value="Mirlo" <% } %>
+                            <% if (pub.features.color === 'dorado') { %> value="Dorado/Naranja" <% } %>
+                            <% if (pub.features.color === 'gris-cafe') { %> value="Gris y Café" <% } %>
+                            <% if (pub.features.color === 'amarillo') { %> value="Amarillo/Pardo" <% } %>
+                            <% if (pub.features.color === 'tricolor') { %> value="Café y Negro y Blanco" <% } %>
+                            aria-required="true">
                           <label for="pet.color">Color</label>
                         </div>
                         <div class="input-field col l6 m12 s6">
                           <i class="material-icons prefix">zoom_out_map</i>
-                          <input type="text" id="pet.size" name="pet.size" readonly="" value="<%= pub.features.size %>" aria-required="true">
+                          <input type="text" id="pet.size" name="pet.size" readonly=""
+                            <% if (pub.features.size === 'pequeño') { %>  value="Pequeño(11 kg o menos)" <% } %>
+                            <% if (pub.features.size === 'mediano') { %>  value="Mediano(12-27 kg)" <% } %>
+                            <% if (pub.features.size === 'grande') { %>  value="Grande(28-45 kg)" <% } %>
+                            <% if (pub.features.size === 'extra') { %>  value="Extra Grande(46 kg o más)" <% } %>
+                            aria-required="true">
                           <label for="pet.size">Tamaño</label>
                         </div>
-                        <div class="input-field col l6 m12 s6">
-                          <i class="material-icons prefix">add_circle</i>
-                          <input type="text" id="pet.age" name="pet.age" readonly="" value="<%= pub.features.age %>" aria-required="true">
-                          <label for="pet.age">Edad</label>
+                        <div class="input-field col l6 m6 s12">
+                          <div class="col s8">
+                            <i class="material-icons prefix">add_circle</i>
+                            <input type="number" id="pet.age" name="pet.age" readonly="" value="<%= pub.features.age %>">
+                            <label for="pet.age">Edad</label>
+                          </div>
+                          <div class="col s4">
+                            <input name="pet.time" id="pet.time" readonly
+                              <% if (pub.features.time === 'mes') { %> value="Mes(es)" <% } %>
+                              <% if (pub.features.time === 'año') { %> value="Año(s)" <% } %>
+                              aria-required="true">
+                          </div>
                         </div>
                         <div class="input-field col l6 m12 s6">
                           <i class="material-icons prefix">pets</i>
