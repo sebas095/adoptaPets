@@ -42,7 +42,7 @@ const PublicationSchema = new Schema({
   },
   description: {
     type: String,
-    require: true
+    default: ""
   },
   email: {
     type: String,

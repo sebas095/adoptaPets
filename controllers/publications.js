@@ -53,7 +53,7 @@ exports.create = (req, res) => {
         const publication = {
           uid: uuid.v4(),
           phone: req.body["phone"],
-          description: req.body["description"],
+          description: req.body["description"] ? req.body["description"] : "",
           email: req.body["email"],
           createdBy: req.user.email,
           address: req.body["address"],
@@ -172,7 +172,7 @@ exports.update = (req, res) => {
 
         const publication = {
           phone: req.body["phone"],
-          description: req.body["description"],
+          description: req.body["description"] ? req.body["description"] : "",
           email: req.body["email"],
           createdBy: req.user.email,
           address: req.body["address"],
