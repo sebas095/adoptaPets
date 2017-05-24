@@ -51,19 +51,25 @@
                               </div>
                             </div>
                             <div class="row">
-                              <div class="input-field col m4 s12">
+                              <div class="input-field col m6 s12">
                                 <i class="material-icons prefix">email</i>
                                 <input type="email" id="user" name="email" class="validate" value="<%= usr.email %>" autocomplete="off" required="" aria-required="true" disabled="">
                                 <label for="user">Email </label>
                               </div>
-                              <div class="input-field col m4 s12">
+                              <div class="input-field col m6 s12">
                                 <i class="material-icons prefix">phone</i>
                                 <input type="text" id="phone" name="phone" class="validate" value="<%= usr.phone %>" autocomplete="off" required="" aria-required="true"  disabled="">
                                 <label for="user">Teléfono </label>
                               </div>
                             </div>
+                            <div class="row">
+                              <div class="input-field col m12 s12">
+                                <input type="checkbox" class="filled-in" name="status" id="status" <% if (usr.state === '1') { %> checked="checked" <% } %> aria-required="true"  disabled="">
+                                <label for="status">¿Es administrador del sistema?</label>
+                              </div>
+                            </div>
                             <div class="row center hide-on-small-only">
-                              <button class="btn waves-effect waves-light green save" id="save-<%= usr._id %>">Guardar</button>
+                              <button class="btn waves-effect waves-light green save" disabled="" id="save-<%= usr._id %>">Guardar</button>
                               <button class="btn waves-effect waves-light blue edit" id="edit-<%= usr._id %>">Editar</button>
                               <button class="btn waves-effect waves-light orange activate" id="activate-<%= usr._id %>">
                                 <% if (usr.state === '3') { %>

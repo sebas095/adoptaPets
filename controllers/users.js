@@ -54,11 +54,9 @@ exports.updateUser = (req, res) => {
   ) {
     const id = req.params.id || req.user._id;
     if (req.body.status) {
-      if (req.body.status === "admin") {
-        req.body.state = "1";
-      } else {
-        req.body.state = "2";
-      }
+      req.body.state = "1";
+    } else {
+      req.body.state = "2";
     }
 
     User.findByIdAndUpdate(id, req.body, { new: true }, (err, user) => {
