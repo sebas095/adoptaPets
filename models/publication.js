@@ -15,8 +15,12 @@ const PetSchema = new Schema({
     type: String,
     require: true
   },
-  age: {
+  time: {
     type: String,
+    require: true
+  },
+  age: {
+    type: Number,
     require: true
   },
   gender: {

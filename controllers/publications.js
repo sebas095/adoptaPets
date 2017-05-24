@@ -42,10 +42,11 @@ exports.create = (req, res) => {
         res.redirect("/");
       } else {
         const pet = {
-          color: req.body["pet.color"].toUpperCase().trim(),
-          size: req.body["pet.size"].toUpperCase().trim(),
+          color: req.body["pet.color"],
+          size: req.body["pet.size"],
           name: req.body["pet.name"].toUpperCase().trim(),
-          age: req.body["pet.age"],
+          age: Number(req.body["pet.age"]),
+          time: req.body["pet.time"],
           type: req.body["pet.type"],
           gender: req.body["pet.gender"]
         };
@@ -162,10 +163,11 @@ exports.update = (req, res) => {
         const { id } = req.params;
 
         const pet = {
-          color: req.body["pet.color"].toUpperCase().trim(),
-          size: req.body["pet.size"].toUpperCase().trim(),
+          color: req.body["pet.color"],
+          size: req.body["pet.size"],
           name: req.body["pet.name"].toUpperCase().trim(),
-          age: req.body["pet.age"],
+          age: Number(req.body["pet.age"]),
+          time: req.body["pet.time"],
           gender: req.body["pet.gender"],
           type: req.body["pet.type"]
         };

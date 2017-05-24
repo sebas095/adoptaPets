@@ -55,13 +55,28 @@
                     <div class="row">
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">color_lens</i>
-                        <input type="text" id="pet.color" name="pet.color" class="validate" autocomplete="off" required="" disabled="" value="<%= publication.features.color %>" aria-required="true">
-                        <label for="pet.color">Color</label>
+                        <select name="pet.color" id="pet.color" class="validate" required="" disabled="">
+                          <option value="" disabled selected>Color Predominante</option>
+                          <option value="blanco" <% if (publication.features.color === 'blanco') { %> selected <% } %> >Blanco</option>
+                          <option value="negro" <% if (publication.features.color === 'negro') { %> selected <% } %> >Negro</option>
+                          <option value="cafe" <% if (publication.features.color === 'cafe') { %> selected <% } %> >Café/Chocolate</option>
+                          <option value="gris" <% if (publication.features.color === 'gris') { %> selected <% } %> >Gris/Plata/Azul</option>
+                          <option value="mirlo" <% if (publication.features.color === 'mirlo') { %> selected <% } %> >Mirlo</option>
+                          <option value="dorado" <% if (publication.features.color === 'dorado') { %> selected <% } %> >Dorado/Naranja</option>
+                          <option value="gris-cafe" <% if (publication.features.color === 'gris-cafe') { %> selected <% } %> >Gris y Café</option>
+                          <option value="amarillo" <% if (publication.features.color === 'amarillo') { %> selected <% } %> >Amarillo/Pardo</option>
+                          <option value="tricolor" <% if (publication.features.color === 'tricolor') { %> selected <% } %> >Café y Negro y Blanco</option>
+                        </select>
                       </div>
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">zoom_out_map</i>
-                        <input type="text" id="pet.size" name="pet.size" class="validate" autocomplete="off" required="" disabled="" value="<%= publication.features.size %>" aria-required="true">
-                        <label for="pet.size">Tamaño</label>
+                        <select name="pet.size" id="pet.size" class="validate" required="" disabled="">
+                          <option value="" disabled selected>Tamaño</option>
+                          <option value="pequeño" <% if (publication.features.size === 'pequeño') { %> selected <% } %> >Pequeño(11 kg o menos)</option>
+                          <option value="mediano" <% if (publication.features.size === 'mediano') { %> selected <% } %> >Mediano(12-27 kg)</option>
+                          <option value="grande" <% if (publication.features.size === 'grande') { %> selected <% } %> >Grande(28-45 kg)</option>
+                          <option value="extra" <% if (publication.features.size === 'extra') { %> selected <% } %> >Extra Grande(46 kg o más)</option>
+                        </select>
                       </div>
                     </div>
                     <div class="row">
@@ -71,9 +86,18 @@
                         <label for="pet.name">Nombre</label>
                       </div>
                       <div class="input-field col m6 s12">
-                        <i class="material-icons prefix">add_circle</i>
-                        <input type="text" id="pet.age" name="pet.age" class="validate" autocomplete="off" required="" disabled="" value="<%= publication.features.age %>" aria-required="true">
-                        <label for="pet.age">Edad</label>
+                        <div class="col s8">
+                          <i class="material-icons prefix">add_circle</i>
+                          <input type="number" id="pet.age" name="pet.age" class="validate" autocomplete="off" required="" disabled="" aria-required="true" value="<%= publication.features.age %>">
+                          <label for="pet.age">Edad</label>
+                        </div>
+                        <div class="col s4">
+                          <select name="pet.time" id="pet.time" class="validate" required="" disabled="">
+                            <option value="" disabled selected>Tiempo</option>
+                            <option value="mes" <% if (publication.features.time === 'mes') { %> selected <% } %> >Mes(es)</option>
+                            <option value="año" <% if (publication.features.time === 'año') { %> selected <% } %> >Año(s)</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                     <div class="row">
@@ -86,7 +110,11 @@
                         </select>
                       </div>
                       <div class="input-field col m6 s12">
-                        <i class="icon ap-dog-2 prefix"></i>
+                        <% if (publication.features.type === 'gato') { %>
+                          <i class="icon ap-cat-2 prefix"></i>
+                        <% } else { %>
+                          <i class="icon ap-dog-2 prefix"></i>
+                        <% } %>
                         <select name="pet.type" id="pet.type" class="validate" required="" disabled="">
                           <option value="" disabled selected>Tipo</option>
                           <option value="gato" <% if (publication.features.type === 'gato') { %> selected <% } %> >Gato</option>

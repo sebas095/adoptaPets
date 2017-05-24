@@ -18,6 +18,7 @@ btnEdit.addEventListener("click", ev => {
     if (!inputs[i].id.includes("edit") && !inputs[i].id.includes("delete"))
       inputs[i].disabled = !inputs[i].disabled;
   }
+  $("select").material_select();
 });
 
 btnDelete.addEventListener("click", ev => {
