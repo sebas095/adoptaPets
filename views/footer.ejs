@@ -12,18 +12,18 @@
           <div class="row">
             <div class="input-field col m6 s12">
               <i class="material-icons prefix">email</i>
-              <input type="email" id="email" name="email" class="validate" autocomplete="off" required="" aria-required="true">
+              <input type="email" id="email" name="email" class="validate white-text" autocomplete="off" required="" aria-required="true">
               <label for="email">Email </label>
             </div>
             <div class="input-field col m6 s12">
               <i class="material-icons prefix">person</i>
-              <input type="text" id="fullname" name="fullname" class="validate" required="" aria-required="true">
+              <input type="text" id="fullname" name="fullname" class="validate white-text" required="" aria-required="true">
               <label for="fullname">Nombre(s) </label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col m9 s12">
-              <textarea id="msg" name="msg" class="materialize-textarea" class="validate" required=""></textarea>
+              <textarea id="msg" name="msg" class="materialize-textarea white-text" class="validate" required=""></textarea>
               <label for="msg">Mensaje</label>
             </div><br>
             <div class="center input-field col m3 s12">
@@ -32,6 +32,14 @@
           </div>
         </form>
       </div>
+      <% if (count > 0) { %>
+        <div class="row">
+          <div class="col m6 s12 white-text">
+            <h4 class="icon ap-cat-4">Mascotas adoptadas:</h4>
+            <span><%= count %><span>
+          </div>
+        </div>
+      <% } %>
     </div>
   </div>
   <div class="footer-copyright">

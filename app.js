@@ -11,6 +11,7 @@ const methodOverride = require("method-override");
 const path = require("path");
 const expSession = require("express-session");
 const User = require("./models/user");
+const Publication = require("./models/publication");
 
 require("colors");
 require("./config/passport")(passport);
@@ -74,6 +75,14 @@ app.use((req, res, next) => {
     });
   } else
     next();
+});
+
+app.use((req, res, next) => {
+  Publication.find({}, (err, data) => {
+    if (err) console.log(err);
+    res.locals.count = data.filter(item => item.available === false).length;
+    next();
+  });
 });
 
 // Routes
