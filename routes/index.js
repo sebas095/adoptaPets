@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { userController, sessionController } = require("../controllers");
 
-module.exports = (app, mountPoint) => {
+module.exports = (app, host, mountPoint) => {
   // GET
   router.get("/", (req, res) =>
     res.render("index", {
@@ -26,5 +26,5 @@ module.exports = (app, mountPoint) => {
     userController.updateUser
   );
 
-  app.use(mountPoint, router);
+  app.use(host + mountPoint, router);
 };
