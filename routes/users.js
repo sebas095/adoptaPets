@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { userController, sessionController } = require("../controllers");
 
-module.exports = (app, mountPoint) => {
+module.exports = (app, host, mountPoint) => {
   // GET
   router.get("/register", userController.newUser);
 
@@ -47,5 +47,5 @@ module.exports = (app, mountPoint) => {
     userController.deleteUser
   );
 
-  app.use(mountPoint, router);
+  app.use(host + mountPoint, router);
 };

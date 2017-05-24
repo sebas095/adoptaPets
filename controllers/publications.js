@@ -401,7 +401,7 @@ exports.search = (req, res) => {
           }
           return flag;
         });
-        res.render("publications/search", { publications: pubs });
+        res.render("publications/search", { publications: pubs, message: "" });
       } else {
         res.render("publications/search", {
           message: "No hay publicaciones disponibles"
@@ -409,7 +409,7 @@ exports.search = (req, res) => {
       }
     });
   } else {
-    res.render("publications/search");
+    res.render("publications/search", { message: "" });
   }
 };
 
