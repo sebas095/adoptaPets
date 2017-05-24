@@ -39,13 +39,32 @@
                     <div class="row">
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">color_lens</i>
-                        <input type="text" id="pet.color" name="pet.color" class="validate" autocomplete="off" required="" aria-required="true">
-                        <label for="pet.color">Color</label>
+                        <!--<input type="text" id="pet.color" name="pet.color" class="validate" autocomplete="off" required="" aria-required="true">
+                        <label for="pet.color">Color</label>-->
+                        <select name="pet.type" class="validate" required="">
+                          <option value="" disabled selected>Color Predominante</option>
+                          <option value="blanco">Blanco</option>
+                          <option value="negro">Negro</option>
+                          <option value="cafe">Café/Chocolate</option>
+                          <option value="gris">Gris/Plata/Azul</option>
+                          <option value="mirlo">Mirlo</option>
+                          <option value="dorado">Dorado/Naranja</option>
+                          <option value="gris-cafe">Gris y Café</option>
+                          <option value="amarillo">Amarillo/Pardo</option>
+                          <option value="tricolor">Café y Negro y Blanco</option>
+                        </select>
                       </div>
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">zoom_out_map</i>
-                        <input type="text" id="pet.size" name="pet.size" class="validate" autocomplete="off" required="" aria-required="true">
-                        <label for="pet.size">Tamaño</label>
+                        <!--<input type="text" id="pet.size" name="pet.size" class="validate" autocomplete="off" required="" aria-required="true">
+                        <label for="pet.size">Tamaño</label>-->
+                        <select name="pet.type" class="validate" required="">
+                          <option value="" disabled selected>Tamaño</option>
+                          <option value="pequeño">Pequeño(11 kg o menos)</option>
+                          <option value="mediano">Mediano(12-27 kg)</option>
+                          <option value="grande">Grande(28-45 kg)</option>
+                          <option value="extra">Extra Grande(46 kg o más)</option>
+                        </select>
                       </div>
                     </div>
                     <div class="row">
@@ -55,9 +74,18 @@
                         <label for="pet.name">Nombre</label>
                       </div>
                       <div class="input-field col m6 s12">
-                        <i class="material-icons prefix">add_circle</i>
-                        <input type="text" id="pet.age" name="pet.age" class="validate" autocomplete="off" required="" aria-required="true">
-                        <label for="pet.age">Edad</label>
+                        <div class="col s8">
+                          <i class="material-icons prefix">add_circle</i>
+                          <input type="text" id="pet.age" name="pet.age" class="validate" autocomplete="off" required="" aria-required="true">
+                          <label for="pet.age">Edad</label>
+                        </div>
+                        <div class="col s4">
+                          <select name="pet.type" class="validate" required="">
+                            <option value="" disabled selected>Tiempo</option>
+                            <option value="mes">Mes(es)</option>
+                            <option value="año">Año(s)</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                     <div class="row">
@@ -87,7 +115,7 @@
                           <input type="file" name="pet.photos" class="validate" accept='image/*' multiple required="">
                         </div>
                         <div class="file-path-wrapper">
-                          <input class="file-path validate" type="text" placeholder="Sube una o más imágenes">
+                          <input class="file-path validate" type="text" placeholder="Sube una o más imágenes(máx.5) .jpg .jpeg ó .png ">
                         </div>
                       </div>
                     </div>
