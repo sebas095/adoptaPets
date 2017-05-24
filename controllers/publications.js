@@ -365,12 +365,15 @@ exports.search = (req, res) => {
   if (req.query.lat1 && req.query.lng1) {
     const lat1 = parseFloat(req.query.lat1);
     const lon1 = parseFloat(req.query.lng1);
-    const dist = req.query.dist ? Number(req.query.dist) : 10;
+    const dist = req.query.dist && req.query.dist >= 0
+      ? Number(req.query.dist)
+      : 10;
     let filter = {};
-    if (req.query.color) filter.color = req.query.color.toUpperCase().trim();
-    if (req.query.size) filter.size = req.query.size.toUpperCase().trim();
-    if (req.query.age) filter.age = req.query.age;
     if (req.query.type) filter.type = req.query.type;
+    if (req.query.color) filter.color = req.query.color;
+    if (req.query.size) filter.size = req.query.size;
+    if (req.query.age) filter.age = Number(req.query.age);
+    if (req.query.time) filter.time = req.query.time;
     if (req.query.gender) filter.gender = req.query.gender;
 
     Publication.find({ available: true }, (err, data) => {
