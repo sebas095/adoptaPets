@@ -7,10 +7,12 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/ghpages-materialize.css">
     <link rel="stylesheet" href="/css/adoptapets.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/share.min.js"></script>
   </head>
   <body>
     <header>
@@ -172,6 +174,14 @@
                             </div>
                           </div>
                         <% } %>
+                        <div class="row">
+                          <div class="col offset-m5 m6 s12">
+                            <a class="waves-effect waves-light btn blue darken-4" data-service="facebook">
+                              <i class="fa fa-facebook" aria-hidden="true"></i>
+                              Compartir
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -199,6 +209,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7NUMl0ZdbpgytjC5N3nwIps43cXbeYpU"></script>
     <script src="/js/maps.js"></script>
+    <script>
+      <% let img = ''; %>
+      <% if (publication.photos.length > 0) { %>
+        <% img = 'uploads/' + publication.photos[0]; %>
+      <% } else { %>
+        <% img = 'img/fondo.png'; %>
+      <% } %>
+      // Share.init(document.getElementsByTagName('a'), {
+        // title: '¿Te gustaria adoptar a <%= publication.features.name %>?',
+        // url: 'http://localhost:3000/publications/<%= publication._id %>',
+        // pic: 'http://localhost:3000/<%= img %>'
+      // });
+      Share.init(document.getElementsByTagName('a'), {
+        title: '¿Te gustaria adoptar una mascota?',
+        url: 'https://lanzador.co/adopta-pets',
+        pic: 'http://www.petsonbroadway.com/wp-content/uploads/2015/12/pet-supplies-portland-or.jpg'
+      });
+    </script>
     <script type="text/javascript">
       (function($) {
         $(function() {
