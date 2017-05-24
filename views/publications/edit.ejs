@@ -51,10 +51,10 @@
               </div>
               <div class="divider"></div>
               <div class="row">
-                <form action="/publications/<%= publication._id %>/delete?_method=delete" id="image-form" method="post">
+                <form action="/adopta-pets/publications/<%= publication._id %>/delete?_method=delete" id="image-form" method="post">
                   <input type="hidden" name="photo" id="photo">
                 </form>
-                <form action="/publications/<%= publication._id %>/edit?_method=put" id="publication-form" enctype="multipart/form-data" method="post">
+                <form action="/adopta-pets/publications/<%= publication._id %>/edit?_method=put" id="publication-form" enctype="multipart/form-data" method="post">
                   <div class="scrollspy" id="pet">
                     <div class="row center">
                       <h4 class="light header icon ap-dog-8 amber-text"> Información de la Mascota</h4>
@@ -219,7 +219,7 @@
                     </div>
                   </div>
                 </form>
-                <form class="" action="/publications/<%= publication._id %>?_method=delete" id="deletePublicationForm" method="post">
+                <form class="" action="/adopta-pets/publications/<%= publication._id %>?_method=delete" id="deletePublicationForm" method="post">
                 </form>
               </div>
             </div>

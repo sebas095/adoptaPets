@@ -38,7 +38,7 @@
 
               <% for (let usr of users) { %>
                 <div class="row">
-                  <form action="/users/deactivateAccount?_method=put" method="post" id="form-<%= usr._id %>">
+                  <form action="/adopta-pets/users/deactivateAccount?_method=put" method="post" id="form-<%= usr._id %>">
                     <div class="row">
                       <div class="col m6 s12">
                         <p>El usuario <%= usr.firstname %> <%= usr.lastname %> solicita la desactivación de su cuenta</p>

@@ -21,7 +21,7 @@ exports.new = (req, res) => {
   ) {
     res.render("publications/new", { user: req.user });
   } else {
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };
 
@@ -39,7 +39,7 @@ exports.create = (req, res) => {
           "indexMessage",
           "Hubo problemas guardando la publicación, intenta de nuevo"
         );
-        res.redirect("/");
+        res.redirect("/adopta-pets");
       } else {
         const pet = {
           color: req.body["pet.color"],
@@ -75,13 +75,13 @@ exports.create = (req, res) => {
                   "indexMessage",
                   "Hubo problemas guardando la publicación, intenta de nuevo"
                 );
-                res.redirect("/");
+                res.redirect("/adopta-pets");
               } else {
                 req.flash(
                   "indexMessage",
                   "Su publicación ha sido creada exitosamente"
                 );
-                res.redirect("/");
+                res.redirect("/adopta-pets");
               }
             });
           });
@@ -93,20 +93,20 @@ exports.create = (req, res) => {
                 "indexMessage",
                 "Hubo problemas guardando la publicación, intenta de nuevo"
               );
-              res.redirect("/");
+              res.redirect("/adopta-pets");
             } else {
               req.flash(
                 "indexMessage",
                 "Su publicación ha sido creada exitosamente"
               );
-              res.redirect("/");
+              res.redirect("/adopta-pets");
             }
           });
         }
       }
     });
   } else {
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };
 
@@ -125,13 +125,13 @@ exports.edit = (req, res) => {
           "indexMessage",
           "Hubo problemas buscando la publicación, intenta más tarde"
         );
-        res.redirect("/");
+        res.redirect("/adopta-pets");
       } else if (!data) {
         req.flash(
           "indexMessage",
           "La publicación solicitada no se encuentra registrada"
         );
-        res.redirect("/");
+        res.redirect("/adopta-pets");
       } else {
         res.render("publications/edit", {
           publication: data,
@@ -140,7 +140,7 @@ exports.edit = (req, res) => {
       }
     });
   } else {
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };
 
@@ -158,7 +158,7 @@ exports.update = (req, res) => {
           "indexMessage",
           "Hubo problemas guardando la publicación, intenta de nuevo"
         );
-        res.redirect("/");
+        res.redirect("/adopta-pets");
       } else {
         const { id } = req.params;
 
@@ -196,7 +196,7 @@ exports.update = (req, res) => {
                 "Hubo problemas actualizando los datos " +
                   "de la publicación, intenta más tarde"
               );
-              res.redirect("/");
+              res.redirect("/adopta-pets");
             } else {
               if (req.files) {
                 if (data.photos.length > 0) {
@@ -208,7 +208,7 @@ exports.update = (req, res) => {
                         "Hubo problemas actualizando los datos " +
                           "de la publicación, intenta más tarde"
                       );
-                      res.redirect("/");
+                      res.redirect("/adopta-pets");
                     } else {
                       renameFiles(data._id, req.files, (err, photos) => {
                         if (err) {
@@ -218,7 +218,7 @@ exports.update = (req, res) => {
                             "Hubo problemas actualizando los datos " +
                               "de la publicación, intenta más tarde"
                           );
-                          res.redirect("/");
+                          res.redirect("/adopta-pets");
                         } else {
                           Publication.findByIdAndUpdate(
                             id,
@@ -232,13 +232,15 @@ exports.update = (req, res) => {
                                   "Hubo problemas actualizando los datos " +
                                     "de la publicación, intenta más tarde"
                                 );
-                                return res.redirect("/");
+                                return res.redirect("/adopta-pets");
                               }
                               req.flash(
                                 "pubMessage",
                                 "Los datos han sido actualizados exitosamente"
                               );
-                              res.redirect(`/publications/${id}/edit`);
+                              res.redirect(
+                                `/adopta-pets/publications/${id}/edit`
+                              );
                             }
                           );
                         }
@@ -254,7 +256,7 @@ exports.update = (req, res) => {
                         "Hubo problemas actualizando los datos " +
                           "de la publicación, intenta más tarde"
                       );
-                      res.redirect("/");
+                      res.redirect("/adopta-pets");
                     } else {
                       Publication.findByIdAndUpdate(
                         id,
@@ -268,13 +270,13 @@ exports.update = (req, res) => {
                               "Hubo problemas actualizando los datos " +
                                 "de la publicación, intenta más tarde"
                             );
-                            return res.redirect("/");
+                            return res.redirect("/adopta-pets");
                           }
                           req.flash(
                             "pubMessage",
                             "Los datos han sido actualizados exitosamente"
                           );
-                          res.redirect(`/publications/${id}/edit`);
+                          res.redirect(`/adopta-pets/publications/${id}/edit`);
                         }
                       );
                     }
@@ -285,7 +287,7 @@ exports.update = (req, res) => {
                   "pubMessage",
                   "Los datos han sido actualizados exitosamente"
                 );
-                res.redirect(`/publications/${id}/edit`);
+                res.redirect(`/adopta-pets/publications/${id}/edit`);
               }
             }
           }
@@ -293,7 +295,7 @@ exports.update = (req, res) => {
       }
     });
   } else {
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };
 
@@ -307,13 +309,13 @@ exports.show = (req, res) => {
         "indexMessage",
         "Hubo problemas buscando la publicación, intenta más tarde"
       );
-      res.redirect("/");
+      res.redirect("/adopta-pets");
     } else if (!data) {
       req.flash(
         "indexMessage",
         "La publicación solicitada no se encuentra registrada"
       );
-      res.redirect("/");
+      res.redirect("/adopta-pets");
     } else {
       res.render("publications/show", { publication: data });
     }
@@ -330,12 +332,12 @@ exports.getPublications = (req, res) => {
         "Hubo problemas obteniendo los datos de las publicaciones, " +
           "intenta de nuevo"
       );
-      res.redirect("/");
+      res.redirect("/adopta-pets");
     } else if (data.length > 0) {
       res.render("publications/all", { publications: data });
     } else {
       req.flash("indexMessage", "No hay publicaciones disponibles");
-      res.redirect("/");
+      res.redirect("/adopta-pets");
     }
   });
 };
@@ -350,12 +352,12 @@ exports.getMyPublications = (req, res) => {
         "Hubo problemas obteniendo los datos de las publicaciones, " +
           "intenta de nuevo"
       );
-      res.redirect("/");
+      res.redirect("/adopta-pets");
     } else if (data.length > 0) {
       res.render("publications/me", { publications: data });
     } else {
       req.flash("indexMessage", "No hay publicaciones disponibles");
-      res.redirect("/");
+      res.redirect("/adopta-pets");
     }
   });
 };
@@ -384,7 +386,7 @@ exports.search = (req, res) => {
           "Hubo problemas obteniendo los datos de las publicaciones, " +
             "intenta de nuevo"
         );
-        res.redirect("/");
+        res.redirect("/adopta-pets");
       } else if (data.length > 0) {
         let pubs = data.filter(pub => {
           const distance = getDistance(lat1, lon1, pub.lat, pub.lng);
@@ -428,7 +430,7 @@ exports.delete = (req, res) => {
           "indexMessage",
           "Hubo problemas para eliminar la publicación, intenta más tarde"
         );
-        res.redirect("/");
+        res.redirect("/adopta-pets");
       } else {
         deleteFiles(data.photos, err => {
           if (err) {
@@ -436,18 +438,18 @@ exports.delete = (req, res) => {
               "indexMessage",
               "Hubo problemas para eliminar la publicación, intenta más tarde"
             );
-            return res.redirect("/");
+            return res.redirect("/adopta-pets");
           }
           req.flash(
             "indexMessage",
             "La publicación ha sido eliminada exitosamente"
           );
-          res.redirect("/");
+          res.redirect("/adopta-pets");
         });
       }
     });
   } else {
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };
 
@@ -465,7 +467,7 @@ exports.deleteImg = (req, res) => {
           "indexMessage",
           "Hubo problemas para eliminar la publicación, intenta más tarde"
         );
-        res.redirect("/");
+        res.redirect("/adopta-pets");
       } else {
         const index = data.photos.indexOf(req.body.photo);
         if (index > -1) {
@@ -483,7 +485,7 @@ exports.deleteImg = (req, res) => {
                   "Hubo problemas actualizando los datos " +
                     "de la publicación, intenta más tarde"
                 );
-                return res.redirect("/");
+                return res.redirect("/adopta-pets");
               }
               deleteFiles([req.body.photo], err => {
                 if (err) {
@@ -493,13 +495,13 @@ exports.deleteImg = (req, res) => {
                     "Hubo problemas actualizando los datos " +
                       "de la publicación, intenta más tarde"
                   );
-                  return res.redirect("/");
+                  return res.redirect("/adopta-pets");
                 }
                 req.flash(
                   "pubMessage",
                   "Los datos han sido actualizados exitosamente"
                 );
-                res.redirect(`/publications/${id}/edit`);
+                res.redirect(`/adopta-pets/publications/${id}/edit`);
               });
             }
           );
@@ -507,6 +509,6 @@ exports.deleteImg = (req, res) => {
       }
     });
   } else {
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };

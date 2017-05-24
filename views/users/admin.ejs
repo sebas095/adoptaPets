@@ -53,7 +53,7 @@
                   <div class="card-stacked">
                     <div class="card-content">
                       <span class="card-title amber-text"><%= usr.firstname %> <%= usr.lastname %></span>
-                      <form action="/users/<%= usr._id %>?_method=put" method="post" id="form-<%= usr._id %>">
+                      <form action="/adopta-pets/users/<%= usr._id %>?_method=put" method="post" id="form-<%= usr._id %>">
                         <div class="row">
                           <div class="input-field col m6 s12">
                             <i class="material-icons prefix">account_circle</i>
@@ -114,7 +114,7 @@
                   </div>
                 </div>
               </div>
-              <form action="/users/<%= usr._id %>?_method=delete" method="post" id="deactivateForm-<%= usr._id %>">
+              <form action="/adopta-pets/users/<%= usr._id %>?_method=delete" method="post" id="deactivateForm-<%= usr._id %>">
                 <input type="hidden" name="status" id="status-<%= usr._id %>">
               </form>
               <% } %>

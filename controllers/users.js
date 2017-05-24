@@ -10,7 +10,7 @@ exports.newUser = (req, res) => {
   if (!req.isAuthenticated()) {
     res.render("users/new");
   } else {
-    res.redirect("/profile");
+    res.redirect("/adopta-pets/profile");
   }
 };
 
@@ -23,7 +23,7 @@ exports.createUser = (req, res) => {
         "indexMessage",
         "Hubo problemas en el registro, intenta de nuevo"
       );
-      return res.redirect("/");
+      return res.redirect("/adopta-pets");
     } else if (users.length == 0) {
       req.body.state = "1";
     } else {
@@ -37,10 +37,10 @@ exports.createUser = (req, res) => {
           "indexMessage",
           "Hubo problemas en el registro, intenta de nuevo"
         );
-        return res.redirect("/");
+        return res.redirect("/adopta-pets");
       }
       req.flash("loginMessage", "Tu cuenta ha sido creada exitosamente");
-      return res.redirect("/session/login");
+      return res.redirect("/adopta-pets/session/login");
     });
   });
 };
@@ -69,23 +69,23 @@ exports.updateUser = (req, res) => {
           "indexMessage",
           "Hubo problemas actualizando los datos, intenta de nuevo"
         );
-        return res.redirect("/");
+        return res.redirect("/adopta-pets");
       } else if (req.originalUrl.includes("/users/")) {
         req.flash(
           "adminMessage",
           "Los datos han sido actualizados exitosamente"
         );
-        res.redirect("/users/admin");
+        res.redirect("/adopta-pets/users/admin");
       } else {
         req.flash(
           "userMessage",
           "Sus datos han sido actualizados exitosamente"
         );
-        res.redirect("/profile");
+        res.redirect("/adopta-pets/profile");
       }
     });
   } else {
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };
 
@@ -106,14 +106,14 @@ exports.deleteUser = (req, res) => {
             "indexMessage",
             "Hubo problemas desactivando la cuenta, intenta de nuevo"
           );
-          return res.redirect("/");
+          return res.redirect("/adopta-pets");
         }
         req.flash("adminMessage", "El estado de la cuenta ha sido actualizada");
-        res.redirect("/users/admin");
+        res.redirect("/adopta-pets/users/admin");
       }
     );
   } else {
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };
 
@@ -133,7 +133,7 @@ exports.getUsers = (req, res) => {
             "Hubo problemas obteniendo los datos de los usuarios, " +
               "intenta de nuevo"
           );
-          res.redirect("/");
+          res.redirect("/adopta-pets");
         } else if (users.length > 0) {
           res.render("users/admin", {
             users: users,
@@ -142,13 +142,13 @@ exports.getUsers = (req, res) => {
           });
         } else {
           req.flash("indexMessage", "No hay usuarios disponibles");
-          res.redirect("/");
+          res.redirect("/adopta-pets");
         }
       }
     );
   } else {
     req.flash("indexMessage", "No tienes permisos para acceder");
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };
 
@@ -163,7 +163,7 @@ exports.deactivatePendingAccount = (req, res) => {
           "Hubo problemas obteniendo los datos de los usuarios, " +
             "intenta de nuevo"
         );
-        res.redirect("/");
+        res.redirect("/adopta-pets");
       } else if (users.length > 0) {
         res.render("users/deactivate", {
           users: users,
@@ -175,12 +175,12 @@ exports.deactivatePendingAccount = (req, res) => {
           "indexMessage",
           "No hay usuarios disponibles para la desactivación de cuentas"
         );
-        res.redirect("/");
+        res.redirect("/adopta-pets");
       }
     });
   } else {
     req.flash("indexMessage", "No tienes permisos para acceder");
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };
 
@@ -195,7 +195,7 @@ exports.changeState = (req, res) => {
           "indexMessage",
           "Hubo problemas en la solicitud de desactivación de la cuenta"
         );
-        return res.redirect("/");
+        return res.redirect("/adopta-pets");
       }
       User.find({ state: "1" }, (err, users) => {
         if (err) {
@@ -204,7 +204,7 @@ exports.changeState = (req, res) => {
             "indexMessage",
             "Hubo problemas para notificar al administrador"
           );
-          return res.redirect("/");
+          return res.redirect("/adopta-pets");
         } else if (users.length > 0) {
           let emails = "";
           for (let i = 0; i < users.length; i++) {
@@ -230,16 +230,16 @@ exports.changeState = (req, res) => {
               "Pronto el administrador revisara tu solicitud " +
                 `y se te notificara al correo electrónico de ${user.email}`
             );
-            res.redirect("/profile");
+            res.redirect("/adopta-pets/profile");
           });
         } else {
           req.flash("indexMessage", "No hay administradores disponibles");
-          res.redirect("/");
+          res.redirect("/adopta-pets");
         }
       });
     });
   } else {
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };
 
@@ -261,7 +261,7 @@ exports.deactivateAccount = (req, res) => {
               "indexMessage",
               "Hubo problemas desactivando la cuenta del usuario"
             );
-            res.redirect("/");
+            res.redirect("/adopta-pets");
           } else if (user) {
             const mailOptions = {
               from: "Administración Adopta Pets",
@@ -275,14 +275,14 @@ exports.deactivateAccount = (req, res) => {
 
             transporter.sendMail(mailOptions, err => {
               if (err) console.log(err);
-              res.redirect("/users/pending/deactivate");
+              res.redirect("/adopta-pets/users/pending/deactivate");
             });
           } else {
             req.flash(
               "pendingDeactivateUsers",
               `No existe el usuario con el correo ${email}`
             );
-            res.redirect("/users/pending/deactivate");
+            res.redirect("/adopta-pets/users/pending/deactivate");
           }
         }
       );
@@ -300,7 +300,7 @@ exports.deactivateAccount = (req, res) => {
               "indexMessage",
               "Hubo problemas con la cuenta del usuario"
             );
-            res.redirect("/");
+            res.redirect("/adopta-pets");
           } else if (user) {
             const mailOptions = {
               from: "Administración Adopta Pets",
@@ -314,21 +314,21 @@ exports.deactivateAccount = (req, res) => {
 
             transporter.sendMail(mailOptions, err => {
               if (err) console.log(err);
-              res.redirect("/users/pending/deactivate");
+              res.redirect("/adopta-pets/users/pending/deactivate");
             });
           } else {
             req.flash(
               "pendingDeactivateUsers",
               `No existe el usuario con el correo ${email}`
             );
-            res.redirect("/users/pending/deactivate");
+            res.redirect("/adopta-pets/users/pending/deactivate");
           }
         }
       );
     }
   } else {
     req.flash("indexMessage", "No tienes permisos para acceder");
-    res.redirect("/");
+    res.redirect("/adopta-pets");
   }
 };
 
@@ -340,7 +340,7 @@ exports.contact = (req, res) => {
         "indexMessage",
         "Hubo problemas en el registro, intenta de nuevo"
       );
-      return res.redirect("/");
+      return res.redirect("/adopta-pets");
     } else if (users.length > 0) {
       let emails = "";
       for (let i = 0; i < users.length; i++) {
@@ -360,11 +360,11 @@ exports.contact = (req, res) => {
 
       transporter.sendMail(mailOptions, err => {
         if (err) console.log(err);
-        res.redirect("/");
+        res.redirect("/adopta-pets");
       });
     } else {
       req.flash("indexMessage", "Hubo problemas en el servidor");
-      res.redirect("/");
+      res.redirect("/adopta-pets");
     }
   });
 };

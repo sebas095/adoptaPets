@@ -1,6 +1,221 @@
-<div style="text-align: center;">
-  <img src="/img/404.gif" alt="404" width="304" height="236">
-</div>
-<% if (error.stack) { %>
-  <pre><%= error.stack %></pre>
-<% } %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Adopta Pets</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/ghpages-materialize.css">
+    <link rel="stylesheet" href="/css/adoptapets.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <header>
+      <% include menu.ejs %>
+    </header>
+    <main>
+      <% include navbar %>
+      <div class="row">
+        <div class="col s12 m9 l10" style="padding: 0">
+          <div class="section" id="index-banner">
+            <div class="scrollspy" id="who">
+              <div class="container">
+                <div class="row center">
+                  <div class="col s12 m12">
+                    <div class="buysellads-header hide-on-small-only hide-on-medium-only">
+                      <img src="/img/white/adoptaPets.svg" style="height: 300px" />
+                    </div>
+                    <div style="text-align: center;">
+                      <img src="/img/404.png" alt="404" width="304" height="236">
+                    </div>
+                    <% if (error.stack) { %>
+                      <pre><%= error.stack %></pre>
+                    <% } %>
+                  </div>
+                </div>
+                <div class="row center">
+                  <div class="col s12 m12">
+                    <h4 class="light white-text center-on-small-only">Buscamos la mejor calidad de vida para animales</h4>
+                    <h5 class="light white-text">La adopción es la mejor opción</h5>
+                  </div>
+                  <div class="row">
+                    <a href="#feature" class="btn-floating btn-large waves-effect waves-light"><i class="white material-icons brown-text">keyboard_arrow_down</i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="section scrollspy" id="feature">
+              <div class="row center">
+                <h3 class="col s12 light header icon ap-cat-5 orange-text"> Las Mejores Características</h3>
+                <p>Tenemos como propósito facilitar la adopción de diferentes animales. Para esto se desarrolla una plataforma que maneja la información necesaria para hacer el proceso de adopción más fácil y efectivo</p>
+              </div>
+              <!--   Promo Section   -->
+              <div class="row">
+                <div class="col s12 m6">
+                  <div class="center promo">
+                    <i class="material-icons red-text">place</i>
+                    <p class="promo-caption red-text">Geolocalización</p>
+                    <p class="light center">Podrás visualizar los animales que se encuentren más cerca de ti, gracias a nuestro sistema de geolocalización.</p>
+                  </div>
+                </div>
+                <div class="col s12 m6">
+                  <div class="center promo">
+                    <i class="material-icons grey-text">phone_iphone</i>
+                    <p class="promo-caption grey-text">Adaptable</p>
+                    <p class="light center">Gracias a la adaptabilidad de nuestro sitio, podrás encontrar tu mascota ideal desde cualquier dispositivo.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12 m6">
+                  <div class="center promo">
+                    <i class="material-icons indigo-text">computer</i>
+                    <p class="promo-caption indigo-text">Web</p>
+                    <p class="light center">Con solo unos pocos clics podrás encontrar tu amigo ideal en la web.</p>
+                  </div>
+                </div>
+                <div class="col s12 m6">
+                  <div class="center promo">
+                    <i class="material-icons blue-text">send</i>
+                    <p class="promo-caption blue-text">Amplia Difusión</p>
+                    <p class="light center">La información de tu mascota será difundida rápidamente y por ello será adoptado más fácilmente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12 m12">
+                  <div class="center promo">
+                    <i class="material-icons light-green-text">attach_money</i>
+                    <p class="promo-caption light-green-text">Gratis</p>
+                    <p class="light center">Encuentra a tu mascota sin ningún costo, la felicidad no tiene precio!</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="divider"></div>
+            <div class="section scrollspy" id="team">
+              <div class="row center">
+                <h3 class="light header ap-dog-2 orange-text"> Las Personas Detrás de la Idea</h3>
+                <p class="col s12 m8 offset-m2 caption">Somos jóvenes emprendedores con experiencia en desarrollo de aplicaciones con sentido social</p>
+              </div>
+              <div class="row">
+                <div class="col s12 m6 l4">
+                  <div class="card hoverable">
+                    <div class="card-image">
+                      <img src="img/author/caro.jpg">
+                      <span class="card-title">Carolina Gómez</span>
+                    </div>
+                    <div class="card-content">
+                      <p>Comercial</p>
+                    </div>
+                    <div class="card-action center">
+                      <div class="row">
+                        <div class="col s3">
+                          <a href="https://github.com/carogomezt" target="_blank"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="col s3">
+                          <a href="https://www.linkedin.com/in/carolinagomezt/" target="_blank"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="col s3">
+                          <a href="https://twitter.com/caro_gomezt" target="_blank"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="col s3">
+                          <a href="https://www.facebook.com/Caro.gomez.t" target="_blank"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col s12 m6 l4">
+                  <div class="card hoverable">
+                    <div class="card-image">
+                      <img src="img/author/alejo.jpg">
+                      <span class="card-title">Alejandro E. Rendón</span>
+                    </div>
+                    <div class="card-content">
+                      <p>Diseñador</p>
+                    </div>
+                    <div class="card-action center">
+                      <div class="row">
+                        <div class="col s3">
+                          <a href="https://github.com/aerendon" target="_blank"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="col s3">
+                          <a href="https://www.linkedin.com/in/aerendon/" target="_blank"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="col s3">
+                          <a href="https://twitter.com/alejoerendon" target="_blank"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="col s3">
+                          <a href="https://www.facebook.com/AlejoERendon" target="_blank"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col s12 m6 l4">
+                  <div class="card hoverable">
+                    <div class="card-image">
+                      <img src="img/author/baldor.jpg">
+                      <span class="card-title">Sebastian Duque</span>
+                    </div>
+                    <div class="card-content">
+                      <p>Desarrollador</p>
+                    </div>
+                    <div class="card-action center">
+                      <div class="row">
+                        <div class="col s3">
+                          <a href="https://github.com/sebas095/" target="_blank"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="col s3">
+                          <a href="https://www.linkedin.com/in/sebastian-duque-restrepo-b24060125/"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="col s3">
+                          <a href="https://twitter.com/sebasd095" target="_blank"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="col s3">
+                          <a href="https://www.facebook.com/sebasduk3" target="_blank"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <h1 class="center icon ap-cat-4"></h1>
+          </div>
+        </div>
+        <div class="col hide-on-small-only m3 l2">
+          <div class="toc-wrapper pinned">
+            <ul class="section table-of-contents">
+              <li><a href="#who">Quiénes Somos</a></li>
+              <li><a href="#feature">Características</a></li>
+              <li><a href="#team">Equipo</a></li>
+              <li><a href="#contact">Contacto</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+    <% include footer %>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script type="text/javascript">
+      (function($) {
+        $(function() {
+          $('.button-collapse').sideNav();
+          $('.scrollspy').scrollSpy();
+        }); // end of document ready
+      })(jQuery); // end of jQuery name space
+    </script>
+  </body>
+</html>

@@ -10,13 +10,13 @@ const transporter = nodemailer.createTransport(
 
 exports.loginRequired = (req, res, next) => {
   if (req.isAuthenticated()) return next();
-  res.redirect("/session/login");
+  res.redirect("/adopta-pets/session/login");
 };
 
 // GET /login -- Login form
 exports.new = (req, res) => {
   if (req.isAuthenticated())
-    res.redirect("/profile");
+    res.redirect("/adopta-pets/profile");
   else
     res.render("session/new", {
       message: req.flash("loginMessage")
@@ -42,7 +42,7 @@ exports.resetPassword = (req, res) => {
           "El token para resetear la contraseña " +
             "es invalido o ya ha expirado"
         );
-        res.redirect("/account/newPassword");
+        res.redirect("/adopta-pets/account/newPassword");
       } else {
         res.render("session/resetPassword", {
           token: req.params.token,
@@ -72,13 +72,13 @@ exports.sendEmail = (req, res) => {
               "loginMessage",
               "Hubo problemas para iniciar sesión, intenta de nuevo"
             );
-            return res.redirect("/session/login");
+            return res.redirect("/adopta-pets/session/login");
           } else if (!user) {
             req.flash(
               "loginMessage",
               `La cuenta con el correo ${email} no se encuentra registrada`
             );
-            return res.redirect("/session/login");
+            return res.redirect("/adopta-pets/session/login");
           } else {
             user.resetPasswordToken = token;
             user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
@@ -114,7 +114,7 @@ exports.sendEmail = (req, res) => {
     ],
     err => {
       if (err) console.log(err);
-      res.redirect("/session/login");
+      res.redirect("/adopta-pets/session/login");
     }
   );
 };
@@ -124,7 +124,7 @@ exports.changePassword = (req, res) => {
   const token = req.params.token;
   if (req.body.password !== req.body.cpassword) {
     req.flash("resetMessage", "Las contraseñas no coinciden");
-    res.redirect(`/account/reset/${token}`);
+    res.redirect(`/adopta-pets/account/reset/${token}`);
   } else {
     User.findOne(
       {
@@ -138,7 +138,7 @@ exports.changePassword = (req, res) => {
             "resetMessage",
             "Hubo problemas para cambiar la contraseña, intenta de nuevo"
           );
-          return res.redirect(`/account/reset/${token}`);
+          return res.redirect(`/adopta-pets/account/reset/${token}`);
         }
         usr.comparePassword(req.body.password, (err, isMatch) => {
           if (err) {
@@ -147,14 +147,14 @@ exports.changePassword = (req, res) => {
               "resetMessage",
               "Hubo problemas para cambiar la contraseña, intenta de nuevo"
             );
-            return res.redirect(`/account/reset/${token}`);
+            return res.redirect(`/adopta-pets/account/reset/${token}`);
           } else if (isMatch) {
             req.flash(
               "resetMessage",
               "Esa contraseña era la que tenias anteriormente, " +
                 "por favor intenta de nuevo con otra contraseña"
             );
-            return res.redirect(`/account/reset/${token}`);
+            return res.redirect(`/adopta-pets/account/reset/${token}`);
           } else {
             async.waterfall(
               [
@@ -209,9 +209,9 @@ exports.changePassword = (req, res) => {
                     "Hubo problemas para cambiar la contraseña, " +
                       "intenta de nuevo"
                   );
-                  return res.redirect(`/account/recovery/${token}`);
+                  return res.redirect(`/adopta-pets/account/recovery/${token}`);
                 }
-                res.redirect("/session/login");
+                res.redirect("/adopta-pets/session/login");
               }
             );
           }
@@ -225,5 +225,5 @@ exports.changePassword = (req, res) => {
 exports.destroy = (req, res) => {
   req.logout();
   delete req.session.passport;
-  res.redirect("/");
+  res.redirect("/adopta-pets");
 };
