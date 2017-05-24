@@ -35,7 +35,7 @@ for (let i = 0; i < edit.length; i++) {
     const form = document.getElementById(`deactivateForm-${id}`);
     const status = document.getElementById(`status-${id}`);
 
-    if (this.innerText === "Activar Cuenta") {
+    if (this.innerText === "ACTIVAR CUENTA") {
       txt = "¿Estás seguro que deseas reactivar esta cuenta?";
       status.value = "2";
     } else {
