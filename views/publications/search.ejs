@@ -27,7 +27,7 @@
               <div class="section scrollspy">
                 <div class="row center">
                     <h3 class="light header icon ap-dog-2 orange-text"> Búsqueda</h3>
-                    <p>Mira mascotas en adopción.</p>
+                    <p>Encuentra la mascota de tus sueños de acuerdo a las características que selecciones.</p>
                 </div>
                 <div class="row">
                   <form id="search-form" action="/publications/search" method="get">
@@ -81,6 +81,7 @@
                       </div>
                     </div>
                   </form>
+                  <p class="center red-text"><i>Nota: Las búsquedas por defecto se realizan por la Distancia en Kilómetros si no se seleccionan otras características</i></p>
                 </div>
                 <% if (typeof(publications) == 'object' && publications) { %>
                   <% for (let pub of publications) { %>
