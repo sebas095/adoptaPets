@@ -95,6 +95,7 @@ users(app, config.host, "/adopta-pets/users");
 account(app, config.host, "/adopta-pets/account");
 session(app, config.host, "/adopta-pets/session", passport);
 publications(app, config.host, "/adopta-pets/publications");
+app.use("/", (req, res) => res.redirect("/adopta-pets"));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
