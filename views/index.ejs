@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Adopta Pets</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/adopta-pets/css/ghpages-materialize.css">
-    <link rel="stylesheet" href="/adopta-pets/css/adoptapets.css">
-    <link rel="stylesheet" href="/adopta-pets/css/style.css">
+    <% include modules %>
   </head>
   <body>
     <header>
-      <% include menu.ejs %>
+      <% include menu %>
     </header>
     <main>
       <% include navbar %>
@@ -24,6 +15,24 @@
           <div class="section" id="index-banner">
             <div class="scrollspy" id="who">
               <div class="container">
+                <% if (message.length > 0) { %>
+                  <div class="row" id="alert_box">
+                    <div class="col s12">
+                      <div class="card light-blue">
+                        <div class="row">
+                          <div class="col s12 m10">
+                            <div class="white-text">
+                              <blockquote><%= message %></blockquote>
+                            </div>
+                          </div>
+                          <div class="col s12 m2">
+                            <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% } %>
                 <div class="row center">
                   <div class="col s12 m12">
                     <div class="buysellads-header hide-on-small-only hide-on-medium-only">
@@ -45,24 +54,6 @@
           </div>
           <div class="container">
             <div class="section scrollspy" id="feature">
-              <% if (message.length > 0) { %>
-                <div class="row" id="alert_box">
-                  <div class="col s12">
-                    <div class="card light-blue">
-                      <div class="row">
-                        <div class="col s12 m10">
-                          <div class="white-text">
-                            <blockquote><%= message %></blockquote>
-                          </div>
-                        </div>
-                        <div class="col s12 m2">
-                          <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% } %>
               <div class="row center">
                 <h3 class="col s12 light header icon ap-cat-5 orange-text"> Las Mejores Características</h3>
                 <p>Tenemos como propósito facilitar la adopción de diferentes animales. Para esto se desarrolla una plataforma que maneja la información necesaria para hacer el proceso de adopción más fácil y efectivo</p>
