@@ -90,11 +90,11 @@ app.use((req, res, next) => {
 });
 
 // Routes
-index(app, config.host, "/adopta-pets");
-users(app, config.host, "/adopta-pets/users");
-account(app, config.host, "/adopta-pets/account");
-session(app, config.host, "/adopta-pets/session", passport);
-publications(app, config.host, "/adopta-pets/publications");
+index(app, "/adopta-pets");
+users(app, "/adopta-pets/users");
+account(app, "/adopta-pets/account");
+session(app, "/adopta-pets/session", passport);
+publications(app, "/adopta-pets/publications");
 app.use("/", (req, res) => res.redirect("/adopta-pets"));
 
 // catch 404 and forward to error handler

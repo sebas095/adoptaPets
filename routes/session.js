@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { sessionController } = require("../controllers");
 
-module.exports = (app, host, mountPoint, passport) => {
+module.exports = (app, mountPoint, passport) => {
   // GET
   router.get("/login", sessionController.new);
 
@@ -23,5 +23,5 @@ module.exports = (app, host, mountPoint, passport) => {
     sessionController.destroy
   );
 
-  app.use(host + mountPoint, router);
+  app.use(mountPoint, router);
 };
