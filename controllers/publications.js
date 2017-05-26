@@ -372,11 +372,22 @@ exports.search = (req, res) => {
       : 10;
     let filter = {};
     if (req.query.type) filter.type = req.query.type;
-    if (req.query.color) filter.color = req.query.color;
     if (req.query.size) filter.size = req.query.size;
     if (req.query.age) filter.age = Number(req.query.age);
     if (req.query.time) filter.time = req.query.time;
     if (req.query.gender) filter.gender = req.query.gender;
+    if (req.query.color) {
+      if (req.query.color === "otro") {
+        if (req.query.otherColor) {
+          let { otherColor } = req.query;
+          otherColor = otherColor.trim()[0].toUpperCase() +
+            otherColor.slice(1).toLowerCase().trim();
+          filter.color = otherColor;
+        }
+      } else {
+        filter.color = req.query.color;
+      }
+    }
 
     Publication.find({ available: true }, (err, data) => {
       if (err) {
@@ -403,7 +414,16 @@ exports.search = (req, res) => {
           }
           return flag;
         });
-        res.render("publications/search", { publications: pubs, message: "" });
+        if (pubs.length > 0) {
+          res.render("publications/search", {
+            publications: pubs,
+            message: ""
+          });
+        } else {
+          res.render("publications/search", {
+            message: "No se encontraron resultados"
+          });
+        }
       } else {
         res.render("publications/search", {
           message: "No hay publicaciones disponibles"
