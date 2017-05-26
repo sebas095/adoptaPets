@@ -41,18 +41,11 @@
                     </div>
                     <div class="row">
                       <div class="input-field col m6 s12">
-                        <i class="material-icons prefix">color_lens</i>
-                        <select name="pet.color" class="validate" required="">
-                          <option value="" disabled selected>Color Predominante</option>
-                          <option value="blanco">Blanco</option>
-                          <option value="negro">Negro</option>
-                          <option value="cafe">Café/Chocolate</option>
-                          <option value="gris">Gris/Plata/Azul</option>
-                          <option value="mirlo">Mirlo</option>
-                          <option value="dorado">Dorado/Naranja</option>
-                          <option value="gris-cafe">Gris y Café</option>
-                          <option value="amarillo">Amarillo/Pardo</option>
-                          <option value="tricolor">Café y Negro y Blanco</option>
+                        <i class="choose icon ap-dog-2 prefix"></i>
+                        <select name="pet.type" id="type" class="validate" required="">
+                          <option value="" disabled selected>Tipo</option>
+                          <option value="gato">Gato</option>
+                          <option value="perro">Perro</option>
                         </select>
                       </div>
                       <div class="input-field col m6 s12">
@@ -87,7 +80,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="other-color">
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">pets</i>
                         <select name="pet.gender" class="validate" required="">
@@ -97,11 +90,19 @@
                         </select>
                       </div>
                       <div class="input-field col m6 s12">
-                        <i class="choose icon ap-dog-2 prefix"></i>
-                        <select name="pet.type" id="type" class="validate" required="">
-                          <option value="" disabled selected>Tipo</option>
-                          <option value="gato">Gato</option>
-                          <option value="perro">Perro</option>
+                        <i class="material-icons prefix">color_lens</i>
+                        <select name="pet.color" id="color" class="validate" required="">
+                          <option value="" disabled selected>Color Predominante</option>
+                          <option value="blanco">Blanco</option>
+                          <option value="negro">Negro</option>
+                          <option value="cafe">Café/Chocolate</option>
+                          <option value="gris">Gris/Plata/Azul</option>
+                          <option value="mirlo">Mirlo</option>
+                          <option value="dorado">Dorado/Naranja</option>
+                          <option value="gris-cafe">Gris y Café</option>
+                          <option value="amarillo">Amarillo/Pardo</option>
+                          <option value="tricolor">Café y Negro y Blanco</option>
+                          <option value="otro">Otro</option>
                         </select>
                       </div>
                     </div>
@@ -202,6 +203,7 @@
     <script src="/adopta-pets/js/esri-leaflet.js"></script>
     <script src="/adopta-pets/js/esri-leaflet-geocoder.js"></script>
     <script src="/adopta-pets/js/geolocation.js"></script>
+    <script src="/adopta-pets/js/otherColor.js"></script>
     <script type="text/javascript">
       (function($) {
         $(function() {
