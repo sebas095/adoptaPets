@@ -44,18 +44,11 @@ app.use(cookieParser());
 app.use("/adopta-pets", express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 
-let cookie = {};
-if (env === "prod") {
-  app.set("trust proxy", 1); // trust first proxy
-  cookie.secure = true; // serve secure cookies
-}
-
 app.use(
   expSession({
     secret: config.secret,
     resave: false,
-    saveUninitialized: true,
-    cookie
+    saveUninitialized: true
   })
 );
 app.use(passport.initialize());
