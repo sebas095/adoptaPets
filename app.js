@@ -10,6 +10,7 @@ const logger = require("morgan");
 const methodOverride = require("method-override");
 const path = require("path");
 const expSession = require("express-session");
+const MongoStore = require("connect-mongo")(expSession);
 const User = require("./models/user");
 const Publication = require("./models/publication");
 
@@ -27,6 +28,15 @@ const publications = require("./routes/publications");
 
 const app = express();
 
+global.HOST = config.url;
+// mongo config
+mongoose.Promise = global.Promise;
+mongoose.connect(config.db.url);
+app.db = mongoose.connection;
+app.on("open", () => {
+  console.log("connected to db".yellow);
+});
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -43,26 +53,21 @@ app.use(
 app.use(cookieParser());
 app.use("/adopta-pets", express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
-
 app.use(
   expSession({
     secret: config.secret,
-    resave: false,
-    saveUninitialized: true
+    resave: true,
+    saveUninitialized: true,
+    // using store session on MongoDB using express-session + connect
+    store: new MongoStore({
+      url: config.db.url,
+      collection: "sessions"
+    })
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
-global.HOST = config.url;
-// mongo config
-mongoose.Promise = global.Promise;
-mongoose.connect(config.db.url);
-app.db = mongoose.connection;
-app.on("open", () => {
-  console.log("connected to db".yellow);
-});
 
 // Helpers
 app.use((req, res, next) => {
