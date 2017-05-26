@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
     <link rel="stylesheet" href="/adopta-pets/css/ghpages-materialize.css">
+    <link rel="stylesheet" href="/adopta-pets/css/leaflet.css">
+    <link rel="stylesheet" href="/adopta-pets/css/esri-leaflet-geocoder.css">
+    <link rel="stylesheet" href="/adopta-pets/css/Control.OSMGeocoder.css">
     <link rel="stylesheet" href="/adopta-pets/css/adoptapets.css">
     <link rel="stylesheet" href="/adopta-pets/css/style.css">
     <script src="/adopta-pets/js/share.min.js"></script>
@@ -207,7 +210,10 @@
     <% include ../footer %>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ-WpnquwEwE71hlC2QPK3M6NQjGXKQ4Q"></script>
+    <script src="/adopta-pets/js/leaflet.js"></script>
+    <script src="/adopta-pets/js/Control.OSMGeocoder.js"></script>
+    <script src="/adopta-pets/js/esri-leaflet.js"></script>
+    <script src="/adopta-pets/js/esri-leaflet-geocoder.js"></script>
     <script src="/adopta-pets/js/maps.js"></script>
     <script>
       <% let img = ''; %>
@@ -219,7 +225,7 @@
       // Share.init(document.getElementsByTagName('a'), {
         // title: '¿Te gustaria adoptar a <%= publication.features.name %>?',
         // url: 'http://localhost:3000/adopta-pets/publications/<%= publication._id %>',
-        // pic: 'http://localhost:3000/<%= img %>'
+        // pic: 'http://localhost:3000/adopta-pets/<%= img %>'
       // });
       Share.init(document.getElementsByTagName('a'), {
         title: '¿Te gustaria adoptar una mascota?',

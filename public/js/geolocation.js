@@ -1,6 +1,6 @@
 let map;
-let marker = null;
 let osmGeocoder;
+let marker = null;
 const submit = document.getElementById("save");
 
 submit.addEventListener("click", ev => {
@@ -23,7 +23,7 @@ function initMap() {
     }
   ).addTo(map);
 
-  osmGeocoder = new L.Control.OSMGeocoder();
+  osmGeocoder = new L.Control.OSMGeocoder({ text: "Localizar" });
   map.addControl(osmGeocoder);
 
   map.on("click", ev => {
@@ -63,29 +63,18 @@ function locate(map) {
 }
 
 function performData(marker) {
-  // let latlng = {
-  //   lat: parseFloat(marker.getPosition().lat()),
-  //   lng: parseFloat(marker.getPosition().lng())
-  // };
-  //
-  // let GEOCODER = L.esri.Geocoding.geocodeService.geocode();
-  // let related = null;
-  //
-  // GEOCODER.geocode({ location: latlng }, (results, status) => {
-  //   if (status === google.maps.GeocoderStatus.OK) {
-  //     if (results[1]) {
-  //       related = results[0].formatted_address;
-  //     } else {
-  //       console.log("No results found");
-  //     }
-  //   } else {
-  //     console.log("Geocoder failed due to: " + status);
-  //   }
-  //   document.getElementById("lat").value = marker.getPosition().lat();
-  //   document.getElementById("lng").value = marker.getPosition().lng();
-  //   document.getElementById("address").value = related;
-  //   document.getElementById("publication-form").submit();
-  // });
+  const geocodeService = L.esri.Geocoding.geocodeService();
+  geocodeService.reverse().latlng(marker.getLatLng()).run((error, result) => {
+    if (error) {
+      console.log("La dirección no fue encontrada");
+      document.getElementById("address").value = "";
+    } else {
+      document.getElementById("address").value = result.address.Match_addr;
+    }
+    document.getElementById("lat").value = marker.getLatLng().lat;
+    document.getElementById("lng").value = marker.getLatLng().lng;
+    document.getElementById("publication-form").submit();
+  });
 }
 
 function hideAlert() {

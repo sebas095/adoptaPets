@@ -61,7 +61,8 @@ const PublicationSchema = new Schema({
   },
   address: {
     type: String,
-    require: true
+    require: true,
+    default: ""
   },
   lat: {
     type: Number,
