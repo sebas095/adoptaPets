@@ -69,33 +69,6 @@
                     </div>
                     <div class="row">
                       <div class="input-field col m6 s12">
-                        <i class="material-icons prefix">color_lens</i>
-                        <select name="color">
-                          <option value="" disabled selected>Color Predominante</option>
-                          <option value="blanco">Blanco</option>
-                          <option value="negro">Negro</option>
-                          <option value="cafe">Café/Chocolate</option>
-                          <option value="gris">Gris/Plata/Azul</option>
-                          <option value="mirlo">Mirlo</option>
-                          <option value="dorado">Dorado/Naranja</option>
-                          <option value="gris-cafe">Gris y Café</option>
-                          <option value="amarillo">Amarillo/Pardo</option>
-                          <option value="tricolor">Café y Negro y Blanco</option>
-                        </select>
-                      </div>
-                      <div class="input-field col m6 s12">
-                        <i class="material-icons prefix">zoom_out_map</i>
-                        <select name="size">
-                          <option value="" disabled selected>Tamaño</option>
-                          <option value="pequeño">Pequeño(11 kg o menos)</option>
-                          <option value="mediano">Mediano(12-27 kg)</option>
-                          <option value="grande">Grande(28-45 kg)</option>
-                          <option value="extra">Extra Grande(46 kg o más)</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="input-field col m6 s12">
                         <div class="col s8">
                           <i class="material-icons prefix">add_circle</i>
                           <input type="number" id="age" name="age" aria-required="true">
@@ -110,11 +83,39 @@
                         </div>
                       </div>
                       <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">zoom_out_map</i>
+                        <select name="size">
+                          <option value="" disabled selected>Tamaño</option>
+                          <option value="pequeño">Pequeño(11 kg o menos)</option>
+                          <option value="mediano">Mediano(12-27 kg)</option>
+                          <option value="grande">Grande(28-45 kg)</option>
+                          <option value="extra">Extra Grande(46 kg o más)</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row" id="other-color">
+                      <div class="input-field col m6 s12">
                         <i class="material-icons prefix">pets</i>
                         <select name="gender" class="validate">
                           <option value="" disabled selected>Sexo</option>
                           <option value="m">Macho</option>
                           <option value="f">Hembra</option>
+                        </select>
+                      </div>
+                      <div class="input-field col m6 s12">
+                        <i class="material-icons prefix">color_lens</i>
+                        <select name="color" id="color">
+                          <option value="" disabled selected>Color Predominante</option>
+                          <option value="blanco">Blanco</option>
+                          <option value="negro">Negro</option>
+                          <option value="cafe">Café/Chocolate</option>
+                          <option value="gris">Gris/Plata/Azul</option>
+                          <option value="mirlo">Mirlo</option>
+                          <option value="dorado">Dorado/Naranja</option>
+                          <option value="gris-cafe">Gris y Café</option>
+                          <option value="amarillo">Amarillo/Pardo</option>
+                          <option value="tricolor">Café y Negro y Blanco</option>
+                          <option value="otro">Otro</option>
                         </select>
                       </div>
                     </div>
@@ -256,6 +257,7 @@
     <script src="/adopta-pets/js/management.js"></script>
     <script src="/adopta-pets/js/search.js"></script>
     <script src="/adopta-pets/js/chooseIcon.js"></script>
+    <script src="/adopta-pets/js/otherColor.js"></script>
     <script type="text/javascript">
       (function($) {
         $(function() {

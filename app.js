@@ -47,8 +47,8 @@ app.use(methodOverride("_method"));
 app.use(
   expSession({
     secret: config.secret,
-    resave: false,
-    saveUninitialized: false
+    saveUninitialized: true,
+    resave: true
   })
 );
 app.use(passport.initialize());

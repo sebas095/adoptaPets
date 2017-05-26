@@ -14,7 +14,7 @@ if (!navigator.geolocation) {
 }
 
 function initMap() {
-  map = L.map("map").setView([40.737, -73.923], 13);
+  map = L.map("map").setView([4.784468966579362, 75.67657470703125], 13);
   L.tileLayer(
     "https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYXMwOTUiLCJhIjoiY2l5Y2ZwenY2MDE4MzJxazF1NWQ0a3g2ZiJ9.sYjDwFf_-q3lgrwH7L9f8g",
     {
