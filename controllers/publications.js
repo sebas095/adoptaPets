@@ -118,7 +118,7 @@ exports.edit = (req, res) => {
     req.user.state.includes("4")
   ) {
     const { id } = req.params;
-    Publication.findById(id, (err, data) => {
+    Publication.findOne({ _id: id, createdBy: req.user.email }, (err, data) => {
       if (err) {
         console.log(err);
         req.flash(
@@ -184,8 +184,8 @@ exports.update = (req, res) => {
           available: req.body.available ? false : true
         };
 
-        Publication.findByIdAndUpdate(
-          id,
+        Publication.findOneAndUpdate(
+          { _id: id, createdBy: req.user.email },
           publication,
           { new: true },
           (err, data) => {
@@ -220,8 +220,8 @@ exports.update = (req, res) => {
                           );
                           res.redirect("/adopta-pets");
                         } else {
-                          Publication.findByIdAndUpdate(
-                            id,
+                          Publication.findOneAndUpdate(
+                            { _id: id, createdBy: req.user.email },
                             { photos },
                             { new: true },
                             (err, pub) => {
@@ -258,8 +258,8 @@ exports.update = (req, res) => {
                       );
                       res.redirect("/adopta-pets");
                     } else {
-                      Publication.findByIdAndUpdate(
-                        id,
+                      Publication.findOneAndUpdate(
+                        { _id: id, createdBy: req.user.email },
                         { photos },
                         { new: true },
                         (err, pub) => {
@@ -344,7 +344,7 @@ exports.getPublications = (req, res) => {
 
 // GET /publications -- All me publications
 exports.getMyPublications = (req, res) => {
-  Publication.find({ email: req.user.email }, (err, data) => {
+  Publication.find({ createdBy: req.user.email }, (err, data) => {
     if (err) {
       console.log(err);
       req.flash(
@@ -423,31 +423,34 @@ exports.delete = (req, res) => {
     req.user.state.includes("4")
   ) {
     const { id } = req.params;
-    Publication.findByIdAndRemove(id, (err, data) => {
-      if (err) {
-        console.log(err);
-        req.flash(
-          "indexMessage",
-          "Hubo problemas para eliminar la publicación, intenta más tarde"
-        );
-        res.redirect("/adopta-pets");
-      } else {
-        deleteFiles(data.photos, err => {
-          if (err) {
-            req.flash(
-              "indexMessage",
-              "Hubo problemas para eliminar la publicación, intenta más tarde"
-            );
-            return res.redirect("/adopta-pets");
-          }
+    Publication.findOneAndRemove(
+      { _id: id, createdBy: req.user.email },
+      (err, data) => {
+        if (err) {
+          console.log(err);
           req.flash(
             "indexMessage",
-            "La publicación ha sido eliminada exitosamente"
+            "Hubo problemas para eliminar la publicación, intenta más tarde"
           );
           res.redirect("/adopta-pets");
-        });
+        } else {
+          deleteFiles(data.photos, err => {
+            if (err) {
+              req.flash(
+                "indexMessage",
+                "Hubo problemas para eliminar la publicación, intenta más tarde"
+              );
+              return res.redirect("/adopta-pets");
+            }
+            req.flash(
+              "indexMessage",
+              "La publicación ha sido eliminada exitosamente"
+            );
+            res.redirect("/adopta-pets");
+          });
+        }
       }
-    });
+    );
   } else {
     res.redirect("/adopta-pets");
   }
@@ -460,7 +463,7 @@ exports.deleteImg = (req, res) => {
     req.user.state.includes("4")
   ) {
     const { id } = req.params;
-    Publication.findById(id, (err, data) => {
+    Publication.findOne({ _id: id, createdBy: req.user.email }, (err, data) => {
       if (err) {
         console.log(err);
         req.flash(

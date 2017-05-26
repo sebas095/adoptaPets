@@ -217,14 +217,9 @@
         $(function() {
           $('.button-collapse').sideNav();
           $('.scrollspy').scrollSpy();
+          $("#alert_close").click(() => $("#alert_box").fadeOut("slow"));
         }); // end of document ready
       })(jQuery); // end of jQuery name space
-    </script>
-    <script>
-      $('#alert_close').click(function(){
-        $( "#alert_box" ).fadeOut( "slow", function() {
-        });
-      });
     </script>
   </body>
 </html>

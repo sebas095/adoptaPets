@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
-
     <link rel="stylesheet" href="/adopta-pets/css/ghpages-materialize.css">
     <link rel="stylesheet" href="/adopta-pets/css/adoptapets.css">
     <link rel="stylesheet" href="/adopta-pets/css/style.css">
@@ -133,14 +132,9 @@
           $('.button-collapse').sideNav();
           $('.parallax').parallax();
           $('.scrollspy').scrollSpy();
+          $("#alert_close").click(() => $("#alert_box").fadeOut("slow"));
         }); // end of document ready
       })(jQuery); // end of jQuery name space
-    </script>
-    <script>
-      $('#alert_close').click(function(){
-        $( "#alert_box" ).fadeOut( "slow", function() {
-        });
-      });
     </script>
   </body>
 </html>

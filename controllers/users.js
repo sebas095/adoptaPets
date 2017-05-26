@@ -53,7 +53,6 @@ exports.updateUser = (req, res) => {
     req.user.state.includes("4")
   ) {
     const id = req.params.id || req.user._id;
-    console.log(req.body.rol);
     if (req.body.rol === "admin/user") {
       if (req.body.status) {
         req.body.state = "1";
@@ -62,28 +61,33 @@ exports.updateUser = (req, res) => {
       }
     }
 
-    User.findByIdAndUpdate(id, req.body, { new: true }, (err, user) => {
-      if (err) {
-        console.log("Error: ", err);
-        req.flash(
-          "indexMessage",
-          "Hubo problemas actualizando los datos, intenta de nuevo"
-        );
-        return res.redirect("/adopta-pets");
-      } else if (req.originalUrl.includes("/users/")) {
-        req.flash(
-          "adminMessage",
-          "Los datos han sido actualizados exitosamente"
-        );
-        res.redirect("/adopta-pets/users/admin");
-      } else {
-        req.flash(
-          "userMessage",
-          "Sus datos han sido actualizados exitosamente"
-        );
-        res.redirect("/adopta-pets/profile");
+    User.findOneAndUpdate(
+      { _id: id, email: req.user.email },
+      req.body,
+      { new: true },
+      (err, user) => {
+        if (err) {
+          console.log("Error: ", err);
+          req.flash(
+            "indexMessage",
+            "Hubo problemas actualizando los datos, intenta de nuevo"
+          );
+          return res.redirect("/adopta-pets");
+        } else if (req.originalUrl.includes("/users/")) {
+          req.flash(
+            "adminMessage",
+            "Los datos han sido actualizados exitosamente"
+          );
+          res.redirect("/adopta-pets/users/admin");
+        } else {
+          req.flash(
+            "userMessage",
+            "Sus datos han sido actualizados exitosamente"
+          );
+          res.redirect("/adopta-pets/profile");
+        }
       }
-    });
+    );
   } else {
     res.redirect("/adopta-pets");
   }
@@ -93,8 +97,8 @@ exports.updateUser = (req, res) => {
 exports.deleteUser = (req, res) => {
   if (req.user.state.includes("1")) {
     const { id } = req.params;
-    User.findByIdAndUpdate(
-      id,
+    User.findOneAndUpdate(
+      { _id: id, email: req.user.email },
       {
         state: req.body.status
       },
@@ -186,58 +190,63 @@ exports.deactivatePendingAccount = (req, res) => {
 
 // PUT /users/:id/deactiveAccount -- Request for deactivate account
 exports.changeState = (req, res) => {
-  if (req.user.state.includes("2") || req.user.state.includes("4")) {
+  if (req.user.state.includes("2")) {
     const { id } = req.params;
-    User.findByIdAndUpdate(id, { state: "4" }, { new: true }, (err, user) => {
-      if (err) {
-        console.log(err);
-        req.flash(
-          "indexMessage",
-          "Hubo problemas en la solicitud de desactivación de la cuenta"
-        );
-        return res.redirect("/adopta-pets");
-      }
-      User.find({ state: "1" }, (err, users) => {
+    User.findOneAndUpdate(
+      { _id: id, email: req.user.email },
+      { state: "4" },
+      { new: true },
+      (err, user) => {
         if (err) {
           console.log(err);
           req.flash(
             "indexMessage",
-            "Hubo problemas para notificar al administrador"
+            "Hubo problemas en la solicitud de desactivación de la cuenta"
           );
           return res.redirect("/adopta-pets");
-        } else if (users.length > 0) {
-          let emails = "";
-          for (let i = 0; i < users.length; i++) {
-            if (i > 0) emails += ",";
-            emails += users[i].email;
-          }
-
-          const mailOptions = {
-            from: "Administración Adopta Pets",
-            to: emails,
-            subject: "Desactivación de cuentas de Adopta Pets",
-            html: `<p>Estimado Usuario administrador,</p><br>Se le informa que
-            hay solicitudes para la desactivación de cuentas, para su
-            aprobación, si deseas ingresar ve a la siguiente dirección:<br>
-            <a href="${HOST}/users/pending/deactivate">Iniciar sesión</a>
-            <br><br><br>Att,<br><br>Equipo Administrativo Adopta Pets`
-          };
-
-          transporter.sendMail(mailOptions, err => {
-            if (err) console.log(err);
-            req.flash(
-              "userMessage",
-              "Pronto el administrador revisara tu solicitud " +
-                `y se te notificara al correo electrónico de ${user.email}`
-            );
-            res.redirect("/adopta-pets/profile");
-          });
-        } else {
-          req.flash("indexMessage", "No hay administradores disponibles");
-          res.redirect("/adopta-pets");
         }
-      });
-    });
+        User.find({ state: "1" }, (err, users) => {
+          if (err) {
+            console.log(err);
+            req.flash(
+              "indexMessage",
+              "Hubo problemas para notificar al administrador"
+            );
+            return res.redirect("/adopta-pets");
+          } else if (users.length > 0) {
+            let emails = "";
+            for (let i = 0; i < users.length; i++) {
+              if (i > 0) emails += ",";
+              emails += users[i].email;
+            }
+
+            const mailOptions = {
+              from: "Administración Adopta Pets",
+              to: emails,
+              subject: "Desactivación de cuentas de Adopta Pets",
+              html: `<p>Estimado Usuario administrador,</p><br>Se le informa que
+                hay solicitudes para la desactivación de cuentas, para su
+                aprobación, si deseas ingresar ve a la siguiente dirección:<br>
+                <a href="${HOST}/users/pending/deactivate">Iniciar sesión</a>
+                <br><br><br>Att,<br><br>Equipo Administrativo Adopta Pets`
+            };
+
+            transporter.sendMail(mailOptions, err => {
+              if (err) console.log(err);
+              req.flash(
+                "userMessage",
+                "Pronto el administrador revisara tu solicitud " +
+                  `y se te notificara al correo electrónico de ${user.email}`
+              );
+              res.redirect("/adopta-pets/profile");
+            });
+          } else {
+            req.flash("indexMessage", "No hay administradores disponibles");
+            res.redirect("/adopta-pets");
+          }
+        });
+      }
+    );
   } else {
     res.redirect("/adopta-pets");
   }
@@ -360,6 +369,7 @@ exports.contact = (req, res) => {
 
       transporter.sendMail(mailOptions, err => {
         if (err) console.log(err);
+        req.flash("indexMessage", "Su mensaje ha sido enviado exitosamente");
         res.redirect("/adopta-pets");
       });
     } else {

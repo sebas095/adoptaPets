@@ -128,8 +128,12 @@
                         <div class="row">
                           <div class="input-field col m12 s12">
                             <i class="material-icons prefix">location_on</i>
-                            <input type="text" id="address" name="address" value="<%= publication.address %>" aria-required="true">
-                            <label for="address">Ubicación(Aproximada)</label>
+                            <% if (publication.address) { %>
+                              <input type="text" id="address" name="address" value="<%= publication.address %>" aria-required="true">
+                              <label for="address">Ubicación(Aproximada)</label>
+                            <% } else { %>
+                              <label for="address">Ubicación</label>
+                            <% } %>
                             <input type="hidden" name="lat" value="<%= publication.lat %>" id="lat">
                             <input type="hidden" name="lng" value="<%= publication.lng %>" id="lng">
                           </div>
