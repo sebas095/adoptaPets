@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "mkdir -p public/uploads",
-    "prod": "npm run build && NODE_ENV='prod' npm start",
+    "prod": "NODE_ENV='prod' npm start",
     "start": "npm run build && nodemon ./bin/www"
   },
   "dependencies": {
