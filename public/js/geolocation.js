@@ -1,5 +1,6 @@
 let map;
 let marker = null;
+let osmGeocoder;
 const submit = document.getElementById("save");
 
 submit.addEventListener("click", ev => {
@@ -13,44 +14,30 @@ if (!navigator.geolocation) {
 }
 
 function initMap() {
-  navigator.geolocation.getCurrentPosition(
-    position => {
-      const { latitude, longitude } = position.coords;
-      map = L.map("map").setView([latitude, longitude], 13);
-      L.tileLayer(
-        "https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYXMwOTUiLCJhIjoiY2l5Y2ZwenY2MDE4MzJxazF1NWQ0a3g2ZiJ9.sYjDwFf_-q3lgrwH7L9f8g",
-        {
-          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-          maxZoom: 18
-        }
-      ).addTo(map);
-    },
-    err => console.log(err),
+  map = L.map("map").setView([40.737, -73.923], 13);
+  L.tileLayer(
+    "https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYXMwOTUiLCJhIjoiY2l5Y2ZwenY2MDE4MzJxazF1NWQ0a3g2ZiJ9.sYjDwFf_-q3lgrwH7L9f8g",
     {
-      timeout: 10000
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      maxZoom: 18
     }
-  );
-  // map = new google.maps.Map(document.getElementById("map"), {
-  //   streetViewControl: false,
-  //   zoom: 16,
-  //   fullscreenControl: false
-  // });
-  //
-  // google.maps.event.addListener(map, "click", ev => {
-  //   addMarker(ev.latLng);
-  // });
-  // locate(map);
+  ).addTo(map);
+
+  osmGeocoder = new L.Control.OSMGeocoder();
+  map.addControl(osmGeocoder);
+
+  map.on("click", ev => {
+    addMarker(ev.latlng);
+  });
+  locate(map);
 }
 
 function addMarker(location) {
-  if (marker != null) {
-    marker.setMap(null);
+  if (marker) {
+    map.removeLayer(marker);
   }
-  marker = new google.maps.Marker({
-    position: location,
-    draggable: true,
-    map: map
-  });
+  marker = L.marker(location, { draggable: true });
+  marker.addTo(map);
 }
 
 function locate(map) {
@@ -58,19 +45,15 @@ function locate(map) {
     const lat = parseFloat(document.getElementById("lat").value);
     const lng = parseFloat(document.getElementById("lng").value);
     if (lat && lng) {
-      const initLocation = new google.maps.LatLng(lat, lng);
-      map.setCenter(initLocation);
-      addMarker({ lat, lng });
+      map.panTo(new L.LatLng(lat, lng));
+      addMarker(new L.LatLng(lat, lng));
     } else {
       navigator.geolocation.getCurrentPosition(
         position => {
           const { latitude, longitude } = position.coords;
-          const initLocation = new google.maps.LatLng(latitude, longitude);
-          map.setCenter(initLocation);
-          addMarker({
-            lat: latitude,
-            lng: longitude
-          });
+          const initLocation = new L.LatLng(latitude, longitude);
+          map.panTo(initLocation);
+          addMarker(new L.LatLng(latitude, longitude));
         },
         err => console.log(err),
         { timeout: 10000 }
@@ -85,7 +68,7 @@ function performData(marker) {
   //   lng: parseFloat(marker.getPosition().lng())
   // };
   //
-  // let GEOCODER = new google.maps.Geocoder();
+  // let GEOCODER = L.esri.Geocoding.geocodeService.geocode();
   // let related = null;
   //
   // GEOCODER.geocode({ location: latlng }, (results, status) => {
