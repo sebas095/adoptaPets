@@ -114,7 +114,11 @@
                             <label for="pet.gender">Sexo</label>
                           </div>
                           <div class="input-field col m6 s12">
-                            <i class="icon ap-dog-2 prefix"></i>
+                            <% if (publication.features.type === 'gato') { %>
+                              <i class="icon choose ap-cat-6 prefix"></i>
+                            <% } else { %>
+                              <i class="icon choose ap-dog-2 prefix"></i>
+                            <% } %>
                             <input type="text" id="pet.type" name="pet.type" readonly=""
                               <% if(publication.features.type === 'gato') { %>
                                 value="Gato"

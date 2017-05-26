@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adopta Pets</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/adopta-pets/css/ghpages-materialize.css">
+    <link rel="stylesheet" href="/adopta-pets/css/leaflet.css">
+    <link rel="stylesheet" href="/adopta-pets/css/esri-leaflet-geocoder.css">
+    <link rel="stylesheet" href="/adopta-pets/css/Control.OSMGeocoder.css">
     <link rel="stylesheet" href="/adopta-pets/css/adoptapets.css">
     <link rel="stylesheet" href="/adopta-pets/css/style.css">
   </head>
@@ -131,11 +132,11 @@
                       </div>
                       <div class="input-field col m6 s12">
                         <% if (publication.features.type === 'gato') { %>
-                          <i class="icon ap-cat-2 prefix"></i>
+                          <i class="icon choose ap-cat-6 prefix"></i>
                         <% } else { %>
-                          <i class="icon ap-dog-2 prefix"></i>
+                          <i class="icon choose ap-dog-2 prefix"></i>
                         <% } %>
-                        <select name="pet.type" id="pet.type" class="validate" required="" disabled="">
+                        <select name="pet.type" id="type" class="validate" required="" disabled="">
                           <option value="" disabled selected>Tipo</option>
                           <option value="gato" <% if (publication.features.type === 'gato') { %> selected <% } %> >Gato</option>
                           <option value="perro" <% if (publication.features.type === 'perro') { %> selected <% } %> >Perro</option>
@@ -240,7 +241,11 @@
     <% include ../footer %>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ-WpnquwEwE71hlC2QPK3M6NQjGXKQ4Q"></script>
+    <script src="/adopta-pets/js/chooseIcon.js"></script>
+    <script src="/adopta-pets/js/leaflet.js"></script>
+    <script src="/adopta-pets/js/Control.OSMGeocoder.js"></script>
+    <script src="/adopta-pets/js/esri-leaflet.js"></script>
+    <script src="/adopta-pets/js/esri-leaflet-geocoder.js"></script>
     <script src="/adopta-pets/js/geolocation.js"></script>
     <script src="/adopta-pets/js/editPublication.js"></script>
     <script type="text/javascript">

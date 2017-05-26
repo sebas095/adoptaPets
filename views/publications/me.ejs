@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
-
     <link rel="stylesheet" href="/adopta-pets/css/ghpages-materialize.css">
     <link rel="stylesheet" href="/adopta-pets/css/adoptapets.css">
     <link rel="stylesheet" href="/adopta-pets/css/style.css">
@@ -106,7 +105,11 @@
                           <label for="pet.gender">Sexo</label>
                         </div>
                         <div class="input-field col m6 s12">
-                          <i class="icon ap-dog-2 prefix"></i>
+                          <% if (pub.features.type === 'gato') { %>
+                            <i class="icon choose ap-cat-6 prefix"></i>
+                          <% } else { %>
+                            <i class="icon choose ap-dog-2 prefix"></i>
+                          <% } %>
                           <input type="text" id="pet.type" name="pet.type" readonly=""
                             <% if(pub.features.type === 'gato') { %>
                               value="Gato"
