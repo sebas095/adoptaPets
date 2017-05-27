@@ -152,7 +152,54 @@
                     </div>
                   </div>
                   <% for (let pub of publications) { %>
-                    <% let i = 0; %>
+                    <% if(pub.photos.length > 0) { %>
+                      <input type="hidden" class="data" value="/adopta-pets/uploads/<%= pub.photos[0] %>">
+                    <% } else { %>
+                      <input type="hidden" class="data" value="/adopta-pets/img/adoptaPetsSmall.svg">
+                    <% } %>
+                    <input type="hidden" class="data" value="<%= pub._id %>">
+                    <input type="hidden" class="data" value="<%= pub.features.name %>">
+                    <input type="hidden" class="data"
+                      <% if (pub.features.color === 'blanco') { %> value="Blanco" <% } %>
+                      <% if (pub.features.color === 'negro') { %> value="Negro" <% } %>
+                      <% if (pub.features.color === 'cafe') { %> value="Café/Chocolate" <% } %>
+                      <% if (pub.features.color === 'gris') { %> value="Gris/Plata/Azul" <% } %>
+                      <% if (pub.features.color === 'mirlo') { %> value="Mirlo" <% } %>
+                      <% if (pub.features.color === 'dorado') { %> value="Dorado/Naranja" <% } %>
+                      <% if (pub.features.color === 'gris-cafe') { %> value="Gris y Café" <% } %>
+                      <% if (pub.features.color === 'amarillo') { %> value="Amarillo/Pardo" <% } %>
+                      <% if (pub.features.color === 'tricolor') { %> value="Café y Negro y Blanco" <% } %>
+                      <% if (pub.features.color === 'otro') { %> value="<%= pub.features.otherColor %>" <% } %>
+                    >
+                    <input type="hidden" class="data"
+                      <% if (pub.features.size === 'pequeño') { %>  value="Pequeño(11 kg o menos)" <% } %>
+                      <% if (pub.features.size === 'mediano') { %>  value="Mediano(12-27 kg)" <% } %>
+                      <% if (pub.features.size === 'grande') { %>  value="Grande(28-45 kg)" <% } %>
+                      <% if (pub.features.size === 'extra') { %>  value="Extra Grande(46 kg o más)" <% } %>
+                    >
+                    <input type="hidden" class="data" value="<%= pub.features.age %>">
+                    <input type="hidden" class="data"
+                      <% if (pub.features.time === 'mes') { %> value="Mes(es)" <% } %>
+                      <% if (pub.features.time === 'año') { %> value="Año(s)" <% } %>
+                    >
+                    <input type="hidden" class="data"
+                      <% if(pub.features.gender === 'm') { %>
+                        value="Macho"
+                      <% } else { %>
+                        value="Hembra"
+                      <% } %>
+                    >
+                    <input type="hidden" class="data"
+                      <% if(pub.features.type === 'gato') { %>
+                        value="Gato"
+                      <% } else { %>
+                        value="Perro"
+                      <% } %>
+                    >
+                    <input type="hidden" class="data" value="<%= pub.lat %>">
+                    <input type="hidden" class="data" value="<%= pub.lng %>">
+
+                    <!--<% let i = 0; %>
                     <% if (i % 2 === 0) { %>
                       <div class="row">
                     <% } %>
@@ -257,6 +304,7 @@
                       <% } %>
                       <% i++ %>
                     <div class="divider"></div>
+                    -->
                   <% } %>
                 <% } %>
               </div>
