@@ -7,13 +7,13 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
-
     <link rel="stylesheet" href="/adopta-pets/css/ghpages-materialize.css">
+    <link rel="stylesheet" href="/adopta-pets/css/leaflet.css">
+    <link rel="stylesheet" href="/adopta-pets/css/esri-leaflet-geocoder.css">
+    <link rel="stylesheet" href="/adopta-pets/css/Control.OSMGeocoder.css">
     <link rel="stylesheet" href="/adopta-pets/css/adoptapets.css">
     <link rel="stylesheet" href="/adopta-pets/css/style.css">
-  </head>
   <body>
     <header>
       <% include ../menu.ejs %>
@@ -47,6 +47,17 @@
                 <div class="row center">
                     <h3 class="light header icon ap-dog-2 orange-text"> Búsqueda</h3>
                     <p>Encuentra la mascota de tus sueños de acuerdo a las características que selecciones.</p>
+                </div>
+                <div class="row">
+                  <div class="input-field col m12 s12">
+                    <i class="material-icons prefix">explore</i>
+                    <label>¿Donde te encuentras?</label>
+                  </div>
+                </div>
+                <div class="row center">
+                  <div class="input-field col m12 s12">
+                    <div id="map2" style="max-width: 100%"></div>
+                  </div>
                 </div>
                 <div class="row">
                   <form id="search-form" action="/adopta-pets/publications/search" method="get">
@@ -255,6 +266,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
     <script src="/adopta-pets/js/management.js"></script>
+    <script src="/adopta-pets/js/leaflet.js"></script>
+    <script src="/adopta-pets/js/Control.OSMGeocoder.js"></script>
+    <script src="/adopta-pets/js/esri-leaflet.js"></script>
+    <script src="/adopta-pets/js/esri-leaflet-geocoder.js"></script>
     <script src="/adopta-pets/js/search.js"></script>
     <script src="/adopta-pets/js/chooseIcon.js"></script>
     <script src="/adopta-pets/js/otherColor.js"></script>

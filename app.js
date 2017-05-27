@@ -56,7 +56,7 @@ app.use(methodOverride("_method"));
 app.use(
   expSession({
     secret: config.secret,
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     // using store session on MongoDB using express-session + connect
     store: new MongoStore({

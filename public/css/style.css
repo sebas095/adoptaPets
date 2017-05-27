@@ -28,15 +28,15 @@ ul.side-nav.fixed li a {
   height: 300px;
 }
 
-#map {
+#map, #map2 {
   height: 65vh;
   width: 70vw;
 }
 
 @media only screen and (max-width: 700px) {
-  #map {
+  #map, #map2 {
     height: 65vh;
-    width: 92vw;
+    width: 94vw;
   }
 }
 
@@ -74,7 +74,7 @@ footer > textarea.materialize-textarea {
   border-bottom: 1px solid #fff;
 }
 
-footer input:not([type]):focus:not([readonly]),footer input[type=text]:focus:not([readonly]),footer input[type=password]:focus:not([readonly]),footer input[type=email]:focus:not([readonly]),footer input[type=url]:focus:not([readonly]),footer input[type=time]:focus:not([readonly]),footer input[type=date]:focus:not([readonly]),footer input[type=datetime]:focus:not([readonly]),footer input[type=datetime-local]:focus:not([readonly]),footer input[type=tel]:focus:not([readonly]),footer input[type=number]:focus:not([readonly]),footer input[type=search]:focus:not([readonly]),footer textarea.materialize-textarea:focus:not([readonly]){border-bottom:1px solid #fff;box-shadow:0 1px 0 0 #fff; 
+footer input:not([type]):focus:not([readonly]),footer input[type=text]:focus:not([readonly]),footer input[type=password]:focus:not([readonly]),footer input[type=email]:focus:not([readonly]),footer input[type=url]:focus:not([readonly]),footer input[type=time]:focus:not([readonly]),footer input[type=date]:focus:not([readonly]),footer input[type=datetime]:focus:not([readonly]),footer input[type=datetime-local]:focus:not([readonly]),footer input[type=tel]:focus:not([readonly]),footer input[type=number]:focus:not([readonly]),footer input[type=search]:focus:not([readonly]),footer textarea.materialize-textarea:focus:not([readonly]){border-bottom:1px solid #fff;box-shadow:0 1px 0 0 #fff;
 color: #fff;}
 
 textarea.materialize-textarea {
@@ -91,7 +91,7 @@ footer .input-field .prefix, footer .input-field .prefix.active {
   top: 10px;
   font-size: 20px;
   color: white;
-  cursor:pointer; 
+  cursor:pointer;
 }
 
 .card blockquote {
