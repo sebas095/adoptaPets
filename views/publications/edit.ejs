@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/adopta-pets/css/Control.OSMGeocoder.css">
     <link rel="stylesheet" href="/adopta-pets/css/adoptapets.css">
     <link rel="stylesheet" href="/adopta-pets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <header>
@@ -44,7 +45,6 @@
                     </div>
                   </div>
                 <% } %>
-
                 <div class="row center">
                   <h3 class="light header icon ap-cat-3 orange-text"> Editar información de <%= publication.features.name %></h3>
                   <p>Mantener actualizada la información de la mascota aumenta la probabilidad de la adopción.</p>
@@ -65,6 +65,9 @@
                         <div class="slider">
                           <ul class="slides">
                             <% for (let i = 0; i < publication.photos.length; i++) { %>
+                              <div class="col s12 m2">
+                                <i class="fa fa-times icon_style red-text"  aria-hidden="true" style="z-index: 3; font-size: 3em;"></i>
+                              </div>
                               <li>
                                 <img src="/adopta-pets/uploads/<%= publication.photos[i] %>">
                               </li>
