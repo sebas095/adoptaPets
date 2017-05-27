@@ -100,7 +100,6 @@ users(app, "/adopta-pets/users");
 account(app, "/adopta-pets/account");
 session(app, "/adopta-pets/session", passport);
 publications(app, "/adopta-pets/publications");
-app.use("/", (req, res) => res.redirect("/adopta-pets"));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -119,5 +118,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render("error");
 });
+
+app.use("/", (req, res) => res.redirect("/adopta-pets"));
 
 module.exports = app;
