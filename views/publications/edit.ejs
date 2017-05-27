@@ -75,18 +75,15 @@
                     <% } %>
                     <div class="row">
                       <div class="input-field col m6 s12">
-                        <i class="material-icons prefix">color_lens</i>
-                        <select name="pet.color" id="pet.color" class="validate" required="" disabled="">
-                          <option value="" disabled selected>Color Predominante</option>
-                          <option value="blanco" <% if (publication.features.color === 'blanco') { %> selected <% } %> >Blanco</option>
-                          <option value="negro" <% if (publication.features.color === 'negro') { %> selected <% } %> >Negro</option>
-                          <option value="cafe" <% if (publication.features.color === 'cafe') { %> selected <% } %> >Café/Chocolate</option>
-                          <option value="gris" <% if (publication.features.color === 'gris') { %> selected <% } %> >Gris/Plata/Azul</option>
-                          <option value="mirlo" <% if (publication.features.color === 'mirlo') { %> selected <% } %> >Mirlo</option>
-                          <option value="dorado" <% if (publication.features.color === 'dorado') { %> selected <% } %> >Dorado/Naranja</option>
-                          <option value="gris-cafe" <% if (publication.features.color === 'gris-cafe') { %> selected <% } %> >Gris y Café</option>
-                          <option value="amarillo" <% if (publication.features.color === 'amarillo') { %> selected <% } %> >Amarillo/Pardo</option>
-                          <option value="tricolor" <% if (publication.features.color === 'tricolor') { %> selected <% } %> >Café y Negro y Blanco</option>
+                        <% if (publication.features.type === 'gato') { %>
+                          <i class="icon choose ap-cat-6 prefix"></i>
+                        <% } else { %>
+                          <i class="icon choose ap-dog-2 prefix"></i>
+                        <% } %>
+                        <select name="pet.type" id="type" class="validate" required="" disabled="">
+                          <option value="" disabled selected>Tipo</option>
+                          <option value="gato" <% if (publication.features.type === 'gato') { %> selected <% } %> >Gato</option>
+                          <option value="perro" <% if (publication.features.type === 'perro') { %> selected <% } %> >Perro</option>
                         </select>
                       </div>
                       <div class="input-field col m6 s12">
@@ -121,7 +118,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="other-color">
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">pets</i>
                         <select name="pet.gender" id="pet.gender" class="validate" required="" disabled="">
@@ -131,18 +128,31 @@
                         </select>
                       </div>
                       <div class="input-field col m6 s12">
-                        <% if (publication.features.type === 'gato') { %>
-                          <i class="icon choose ap-cat-6 prefix"></i>
-                        <% } else { %>
-                          <i class="icon choose ap-dog-2 prefix"></i>
-                        <% } %>
-                        <select name="pet.type" id="type" class="validate" required="" disabled="">
-                          <option value="" disabled selected>Tipo</option>
-                          <option value="gato" <% if (publication.features.type === 'gato') { %> selected <% } %> >Gato</option>
-                          <option value="perro" <% if (publication.features.type === 'perro') { %> selected <% } %> >Perro</option>
+                        <i class="material-icons prefix">color_lens</i>
+                        <select name="pet.color" id="color" class="validate" required="" disabled="">
+                          <option value="" disabled selected>Color Predominante</option>
+                          <option value="blanco" <% if (publication.features.color === 'blanco') { %> selected <% } %> >Blanco</option>
+                          <option value="negro" <% if (publication.features.color === 'negro') { %> selected <% } %> >Negro</option>
+                          <option value="cafe" <% if (publication.features.color === 'cafe') { %> selected <% } %> >Café/Chocolate</option>
+                          <option value="gris" <% if (publication.features.color === 'gris') { %> selected <% } %> >Gris/Plata/Azul</option>
+                          <option value="mirlo" <% if (publication.features.color === 'mirlo') { %> selected <% } %> >Mirlo</option>
+                          <option value="dorado" <% if (publication.features.color === 'dorado') { %> selected <% } %> >Dorado/Naranja</option>
+                          <option value="gris-cafe" <% if (publication.features.color === 'gris-cafe') { %> selected <% } %> >Gris y Café</option>
+                          <option value="amarillo" <% if (publication.features.color === 'amarillo') { %> selected <% } %> >Amarillo/Pardo</option>
+                          <option value="tricolor" <% if (publication.features.color === 'tricolor') { %> selected <% } %> >Café y Negro y Blanco</option>
+                          <option value="otro" <% if (publication.features.color === 'otro') { %> selected <% } %> >Otro</option>
                         </select>
                       </div>
                     </div>
+                    <% if (publication.features.color === 'otro') { %>
+                      <div class="row" id="newColor">
+                        <div class="input-field col offset-m3 m6 s12">
+                          <i class="material-icons prefix">help</i>
+                          <input type="text" id="otherColor" name="otherColor" require="" disabled="" value="<%= publication.features.otherColor %>" class="validate">
+                          <label for="otherColor">¿Cuál color?</label>
+                        </div>
+                      </div>
+                    <% } %>
                     <div class="row">
                       <div class="input-field col m12 s12 file-field">
                         <div class="btn">
@@ -242,6 +252,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
     <script src="/adopta-pets/js/chooseIcon.js"></script>
+    <script src="/adopta-pets/js/otherColor.js"></script>
     <script src="/adopta-pets/js/leaflet.js"></script>
     <script src="/adopta-pets/js/Control.OSMGeocoder.js"></script>
     <script src="/adopta-pets/js/esri-leaflet.js"></script>

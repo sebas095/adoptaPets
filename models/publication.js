@@ -7,6 +7,11 @@ const PetSchema = new Schema({
     type: String,
     require: true
   },
+  otherColor: {
+    type: String,
+    require: true,
+    default: ""
+  },
   size: {
     type: String,
     require: true

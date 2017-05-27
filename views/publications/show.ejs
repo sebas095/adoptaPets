@@ -66,6 +66,7 @@
                               <% if (publication.features.color === 'gris-cafe') { %> value="Gris y Café" <% } %>
                               <% if (publication.features.color === 'amarillo') { %> value="Amarillo/Pardo" <% } %>
                               <% if (publication.features.color === 'tricolor') { %> value="Café y Negro y Blanco" <% } %>
+                              <% if (publication.features.color === 'otro') { %> value="<%= publication.features.otherColor %>" <% } %>
                               aria-required="true">
                             <label for="pet.color">Color</label>
                           </div>

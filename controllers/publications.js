@@ -43,6 +43,14 @@ exports.create = (req, res) => {
       } else {
         const pet = {
           color: req.body["pet.color"],
+          otherColor: req.body["pet.color"] === "otro"
+            ? `${req.body["otherColor"]
+                .trim()[0]
+                .toUpperCase()}${req.body["otherColor"]
+                .slice(1)
+                .toLowerCase()
+                .trim()}`
+            : "",
           size: req.body["pet.size"],
           name: req.body["pet.name"].toUpperCase().trim(),
           age: Number(req.body["pet.age"]),
@@ -164,6 +172,14 @@ exports.update = (req, res) => {
 
         const pet = {
           color: req.body["pet.color"],
+          otherColor: req.body["pet.color"] === "otro"
+            ? `${req.body["otherColor"]
+                .trim()[0]
+                .toUpperCase()}${req.body["otherColor"]
+                .slice(1)
+                .toLowerCase()
+                .trim()}`
+            : "",
           size: req.body["pet.size"],
           name: req.body["pet.name"].toUpperCase().trim(),
           age: Number(req.body["pet.age"]),

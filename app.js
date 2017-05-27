@@ -10,7 +10,6 @@ const logger = require("morgan");
 const methodOverride = require("method-override");
 const path = require("path");
 const expSession = require("express-session");
-// const MongoStore = require("connect-mongo")(expSession);
 const User = require("./models/user");
 const Publication = require("./models/publication");
 
@@ -58,11 +57,6 @@ app.use(
     secret: config.secret,
     resave: false,
     saveUninitialized: true
-    // using store session on MongoDB using express-session + connect
-    //   store: new MongoStore({
-    //     url: config.db.url,
-    //     collection: "sessions"
-    //   })
   })
 );
 app.use(passport.initialize());
