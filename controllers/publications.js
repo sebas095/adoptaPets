@@ -393,15 +393,14 @@ exports.search = (req, res) => {
     if (req.query.time) filter.time = req.query.time;
     if (req.query.gender) filter.gender = req.query.gender;
     if (req.query.color) {
+      filter.color = req.query.color;
       if (req.query.color === "otro") {
         if (req.query.otherColor) {
           let { otherColor } = req.query;
           otherColor = otherColor.trim()[0].toUpperCase() +
             otherColor.slice(1).toLowerCase().trim();
-          filter.color = otherColor;
+          filter.otherColor = otherColor;
         }
-      } else {
-        filter.color = req.query.color;
       }
     }
 
@@ -433,6 +432,8 @@ exports.search = (req, res) => {
         if (pubs.length > 0) {
           res.render("publications/search", {
             publications: pubs,
+            lat: lat1,
+            lng: lon1,
             message: "Se han encontrado resultados exitosamente"
           });
         } else {

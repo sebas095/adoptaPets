@@ -9,7 +9,10 @@
   }
 
   function initMap() {
-    map = L.map("map").setView([4.784468966579362, 75.67657470703125], 13);
+    const lat = document.getElementById("lat").value;
+    const lng = document.getElementById("lng").value;
+
+    map = L.map("map").setView([lat, lng], 13);
     L.tileLayer(
       "https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYXMwOTUiLCJhIjoiY2l5Y2ZwenY2MDE4MzJxazF1NWQ0a3g2ZiJ9.sYjDwFf_-q3lgrwH7L9f8g",
       {
@@ -47,7 +50,8 @@
       popupAnchor: [0, -48] // point from which the popup should open relative to the iconAnchor
     });
 
-    for (let i = 0, pet = pets[i]; i < pets.length; i++) {
+    for (let i = 0; i < pets.length; i++) {
+      const pet = pets[i];
       const petMarker = L.marker(new L.LatLng(pet.lat, pet.lng), {
         draggable: false,
         icon
