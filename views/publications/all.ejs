@@ -39,7 +39,7 @@
                     <div class="col l8 m6 s12">
                       <div class="row">
                         <h5 class="center icon ap-cat-7"> Características</h5>
-                        <div class="input-field col l6 m12 s6">
+                        <div class="input-field col l6 s12">
                           <i class="material-icons prefix">color_lens</i>
                           <input type="text" id="pet.color" name="pet.color" readonly=""
                             <% if (pub.features.color === 'blanco') { %> value="Blanco" <% } %>
@@ -55,7 +55,7 @@
                             aria-required="true">
                           <label for="pet.color">Color</label>
                         </div>
-                        <div class="input-field col l6 m12 s6">
+                        <div class="input-field col l6 s12">
                           <i class="material-icons prefix">zoom_out_map</i>
                           <input type="text" id="pet.size" name="pet.size" readonly=""
                             <% if (pub.features.size === 'pequeño') { %>  value="Pequeño(11 kg o menos)" <% } %>
@@ -67,7 +67,7 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div class="input-field col l6 m6 s12">
+                        <div class="input-field col l6 s12">
                           <% if (pub.features.type === 'gato') { %>
                             <i class="icon choose ap-cat-6 prefix"></i>
                           <% } else { %>
@@ -82,7 +82,7 @@
                           aria-required="true">
                           <label for="pet.type">Tipo</label>
                         </div>
-                        <div class="input-field col l6 m12 s6">
+                        <div class="input-field col l6 s12">
                           <i class="material-icons prefix">pets</i>
                           <input type="text" id="pet.gender" name="pet.gender" readonly=""
                             <% if(pub.features.gender === 'm') { %>
@@ -95,7 +95,7 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div class="input-field col m6 s12">
+                        <div class="input-field col l6 s12">
                           <div class="col s8">
                             <i class="material-icons prefix">add_circle</i>
                             <input type="number" id="pet.age" name="pet.age" readonly="" value="<%= pub.features.age %>">
