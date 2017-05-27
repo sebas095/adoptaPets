@@ -30,7 +30,6 @@ btnDelete.addEventListener("click", ev => {
 
 // Delete image
 $(() => {
-  // $(".exit").attr("disabled", false);
   $(".exit").click(function(ev) {
     ev.preventDefault();
     const filename = ev.target.id.split("exit-")[1];

@@ -73,12 +73,39 @@ exports.updateUser = (req, res) => {
             "Hubo problemas actualizando los datos, intenta de nuevo"
           );
           return res.redirect("/adopta-pets");
-        } else if (req.originalUrl.includes("/users/")) {
+        } else {
           req.flash(
             "adminMessage",
             "Los datos han sido actualizados exitosamente"
           );
           res.redirect("/adopta-pets/users/admin");
+        }
+      }
+    );
+  } else {
+    res.redirect("/adopta-pets");
+  }
+};
+
+// PUT /profile -- Modifies user profile data
+exports.updateProfile = (req, res) => {
+  if (
+    req.user.state.includes("1") ||
+    req.user.state.includes("2") ||
+    req.user.state.includes("4")
+  ) {
+    User.findOneAndUpdate(
+      { _id: req.user._id, email: req.user.email },
+      req.body,
+      { new: true },
+      (err, user) => {
+        if (err) {
+          console.log("Error: ", err);
+          req.flash(
+            "indexMessage",
+            "Hubo problemas actualizando los datos, intenta de nuevo"
+          );
+          return res.redirect("/adopta-pets");
         } else {
           req.flash(
             "userMessage",
