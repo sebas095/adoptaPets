@@ -2,7 +2,6 @@
   let map;
   let osmGeocoder;
   let marker = null;
-  const search = document.getElementById("search");
   window.addEventListener("load", initMap);
 
   if (!navigator.geolocation) {
@@ -10,7 +9,7 @@
   }
 
   function initMap() {
-    map = L.map("map2").setView([4.784468966579362, 75.67657470703125], 13);
+    map = L.map("map").setView([4.784468966579362, 75.67657470703125], 13);
     L.tileLayer(
       "https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYXMwOTUiLCJhIjoiY2l5Y2ZwenY2MDE4MzJxazF1NWQ0a3g2ZiJ9.sYjDwFf_-q3lgrwH7L9f8g",
       {
@@ -30,7 +29,6 @@
     }
     marker = L.marker(location, { draggable: true });
     marker.addTo(map);
-    marker.bindPopup("!Estoy aquí").openPopup();
   }
 
   function locate(map) {
@@ -47,11 +45,4 @@
       );
     }
   }
-
-  search.addEventListener("click", ev => {
-    ev.preventDefault();
-    document.getElementById("lat1").value = marker.getLatLng().lat;
-    document.getElementById("lng1").value = marker.getLatLng().lng;
-    document.getElementById("search-form").submit();
-  });
 })();

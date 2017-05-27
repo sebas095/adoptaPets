@@ -433,7 +433,7 @@ exports.search = (req, res) => {
         if (pubs.length > 0) {
           res.render("publications/search", {
             publications: pubs,
-            message: ""
+            message: "Se han encontrado resultados exitosamente"
           });
         } else {
           res.render("publications/search", {
