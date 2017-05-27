@@ -230,16 +230,16 @@
       <% } else { %>
         <% img = 'img/fondo.png'; %>
       <% } %>
-      // Share.init(document.getElementsByTagName('a'), {
-        // title: '¿Te gustaria adoptar a <%= publication.features.name %>?',
-        // url: 'http://localhost:3000/adopta-pets/publications/<%= publication._id %>',
-        // pic: 'http://localhost:3000/adopta-pets/<%= img %>'
-      // });
       Share.init(document.getElementsByTagName('a'), {
-        title: '¿Te gustaria adoptar una mascota?',
-        url: 'https://lanzador.co/adopta-pets',
-        pic: 'http://www.petsonbroadway.com/wp-content/uploads/2015/12/pet-supplies-portland-or.jpg'
+        title: '¿Te gustaria adoptar a <%= publication.features.name %>?',
+        url: 'https://lovelace.utp.edu.co/adopta-pets/publications/<%= publication._id %>',
+        pic: 'https://lovelace.utp.edu.co/adopta-pets/<%= img %>'
       });
+      // Share.init(document.getElementsByTagName('a'), {
+      //   title: '¿Te gustaria adoptar una mascota?',
+      //   url: 'https://lanzador.co/adopta-pets',
+      //   pic: 'http://www.petsonbroadway.com/wp-content/uploads/2015/12/pet-supplies-portland-or.jpg'
+      // });
     </script>
     <script type="text/javascript">
       (function($) {
