@@ -62,54 +62,12 @@
            <div class="col s12 m12">
              <div class="card">
                <div class="card-image">
-                 <img src="${pet.photo}" width="100" height="100">
-                 <span class="card-title orange-text" style="text-align: center !important">${pet.name}</span>
-               </div>
-               <div class="card-content">
-                 <div class="row">
-                   <h5 class="center amber-text icon ap-cat-7"> Características</h5>
-                   <div class="input-field col l6 m12 s6">
-                     <i class="material-icons prefix">color_lens</i>
-                     <input type="text" id="pet.color" name="pet.color" readonly="" value="${pet.color}" aria-required="true">
-                     <label for="pet.color">Color</label>
-                   </div>
-                   <div class="input-field col l6 m12 s6">
-                     <i class="material-icons prefix">zoom_out_map</i>
-                     <input type="text" id="pet.size" name="pet.size" readonly="" value="${pet.size}" aria-required="true">
-                     <label for="pet.size">Tamaño</label>
-                   </div>
-                 </div>
-                 <div class="row">
-                   <div class="input-field col l6 m6 s12">
-                     <div class="col s8">
-                       <i class="material-icons prefix">add_circle</i>
-                       <input type="number" id="pet.age" name="pet.age" readonly="" value="${pet.age}">
-                       <label for="pet.age">Edad</label>
-                     </div>
-                     <div class="col s4">
-                       <input name="pet.time" id="pet.time" readonly value="${pet.time}" aria-required="true">
-                     </div>
-                   </div>
-                   <div class="input-field col l6 m12 s6">
-                     <i class="material-icons prefix">pets</i>
-                     <input type="text" id="pet.gender" name="pet.gender" readonly="" value="pet.gender" aria-required="true">
-                     <label for="pet.gender">Sexo</label>
-                   </div>
-                 </div>
-                 <div class="row">
-                   <div class="input-field col m6 s12">
-                     <i class="icon ap-dog-2 prefix"></i>
-                     <input type="text" id="pet.type" name="pet.type" readonly="" value="${pet.type}" aria-required="true">
-                     <label for="pet.type">Tipo</label>
-                   </div>
-                 </div>
-                 <div class="row">
-                   <div class="input-field col l6 offset-m3 m12 s6">
-                     <a class="btn waves-effect waves-light cyan darken-2 white-text" href="/adopta-pets/publications/${pet.id}">Ver más</a>
-                   </div>
-                 </div>
+                 <img src="${pet.photo}" width="100" height="auto">
                </div>
              </div>
+              <div class="input-field col s12">
+                <a class="btn waves-effect waves-light cyan darken-2 white-text" href="/adopta-pets/publications/${pet.id}">Ver más</a>
+              </div>
            </div>
          </div>`
       );
