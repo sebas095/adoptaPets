@@ -25,37 +25,20 @@
             <div class="scrollspy" id="post">
               <div class="section scrollspy">
                 <div class="row center">
-                    <h3 class="light header icon ap-dog-2 orange-text"> Publicaciones</h3>
-                    <p>Mira mascotas en adopción.</p>
-                  </div>
+                  <h3 class="light header icon ap-dog-2 orange-text"> Publicaciones</h3>
+                  <p>Mira las mascotas que has publicado para adopción.</p>
+                </div>
+                <div class="divider"></div>
                   <% for (let pub of publications) { %>
                   <div class="row">
                     <div class="col l4 m6 s12">
-                      <div class="card">
-                        <div class="card-image">
-                          <% if(pub.photos.length > 0) { %>
-                            <div class="row">
-                              <div class="slider">
-                                <ul class="slides">
-                                  <% for (let i = 0; i < pub.photos.length; i++) { %>
-                                    <li><img src="/adopta-pets/uploads/<%= pub.photos[i] %>"></li>
-                                  <% } %>
-                                </ul>
-                              </div>
-                            </div>
-                          <% } %>
-                        </div>
-                        <div class="card-stacked">
-                          <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4"><%= pub.features.name %></span>
-                          </div>
-                        </div>
-                      </div>
+                      <h5 class="center amber-text"><%= pub.features.name %></h5>
+                      <img class="materialboxed" width="100%" src="/adopta-pets/uploads/<%= pub.photos[0] %>">
                     </div>
                     <div class="col l8 m6 s12">
+                      <h5 class="center icon ap-cat-7"> Características</h5>
                       <div class="row">
-                        <h5 class="center amber-text icon ap-cat-7"> Características</h5>
-                        <div class="input-field col l6 m12 s6">
+                        <div class="input-field col l6 s12">
                           <i class="material-icons prefix">color_lens</i>
                           <input type="text" id="pet.color" name="pet.color" readonly=""
                             <% if (pub.features.color === 'blanco') { %> value="Blanco" <% } %>
@@ -71,7 +54,7 @@
                             aria-required="true">
                           <label for="pet.color">Color</label>
                         </div>
-                        <div class="input-field col l6 m12 s6">
+                        <div class="input-field col l6 s12">
                           <i class="material-icons prefix">zoom_out_map</i>
                           <input type="text" id="pet.size" name="pet.size" readonly=""
                             <% if (pub.features.size === 'pequeño') { %>  value="Pequeño(11 kg o menos)" <% } %>
@@ -81,31 +64,9 @@
                             aria-required="true">
                           <label for="pet.size">Tamaño</label>
                         </div>
-                        <div class="input-field col l6 m6 s12">
-                          <div class="col s8">
-                            <i class="material-icons prefix">add_circle</i>
-                            <input type="number" id="pet.age" name="pet.age" readonly="" value="<%= pub.features.age %>">
-                            <label for="pet.age">Edad</label>
-                          </div>
-                          <div class="col s4">
-                            <input name="pet.time" id="pet.time" readonly
-                              <% if (pub.features.time === 'mes') { %> value="Mes(es)" <% } %>
-                              <% if (pub.features.time === 'año') { %> value="Año(s)" <% } %>
-                              aria-required="true">
-                          </div>
-                        </div>
-                        <div class="input-field col l6 m12 s6">
-                          <i class="material-icons prefix">pets</i>
-                          <input type="text" id="pet.gender" name="pet.gender" readonly=""
-                            <% if(pub.features.gender === 'm') { %>
-                              value="Macho"
-                            <% } else { %>
-                              value="Hembra"
-                            <% } %>
-                          aria-required="true">
-                          <label for="pet.gender">Sexo</label>
-                        </div>
-                        <div class="input-field col m6 s12">
+                      </div>
+                      <div class="row">
+                        <div class="input-field col l6 s12">
                           <% if (pub.features.type === 'gato') { %>
                             <i class="icon choose ap-cat-6 prefix"></i>
                           <% } else { %>
@@ -119,6 +80,32 @@
                             <% } %>
                           aria-required="true">
                           <label for="pet.type">Tipo</label>
+                        </div>
+                        <div class="input-field col l6 s12">
+                          <i class="material-icons prefix">pets</i>
+                          <input type="text" id="pet.gender" name="pet.gender" readonly=""
+                            <% if(pub.features.gender === 'm') { %>
+                              value="Macho"
+                            <% } else { %>
+                              value="Hembra"
+                            <% } %>
+                          aria-required="true">
+                          <label for="pet.gender">Sexo</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col l6 s12 offset-l3">
+                          <div class="col s8">
+                            <i class="material-icons prefix">add_circle</i>
+                            <input type="number" id="pet.age" name="pet.age" readonly="" value="<%= pub.features.age %>">
+                            <label for="pet.age">Edad</label>
+                          </div>
+                          <div class="col s4">
+                            <input name="pet.time" id="pet.time" readonly
+                              <% if (pub.features.time === 'mes') { %> value="Mes(es)" <% } %>
+                              <% if (pub.features.time === 'año') { %> value="Año(s)" <% } %>
+                              aria-required="true">
+                          </div>
                         </div>
                       </div>
                       <div class="center input-field">
