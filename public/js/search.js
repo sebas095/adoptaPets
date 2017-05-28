@@ -21,6 +21,11 @@
 
     osmGeocoder = new L.Control.OSMGeocoder({ text: "Localizar" });
     map.addControl(osmGeocoder);
+
+    map.on("click", ev => {
+      addMarker(ev.latlng);
+    });
+
     locate(map);
   }
 

@@ -24,12 +24,12 @@
     osmGeocoder = new L.Control.OSMGeocoder({ text: "Localizar" });
     map.addControl(osmGeocoder);
 
-    locate(map);
+    addMarker(new L.LatLng(lat, lng));
     const pets = getData();
     addPetstoMap(map, pets);
   }
 
-  function addMyMarker(location) {
+  function addMarker(location) {
     if (marker) {
       map.removeLayer(marker);
     }
@@ -40,71 +40,84 @@
   }
 
   function addPetstoMap(map, pets) {
-    const icon = L.icon({
-      iconUrl: "/adopta-pets/img/markers/position.png",
-      shadowUrl: "/adopta-pets/img/markers/shadow.png",
+    const catIcon = L.icon({
+      iconUrl: "/adopta-pets/img/markers/cat.png",
       iconSize: [48, 48], // size of the icon
-      shadowSize: [48, 48], // size of the shadow
       iconAnchor: [24, 48], // point of the icon which will correspond to marker's location
-      shadowAnchor: [7, 40], // the same for the shadow
+      popupAnchor: [0, -48] // point from which the popup should open relative to the iconAnchor
+    });
+
+    const dogIcon = L.icon({
+      iconUrl: "/adopta-pets/img/markers/dog.png",
+      iconSize: [48, 48], // size of the icon
+      iconAnchor: [24, 48], // point of the icon which will correspond to marker's location
       popupAnchor: [0, -48] // point from which the popup should open relative to the iconAnchor
     });
 
     for (let i = 0; i < pets.length; i++) {
       const pet = pets[i];
+      let icon = pet.type === "gato" ? catIcon : dogIcon;
       const petMarker = L.marker(new L.LatLng(pet.lat, pet.lng), {
         draggable: false,
         icon
       });
       petMarker.addTo(map);
-      petMarker.bindPopup(
-        `<div class="row">
-           <div class="col s12 m12">
-             <div class="card">
-               <div class="card-image">
-                 <img src="${pet.photo}" width="100" height="auto">
+      if (pet.photo.includes("default")) {
+        petMarker.bindPopup(
+          `<div class="row">
+             <div class="col s12 m12">
+               <div class="card">
+                 <div class="card-image">
+                   <img src="${pet.photo}" width="100" height="auto">
+                    <span class="card-title orange-text">${pet.name}</span>
+                 </div>
                </div>
+                <div class="input-field col s12">
+                  <a class="btn waves-effect waves-light cyan darken-2 white-text" href="/adopta-pets/publications/${pet.id}">Ver más</a>
+                </div>
              </div>
-              <div class="input-field col s12">
-                <a class="btn waves-effect waves-light cyan darken-2 white-text" href="/adopta-pets/publications/${pet.id}">Ver más</a>
-              </div>
-           </div>
-         </div>`
-      );
-    }
-  }
-
-  function locate(map) {
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(
-        position => {
-          const { latitude, longitude } = position.coords;
-          const initLocation = new L.LatLng(latitude, longitude);
-          map.panTo(initLocation);
-          addMyMarker(new L.LatLng(latitude, longitude));
-        },
-        err => console.log(err),
-        { timeout: 10000 }
-      );
+           </div>`
+        );
+      } else {
+        petMarker.bindPopup(
+          `<div class="row">
+             <div class="col s12 m12">
+               <div class="card">
+                 <div class="card-image">
+                   <img src="${pet.photo}" width="100" height="auto">
+                 </div>
+               </div>
+                <div class="input-field col s12">
+                  <a class="btn waves-effect waves-light cyan darken-2 white-text" href="/adopta-pets/publications/${pet.id}">Ver más</a>
+                </div>
+             </div>
+           </div>`
+        );
+      }
     }
   }
 
   function getData() {
     let pets = [];
     const data = document.querySelectorAll(".data");
-    for (let i = 0; i < data.length; i += 11) {
+    for (let i = 0; i < data.length; i += 6) {
+      let photo = "";
+      if (data[i].value === "none") {
+        if (data[i + 3].value === "gato") {
+          photo = "/adopta-pets/img/default-cat.png";
+        } else {
+          photo = "/adopta-pets/img/default-dog.png";
+        }
+      } else {
+        photo = data[i].value;
+      }
       const pet = {
-        photo: data[i].value,
+        photo: photo,
         id: data[i + 1].value,
         name: data[i + 2].value,
-        color: data[i + 3].value,
-        size: data[i + 4].value,
-        age: data[i + 5].value,
-        time: data[i + 6].value,
-        gender: data[i + 7].value,
-        type: data[i + 8].value,
-        lat: parseFloat(data[i + 9].value),
-        lng: parseFloat(data[i + 10].value)
+        type: data[i + 3].value,
+        lat: parseFloat(data[i + 4].value),
+        lng: parseFloat(data[i + 5].value)
       };
       pets.push(pet);
     }
