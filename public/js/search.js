@@ -2,6 +2,7 @@
   let map;
   let osmGeocoder;
   let marker = null;
+  let circleMarker = null;
   const search = document.getElementById("search");
   window.addEventListener("load", initMap);
 
@@ -26,16 +27,39 @@
       addMarker(ev.latlng);
     });
 
+    $("#dist").bind("keyup mouseup", function() {
+      circleMarker.setRadius(this.value * 1000);
+    });
+
     locate(map);
   }
 
   function addMarker(location) {
     if (marker) {
       map.removeLayer(marker);
+      map.removeLayer(circleMarker);
     }
     marker = L.marker(location, { draggable: true });
+    circleMarker = L.circle([location.lat, location.lng], {
+      color: "blue",
+      radius: $("#dist").val() * 1000
+    });
+
     marker.addTo(map);
+    circleMarker.addTo(map);
     marker.bindPopup("!Estoy aquí").openPopup();
+    circleMarker.bindPopup("Area de búsqueda");
+
+    marker.on("dragend", function(ev) {
+      map.removeLayer(circleMarker);
+      circleMarker = L.circle([ev.target._latlng.lat, ev.target._latlng.lng], {
+        color: "blue",
+        radius: $("#dist").val() * 1000
+      });
+
+      circleMarker.addTo(map);
+      circleMarker.bindPopup("Area de búsqueda");
+    });
   }
 
   function locate(map) {
