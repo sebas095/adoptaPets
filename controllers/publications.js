@@ -385,7 +385,7 @@ exports.search = (req, res) => {
     const lon1 = parseFloat(req.query.lng1);
     const dist = req.query.dist && req.query.dist >= 0
       ? Number(req.query.dist)
-      : 10;
+      : 3;
     let filter = {};
     if (req.query.type) filter.type = req.query.type;
     if (req.query.size) filter.size = req.query.size;

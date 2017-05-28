@@ -1,6 +1,4 @@
 <div class="container">
-  <!--<a href="#" id="menu" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only"><i class="material-icons">menu</i>
-  </a>-->
 </div>
 <ul id="nav-mobile" class="side-nav fixed">
   <li class="logo">
@@ -8,12 +6,6 @@
       <div class="icon ap-sm-adoptapets"></div>
     </a>
   </li>
-  <!-- <li class="search">
-    <div class="search-wrapper card">
-      <input id="search"><i class="material-icons">search</i>
-      <div class="search-results"></div>
-    </div>
-  </li> -->
   <% if (typeof(session) != 'object') { %>
     <li><a href="/adopta-pets/session/login" class="waves-effect waves-light green btn" style="color:white">Iniciar Sesión</a></li>
     <li><a href="/adopta-pets/users/register" class="waves-effect waves-light orange btn" style="color:white">Crear Cuenta</a></li>
@@ -22,12 +14,12 @@
   <li class="no-padding">
     <ul class="collapsible collapsible-accordion">
       <li class="bold"><a href="/adopta-pets" class="waves-effect waves-light"><i class="material-icons prefix">info</i>Acerca de</a></li>
-      <li class="bold"><a href="/adopta-pets/publications" class="waves-effect waves-light"><i class="material-icons prefix">pets</i>Mascotas en Adopción</a>
       </li>
       <% if (typeof(session) == 'object' && session) { %>
       <li class="bold"><a href="/adopta-pets/publications/new" class="waves-effect waves-light"><i class="material-icons prefix">add_circle</i>Agregar Mascota</a>
       </li>
       <% } %>
+      <li class="bold"><a href="/adopta-pets/publications" class="waves-effect waves-light"><i class="material-icons prefix">pets</i>Mascotas en Adopción</a>
       <li class="bold"><a href="/adopta-pets/publications/search" class="waves-effect waves-light"><i class="material-icons prefix">search</i>Buscar Mascotas</a>
       <% if (typeof(session) == 'object' && session) { %>
         <li class="bold"><a class="collapsible-header  waves-effect waves-light"><i class="material-icons prefix">person</i>USUARIO</a>

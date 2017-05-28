@@ -20,7 +20,7 @@ exports.renameFiles = (id, files, callback) => {
       const dir = __dirname + "/../" + file.value.destination;
       const { filename } = file.value;
       const ext = path.extname(file.value.originalname);
-      const newName = id + file.index + ext;
+      const newName = id + file.index + Date.now() + ext;
       fs.rename(`${dir}/${filename}`, `${dir}/${newName}`, err => {
         if (err) return cb(err, null);
         cb(null, newName);
