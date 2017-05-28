@@ -33,8 +33,15 @@
                   <div class="row">
                     <div class="col l4 m6 s12">
                       <h5 class="center amber-text"><%= pub.features.name %></h5>
-                      <img class="materialboxed" width="100%" src="/adopta-pets/uploads/<%= pub.photos[0] %>">
-                    </div>
+                      <% if (pub.photos.length > 0) { %>
+                        <img class="materialboxed" width="100%" src="/adopta-pets/uploads/<%= pub.photos[0] %>">
+                      <% } else { %>
+                        <% if(pub.features.type === 'gato') { %>
+                          <img class="materialboxed" width="100%" src="/adopta-pets/img/default-cat.png">
+                        <% } else { %>
+                          <img class="materialboxed" width="100%" src="/adopta-pets/img/default-dog.png">
+                        <% } %>
+                      <% } %>                    </div>
                     <div class="col l8 m6 s12">
                       <h5 class="center icon ap-cat-7"> Características</h5>
                       <div class="row">
