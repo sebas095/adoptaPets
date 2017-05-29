@@ -23,34 +23,30 @@
     <main>
       <% include ../navbar %>
       <div class="row">
-        <div class="col s12 m9 l10" style="padding: 0">
-          <% include ../header %>
+        <div class="col s12" style="padding: 0">
           <div class="container">
             <div id="session">
               <div class="scrollspy" id="post">
                 <div class="row center">
-                  <h3 class="light header icon ap-cat-3 orange-text"> Información sobre <%= publication.features.name %></h3>
+                  <h3 class="light header orange-text"><%= publication.features.name %></h3>
                   <p>Todo lo que debes saber sobre esta mascota.</p>
                 </div>
               </div>
               <div class="row">
-                <% if(publication.photos.length > 0) { %>
-                  <div class="row">
-                    <div class="slider">
-                      <ul class="slides">
-                        <% for (let i = 0; i < publication.photos.length; i++) { %>
-                          <li><img src="/adopta-pets/uploads/<%= publication.photos[i] %>"></li>
-                        <% } %>
-                      </ul>
+                <div class="col offset-m3 m6 s12">
+                  <% if(publication.photos.length > 0) { %>
+                    <div class="row">
+                      <img src="/adopta-pets/uploads/<%= publication.photos[0] %>">
                     </div>
-                  </div>
-                  <% } else { %>
-                    <% if(publication.features.type === 'gato') { %>
-                      <img class="materialboxed" width="100%" src="/adopta-pets/img/default-cat.png">
                     <% } else { %>
-                      <img class="materialboxed" width="100%" src="/adopta-pets/img/default-dog.png">
+                      <% if(publication.features.type === 'gato') { %>
+                        <img class="materialboxed" width="100%" src="/adopta-pets/img/default-cat.png">
+                      <% } else { %>
+                        <img class="materialboxed" width="100%" src="/adopta-pets/img/default-dog.png">
+                      <% } %>
                     <% } %>
-                  <% } %>
+                  </div>
+                </div>
                 <div class="card">
                   <div class="card-stacked">
                     <div class="card-content">
@@ -135,80 +131,30 @@
                             <label for="pet.type">Tipo</label>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="input-field col m12 s12">
-                            <i class="material-icons prefix">location_on</i>
-                            <% if (publication.address) { %>
-                              <input type="text" id="address" name="address" value="<%= publication.address %>" aria-required="true">
-                              <label for="address">Ubicación(Aproximada)</label>
-                            <% } else { %>
-                              <label for="address">Ubicación</label>
-                            <% } %>
-                            <input type="hidden" name="lat" value="<%= publication.lat %>" id="lat">
-                            <input type="hidden" name="lng" value="<%= publication.lng %>" id="lng">
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col s12 m12">
-                            <div id="required-map" style="display: none" class="red">
-                              <a class="close" onclick="hideAlert()" aria-label="close">&times;</a>
-                              <p></p><strong>Error!</strong> Debe establecer una ubicacion para el cliente antes de registrarlo. Búsque la ubicación en el mapa y haga click alli.
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row center">
-                          <div class="input-field col m12 s12">
-                            <div id="map" style="max-width: 100%"></div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="divider"></div>
-                      <div class="scrollspy" id="contact-info">
-                        <div class="row center">
-                          <h4 class="light header icon ap-dog-8 amber-text"> Información del Contacto</h4>
-                        </div>
-
-                        <div class="row">
-                          <div class="input-field col m6 s12">
-                            <i class="material-icons prefix">phone</i>
-                            <input type="text" id="phone" name="phone" value="<%= publication.phone %>" readonly="" aria-required="true">
-                            <label for="phone">Teléfono</label>
-                          </div>
-                          <div class="input-field col m6 s12">
-                            <i class="material-icons prefix">email</i>
-                            <input type="text" id="email" name="email" value="<%= publication.email %>" readonly="" aria-required="true">
-                            <label for="email">E-mail</label>
-                          </div>
-                        </div>
-
-                        <% if (publication.description) { %>
-                          <div class="row">
-                            <div class="input-field col m12 s12">
-                              <i class="material-icons prefix">assignment</i>
-                              <textarea id="description" name="description" class="materialize-textarea" readonly="" aria-required="true"><%= publication.description %></textarea>
-                              <label for="description">Descripción</label>
-                            </div>
-                          </div>
-                        <% } %>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="row center">
+              <div class="col offset-m3 m6 s12">
+                <a href="/adopta-pets/publications/<%= publication._id %>/facebook" class="waves-effect waves-light btn blue darken-4">
+                  <i class="fa fa-facebook" aria-hidden="true"></i> Compartir
+                </a>
+                <!--<div class="fb-share-button" data-href="https://lovelace.utp.edu.co/adopta-pets/publications/592b4102436d710160f8540e" data-layout="button" data-size="large" data-mobile-iframe="true">
+                  <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flovelace.utp.edu.co%2Fadopta-pets%2Fpublications%2F592b4102436d710160f8540e&amp;src=sdkpreparse">
+                    Compartir
+                  </a>
+                </div>
+                <div class="fb-share-button"
+                  data-href="https://lovelace.utp.edu.co/adopta-pets/publications/592b4102436d710160f8540e"
+                  data-layout="button">
+                </div>-->
+              </div>
+            </div>
             <div class="divider"></div>
             <h1 class="center icon ap-cat-5  %>"></h1>
-          </div>
-        </div>
-        <div class="col hide-on-small-only m3 l2">
-          <div class="toc-wrapper pinned">
-            <ul class="section table-of-contents">
-              <li><a href="#post">Publicación</a></li>
-              <li><a href="#pet">Características</a></li>
-              <li><a href="#contact-info">Información Contacto</a></li>
-              <li><a href="#contact">Contacto</a></li>
-            </ul>
           </div>
         </div>
       </div>
