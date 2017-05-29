@@ -31,7 +31,7 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Adopta Pets" />
     <meta property="og:description"   content="¿Te gustaria adoptar a <%= publication.features.name %>?" />
-    <meta property="og:image:secure_url"  content="https://www.jointdeveloper.com/adopta-pets/<%= img %>" />
+    <meta property="og:image"         content="https://www.jointdeveloper.com/adopta-pets/<%= img %>" />
   </head>
   <body>
     <div id="fb-root"></div>
@@ -40,9 +40,9 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.9&appId=721249691375386";
+        js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.9&appId=1704586266509268";
         fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+      }(document, 'script', 'facebook-jssdk'));</script>
     </script>
     <header>
       <% include ../menu.ejs %>
