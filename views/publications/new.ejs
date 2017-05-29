@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://file.myfontastic.com/e5H9LUj5bTPs52rQ4f96C6/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/adopta-pets/css/ghpages-materialize.css">
     <link rel="stylesheet" href="/adopta-pets/css/leaflet.css">
     <link rel="stylesheet" href="/adopta-pets/css/esri-leaflet-geocoder.css">
@@ -50,7 +51,7 @@
                       </div>
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">zoom_out_map</i>
-                        <select name="pet.size" class="validate" required="">
+                        <select name="pet.size"  id="size" class="validate" required="">
                           <option value="" disabled selected>Tamaño</option>
                           <option value="pequeño">Pequeño(11 kg o menos)</option>
                           <option value="mediano">Mediano(12-27 kg)</option>
@@ -72,7 +73,7 @@
                           <label for="pet.age">Edad</label>
                         </div>
                         <div class="col s4">
-                          <select name="pet.time" class="validate" required="">
+                          <select name="pet.time" id="pet.time" class="validate" required="">
                             <option value="" disabled selected>Tiempo</option>
                             <option value="mes">Mes(es)</option>
                             <option value="año">Año(s)</option>
@@ -83,7 +84,7 @@
                     <div class="row" id="other-color">
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">pets</i>
-                        <select name="pet.gender" class="validate" required="">
+                        <select name="pet.gender" id="gender" class="validate" required="">
                           <option value="" disabled selected>Sexo</option>
                           <option value="m">Macho</option>
                           <option value="f">Hembra</option>
@@ -170,7 +171,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row center">
+                  <div class="row center" id="warnings">
                     <div class="col s12">
                       <input class="btn waves-effect waves-light light-blue" type="button" id="save" value="Enviar">
                     </div>

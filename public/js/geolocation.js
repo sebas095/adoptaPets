@@ -64,6 +64,7 @@
   }
 
   function performData(marker) {
+    let warnings = [];
     const geocodeService = L.esri.Geocoding.geocodeService();
     geocodeService.reverse().latlng(marker.getLatLng()).run((error, result) => {
       if (error) {
@@ -74,7 +75,67 @@
       }
       document.getElementById("lat").value = marker.getLatLng().lat;
       document.getElementById("lng").value = marker.getLatLng().lng;
-      document.getElementById("publication-form").submit();
+      if (!document.getElementById("type").value) {
+        warnings.push("<li>*Tipo</li>");
+      }
+      if (!document.getElementById("size").value) {
+        warnings.push("<li>* Tamaño</li>");
+      }
+      if (!document.getElementById("pet.name").value) {
+        warnings.push("<li>* Nombre</li>");
+      }
+      if (!document.getElementById("pet.age").value) {
+        warnings.push("<li>* Edad</li>");
+      }
+      if (!document.getElementById("pet.time").value) {
+        warnings.push("<li>* Tiempo</li>");
+      }
+      if (!document.getElementById("gender").value) {
+        warnings.push("<li>* Sexo</li>");
+      }
+      if (!document.getElementById("color").value) {
+        warnings.push("<li>* Color</li>");
+      }
+      if (
+        document.getElementById("color").value &&
+        !document.getElementById("newColor").value
+      ) {
+        warnings.push("<li>* Otro Color</li>");
+      }
+      if (!document.getElementById("phone").value) {
+        warnings.push("<li>* Teléfono</li>");
+      }
+      if (!document.getElementById("email").value) {
+        warnings.push("<li>* Correo</li>");
+      }
+      if (warnings.length > 0) {
+        $(
+          `<div class="row" id="alert_box">
+            <div class="col s12">
+              <div class="card red">
+                <div class="row">
+                  <div class="col s12 m10">
+                    <div class="white-text">
+                      <blockquote>
+                        Los siguientes campos son requeridos:
+                        <ul>
+                          ${warnings.join("\n")}
+                        </ul>
+                      </blockquote>
+                    </div>
+                  </div>
+                  <div class="col s12 m2">
+                    <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>`
+        ).insertBefore("#warnings");
+        $("#alert_close").click(() => $("#alert_box").fadeOut("slow"));
+      } else {
+        document.getElementById("publication-form").submit();
+      }
     });
   }
 
