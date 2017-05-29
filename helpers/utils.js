@@ -14,26 +14,23 @@ exports.renameFiles = (id, files, offset, callback) => {
   const wrapped = files.map((value, index) => {
     return { index: index + offset, value: value };
   });
-  if (offset === 0) {
-    async.map(
-      wrapped,
-      (file, cb) => {
-        const dir = __dirname + "/../" + file.value.destination;
-        const { filename } = file.value;
-        const ext = path.extname(file.value.originalname);
-        const newName = id + file.index + Date.now() + ext;
-        fs.rename(`${dir}/${filename}`, `${dir}/${newName}`, err => {
-          if (err) return cb(err, null);
-          cb(null, newName);
-        });
-      },
-      (err, results) => {
-        if (err) return callback(err, null);
-        callback(null, results);
-      }
-    );
-  } else {
-  }
+  async.map(
+    wrapped,
+    (file, cb) => {
+      const dir = __dirname + "/../" + file.value.destination;
+      const { filename } = file.value;
+      const ext = path.extname(file.value.originalname);
+      const newName = id + file.index + Date.now() + ext;
+      fs.rename(`${dir}/${filename}`, `${dir}/${newName}`, err => {
+        if (err) return cb(err, null);
+        cb(null, newName);
+      });
+    },
+    (err, results) => {
+      if (err) return callback(err, null);
+      callback(null, results);
+    }
+  );
 };
 
 exports.deleteFiles = (files, callback) => {

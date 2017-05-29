@@ -215,89 +215,44 @@ exports.update = (req, res) => {
               res.redirect("/adopta-pets");
             } else {
               if (req.files) {
-                // if (data.photos.length > 0) {
-                //   deleteFiles(data.photos, err => {
-                //     if (err) {
-                //       console.log(err);
-                //       req.flash(
-                //         "indexMessage",
-                //         "Hubo problemas actualizando los datos " +
-                //           "de la publicación, intenta más tarde"
-                //       );
-                //       res.redirect("/adopta-pets");
-                //     } else {
-                //       renameFiles(data._id, req.files, (err, photos) => {
-                //         if (err) {
-                //           console.log(err);
-                //           req.flash(
-                //             "indexMessage",
-                //             "Hubo problemas actualizando los datos " +
-                //               "de la publicación, intenta más tarde"
-                //           );
-                //           res.redirect("/adopta-pets");
-                //         } else {
-                //           Publication.findOneAndUpdate(
-                //             { _id: id, createdBy: req.user.email },
-                //             { photos },
-                //             { new: true },
-                //             (err, pub) => {
-                //               if (err) {
-                //                 console.log(err);
-                //                 req.flash(
-                //                   "indexMessage",
-                //                   "Hubo problemas actualizando los datos " +
-                //                     "de la publicación, intenta más tarde"
-                //                 );
-                //                 return res.redirect("/adopta-pets");
-                //               }
-                //               req.flash(
-                //                 "pubMessage",
-                //                 "Los datos han sido actualizados exitosamente"
-                //               );
-                //               res.redirect(
-                //                 `/adopta-pets/publications/${id}/edit`
-                //               );
-                //             }
-                //           );
-                //         }
-                //       });
-                //     }
-                //   });
-                // } else {
-                //   renameFiles(data._id, req.files, (err, photos) => {
-                //     if (err) {
-                //       console.log(err);
-                //       req.flash(
-                //         "indexMessage",
-                //         "Hubo problemas actualizando los datos " +
-                //           "de la publicación, intenta más tarde"
-                //       );
-                //       res.redirect("/adopta-pets");
-                //     } else {
-                //       Publication.findOneAndUpdate(
-                //         { _id: id, createdBy: req.user.email },
-                //         { photos },
-                //         { new: true },
-                //         (err, pub) => {
-                //           if (err) {
-                //             console.log(err);
-                //             req.flash(
-                //               "indexMessage",
-                //               "Hubo problemas actualizando los datos " +
-                //                 "de la publicación, intenta más tarde"
-                //             );
-                //             return res.redirect("/adopta-pets");
-                //           }
-                //           req.flash(
-                //             "pubMessage",
-                //             "Los datos han sido actualizados exitosamente"
-                //           );
-                //           res.redirect(`/adopta-pets/publications/${id}/edit`);
-                //         }
-                //       );
-                //     }
-                //   });
-                // }
+                renameFiles(
+                  data._id,
+                  req.files,
+                  data.photos.length,
+                  (err, photos) => {
+                    if (err) {
+                      console.log(err);
+                      req.flash(
+                        "indexMessage",
+                        "Hubo problemas actualizando los datos " +
+                          "de la publicación, intenta más tarde"
+                      );
+                      res.redirect("/adopta-pets");
+                    } else {
+                      Publication.findOneAndUpdate(
+                        { _id: id, createdBy: req.user.email },
+                        { photos: data.photos.concat(photos) },
+                        { new: true },
+                        (err, pub) => {
+                          if (err) {
+                            console.log(err);
+                            req.flash(
+                              "indexMessage",
+                              "Hubo problemas actualizando los datos " +
+                                "de la publicación, intenta más tarde"
+                            );
+                            return res.redirect("/adopta-pets");
+                          }
+                          req.flash(
+                            "pubMessage",
+                            "Los datos han sido actualizados exitosamente"
+                          );
+                          res.redirect(`/adopta-pets/publications/${id}/edit`);
+                        }
+                      );
+                    }
+                  }
+                );
               } else {
                 req.flash(
                   "pubMessage",
