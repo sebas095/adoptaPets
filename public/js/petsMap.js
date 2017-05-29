@@ -105,9 +105,9 @@
       let photo = "";
       if (data[i].value === "none") {
         if (data[i + 3].value === "gato") {
-          photo = "/adopta-pets/img/default-cat.png";
+          photo = "/adopta-pets/img/default-cat.svg";
         } else {
-          photo = "/adopta-pets/img/default-dog.png";
+          photo = "/adopta-pets/img/default-dog.svg";
         }
       } else {
         photo = data[i].value;
