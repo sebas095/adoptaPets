@@ -25,26 +25,26 @@
         <div class="col s12 m9 l10" style="padding: 0">
           <% include ../header %>
           <div class="container">
-            <div class="scrollspy" id="post">
-              <div class="section scrollspy">
-                <% if (message.length > 0) { %>
-                  <div class="row" id="alert_box">
-                    <div class="col s12">
-                      <div class="card light-blue">
-                        <div class="row">
-                          <div class="col s12 m10">
-                            <div class="white-text">
-                              <blockquote><%= message %></blockquote>
-                            </div>
-                          </div>
-                          <div class="col s12 m2">
-                            <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
-                          </div>
+            <% if (message.length > 0) { %>
+              <div class="row" id="alert_box">
+                <div class="col s12">
+                  <div class="card light-blue">
+                    <div class="row">
+                      <div class="col s12 m10">
+                        <div class="white-text">
+                          <blockquote><%= message %></blockquote>
                         </div>
+                      </div>
+                      <div class="col s12 m2">
+                        <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
                       </div>
                     </div>
                   </div>
-                <% } %>
+                </div>
+              </div>
+            <% } %>
+            <div class="scrollspy" id="searching">
+              <div class="section scrollspy">
                 <div class="row center">
                     <h3 class="light header icon ap-dog-2 orange-text"> Búsqueda</h3>
                     <p>Encuentra la mascota de tus sueños de acuerdo a las características que selecciones.</p>
@@ -139,6 +139,10 @@
                   </form>
                   <p class="center red-text"><i>Nota: Las búsquedas por defecto se realizan por la Distancia en Kilómetros si no se seleccionan otras características</i></p>
                 </div>
+              </div>
+            </div>
+            <div class="scrollspy" id="results">
+              <div class="section scrollspy">
                 <% if (typeof(publications) == 'object' && publications) { %>
                   <input type="hidden" id="lat" value="<%= lat %>">
                   <input type="hidden" id="lng" value="<%= lng %>">
@@ -165,6 +169,11 @@
                     <input type="hidden" class="data" value="<%= pub.lat %>">
                     <input type="hidden" class="data" value="<%= pub.lng %>">
                   <% } %>
+                  <div class="row center">
+                    <div class="col s12">
+                      <a href="#map2" class="btn waves-effect waves-light light-blue">Buscar más</a>
+                    </div>
+                  </div>
                 <% } %>
               </div>
             </div>
@@ -174,7 +183,8 @@
         <div class="col hide-on-small-only m3 l2">
           <div class="toc-wrapper pinned">
             <ul class="section table-of-contents">
-              <li><a href="#post">Publicaciones</a></li>
+              <li><a href="#searching">Buscar</a></li>
+              <li><a href="#results">Resultados de la búsqueda</a></li>
               <li><a href="#contact">Contacto</a></li>
             </ul>
           </div>

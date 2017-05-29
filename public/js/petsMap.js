@@ -27,6 +27,7 @@
     addMarker(new L.LatLng(lat, lng));
     const pets = getData();
     addPetstoMap(map, pets);
+    window.location.href += "#results";
   }
 
   function addMarker(location) {
