@@ -103,3 +103,7 @@ footer .input-field .prefix, footer .input-field .prefix.active {
 .exit:hover {
   color: gray !important;
 }
+
+.pagination li.active {
+  background-color: #8F6F40;
+}
