@@ -35,7 +35,7 @@ module.exports = (app, mountPoint) => {
   );
 
   router.put(
-    "/:id",
+    "/:id/:rol",
     sessionController.loginRequired,
     userController.updateUser
   );

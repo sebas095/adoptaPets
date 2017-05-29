@@ -47,13 +47,9 @@ exports.createUser = (req, res) => {
 
 // PUT /users/:id -- Modifies user data
 exports.updateUser = (req, res) => {
-  if (
-    req.user.state.includes("1") ||
-    req.user.state.includes("2") ||
-    req.user.state.includes("4")
-  ) {
-    const id = req.params.id || req.user._id;
-    if (req.body.rol === "admin/user") {
+  if (req.user.state.includes("1")) {
+    const { id, rol } = req.params;
+    if (rol === "admin-user") {
       if (req.body.status) {
         req.body.state = "1";
       } else {
@@ -62,7 +58,7 @@ exports.updateUser = (req, res) => {
     }
 
     User.findOneAndUpdate(
-      { _id: id, email: req.user.email },
+      { _id: id, email: req.body.email },
       req.body,
       { new: true },
       (err, user) => {
@@ -124,8 +120,8 @@ exports.updateProfile = (req, res) => {
 exports.deleteUser = (req, res) => {
   if (req.user.state.includes("1")) {
     const { id } = req.params;
-    User.findOneAndUpdate(
-      { _id: id, email: req.user.email },
+    User.findByIdAndUpdate(
+      id,
       {
         state: req.body.status
       },
