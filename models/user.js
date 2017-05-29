@@ -7,11 +7,17 @@ const SALT_WORK_FACTOR = 10;
 const UserSchema = new Schema({
   firstname: {
     type: String,
-    require: true
+    require: true,
+    validate(firstname) {
+      return /(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+/.test(firstname);
+    }
   },
   lastname: {
     type: String,
-    require: true
+    require: true,
+    validate(lastname) {
+      return /(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+/.test(lastname);
+    }
   },
   email: {
     type: String,
@@ -25,7 +31,10 @@ const UserSchema = new Schema({
   },
   phone: {
     type: String,
-    require: true
+    require: true,
+    validate(phone) {
+      return /[0-9]+/.test(phone);
+    }
   },
   state: {
     type: String,

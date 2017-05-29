@@ -5,7 +5,10 @@ const { Schema } = mongoose;
 const PetSchema = new Schema({
   color: {
     type: String,
-    require: true
+    require: true,
+    validate(color) {
+      return color.length > 0;
+    }
   },
   otherColor: {
     type: String,
@@ -14,27 +17,45 @@ const PetSchema = new Schema({
   },
   size: {
     type: String,
-    require: true
+    require: true,
+    validate(size) {
+      return size.length > 0;
+    }
   },
   name: {
     type: String,
-    require: true
+    require: true,
+    validate(name) {
+      return /(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+/.test(name);
+    }
   },
   time: {
     type: String,
-    require: true
+    require: true,
+    validate(time) {
+      return time.length > 0;
+    }
   },
   age: {
     type: Number,
-    require: true
+    require: true,
+    validate(age) {
+      return age > 0;
+    }
   },
   gender: {
     type: String,
-    require: true
+    require: true,
+    validate(gender) {
+      return gender.length > 0;
+    }
   },
   type: {
     type: String,
-    require: true
+    require: true,
+    validate(type) {
+      return type.length > 0;
+    }
   }
 });
 
@@ -47,7 +68,10 @@ const PublicationSchema = new Schema({
   },
   phone: {
     type: String,
-    require: true
+    require: true,
+    validate(phone) {
+      return /[0-9]+/.test(phone);
+    }
   },
   description: {
     type: String,
@@ -83,7 +107,8 @@ const PublicationSchema = new Schema({
   },
   photos: {
     type: Array,
-    require: true
+    require: true,
+    default: []
   },
   features: {
     type: PetSchema,
