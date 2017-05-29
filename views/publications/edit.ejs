@@ -65,10 +65,10 @@
                         <div class="slider">
                           <ul class="slides">
                             <% for (let i = 0; i < publication.photos.length; i++) { %>
-                              <div class="col s12 m2">
-                                <i class="exit fa fa-times icon_style red-text" id="exit-<%= publication.photos[i] %>" aria-hidden="true" style="z-index: 3; font-size: 3em;"></i>
-                              </div>
                               <li>
+                                <div class="col s12 m2">
+                                  <i class="exit fa fa-times icon_style red-text" id="exit-<%= publication.photos[i] %>" aria-hidden="true" style="z-index: 3; font-size: 3em;"></i>
+                                </div>
                                 <img src="/adopta-pets/uploads/<%= publication.photos[i] %>">
                               </li>
                             <% } %>
@@ -276,6 +276,7 @@
           $('.scrollspy').scrollSpy();
           $('select').material_select();
           $('.slider').slider();
+          $('.materialboxed').materialbox();
           $("#alert_close").click(() => $("#alert_box").fadeOut("slow"));
         }); // end of document ready
       })(jQuery); // end of jQuery name space
