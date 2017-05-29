@@ -15,24 +15,8 @@
     <link rel="stylesheet" href="/adopta-pets/css/Control.OSMGeocoder.css">
     <link rel="stylesheet" href="/adopta-pets/css/adoptapets.css">
     <link rel="stylesheet" href="/adopta-pets/css/style.css">
-
-    <meta property="og:url"           content="https://lovelace.utp.edu.co/adopta-pets/publications/592b4102436d710160f8540e"/>
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Adopta Pets" />
-    <meta property="og:description"   content="¿Te gustaria adoptar a <%= publication.features.name %>?" />
-    <meta property="og:image:secure_url"  content="https://lovelace.utp.edu.co/adopta-pets/uploads/592b4102436d710160f8540e0.jpg" />
   </head>
   <body>
-    <div id="fb-root"></div>
-    <script>
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.9&appId=721249691375386";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
     <header>
       <% include ../menu.ejs %>
     </header>
@@ -207,22 +191,6 @@
                             </div>
                           </div>
                         <% } %>
-                        <div class="row center">
-                          <div class="col offset-m3 m6 s12">
-                            <a href="/adopta-pets/publications/<%= publication._id %>/facebook" class="waves-effect waves-light btn blue darken-4">
-                              <i class="fa fa-facebook" aria-hidden="true"></i> Compartir
-                            </a>
-                            <!--<div class="fb-share-button" data-href="https://lovelace.utp.edu.co/adopta-pets/publications/592b4102436d710160f8540e" data-layout="button" data-size="large" data-mobile-iframe="true">
-                              <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flovelace.utp.edu.co%2Fadopta-pets%2Fpublications%2F592b4102436d710160f8540e&amp;src=sdkpreparse">
-                                Compartir
-                              </a>
-                            </div>
-                            <div class="fb-share-button"
-                              data-href="https://lovelace.utp.edu.co/adopta-pets/publications/592b4102436d710160f8540e"
-                              data-layout="button">
-                            </div>-->
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -253,31 +221,6 @@
     <script src="/adopta-pets/js/esri-leaflet.js"></script>
     <script src="/adopta-pets/js/esri-leaflet-geocoder.js"></script>
     <script src="/adopta-pets/js/maps.js"></script>
-    <script src="/adopta-pets/js/share.min.js"></script>
-    <script src="/adopta-pets/js/socialshare.min.js"></script>
-    <script>
-      <% let img = ''; %>
-      <% if (publication.photos.length > 0) { %>
-        <% img = 'uploads/' + publication.photos[0]; %>
-      <% } else { %>
-        <% img = 'img/fondo.png'; %>
-      <% } %>
-      // Share.init(document.getElementsByTagName('a'), {
-      //   title: '¿Te gustaria adoptar a <%= publication.features.name %>?',
-      //   url: 'https://lovelace.utp.edu.co/adopta-pets/publications/<%= publication._id %>',
-      //   pic: 'https://lovelace.utp.edu.co/adopta-pets/<%= img %>'
-      // });
-      // $(".element").socialShare({
-      //   facebook: true,
-      //   url: 'https://lovelace.utp.edu.co/adopta-pets/publications/592b4102436d710160f8540e',
-      //   image: "https://lovelace.utp.edu.co/adopta-pets/uploads/592b4102436d710160f8540e0.jpg"
-      // });
-      // Share.init(document.getElementsByTagName('a'), {
-      //   title: '¿Te gustaria adoptar una mascota?',
-      //   url: 'https://lanzador.co/adopta-pets',
-      //   pic: 'http://www.petsonbroadway.com/wp-content/uploads/2015/12/pet-supplies-portland-or.jpg'
-      // });
-    </script>
     <script type="text/javascript">
       (function($) {
         $(function() {

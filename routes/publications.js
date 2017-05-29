@@ -21,6 +21,7 @@ module.exports = (app, mountPoint) => {
     publicationController.edit
   );
 
+  router.get("/:id/facebook", publicationController.facebook);
   router.get("/:id", publicationController.show);
 
   // POST
