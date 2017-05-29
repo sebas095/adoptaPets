@@ -97,8 +97,8 @@
         warnings.push("<li>* Color</li>");
       }
       if (
-        document.getElementById("color").value &&
-        !document.getElementById("newColor").value
+        document.getElementById("color").value === "otro" &&
+        !document.getElementById("otherColor").value
       ) {
         warnings.push("<li>* Otro Color</li>");
       }

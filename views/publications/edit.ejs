@@ -97,7 +97,7 @@
                       </div>
                       <div class="input-field col m6 s12">
                         <i class="material-icons prefix">zoom_out_map</i>
-                        <select name="pet.size" id="pet.size" class="validate" required="" disabled="">
+                        <select name="pet.size" id="size" class="validate" required="" disabled="">
                           <option value="" disabled selected>Tamaño</option>
                           <option value="pequeño" <% if (publication.features.size === 'pequeño') { %> selected <% } %> >Pequeño(11 kg o menos)</option>
                           <option value="mediano" <% if (publication.features.size === 'mediano') { %> selected <% } %> >Mediano(12-27 kg)</option>
@@ -231,7 +231,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row center">
+                  <div class="row center" id="warnings">
                     <div class="col s12">
                       <button class="btn waves-effect waves-light blue" id="edit">Editar</button>
                       <button class="btn waves-effect waves-light green" id="save">Enviar</button>
