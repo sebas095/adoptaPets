@@ -1,16 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const csrf = require("csurf");
-const csrfProtection = csrf({ cookie: true });
+// const csrf = require("csurf");
+// const csrfProtection = csrf({ cookie: true });
 const { userController, sessionController } = require("../controllers");
-router.use(csrfProtection);
+// router.use(csrfProtection);
 
 module.exports = (app, mountPoint) => {
   // GET
   router.get("/", (req, res) =>
     res.render("index", {
-      message: req.flash("indexMessage"),
-      csrfToken: req.csrfToken()
+      message: req.flash("indexMessage")
     }));
 
   router.get("/profile", sessionController.loginRequired, (req, res) => {

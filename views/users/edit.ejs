@@ -74,7 +74,6 @@
                     </div>
                   </div>
                   <div class="row center">
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button class="btn waves-effect waves-light blue" id="edit">Editar</button>
                     <button class="btn waves-effect waves-light green" type="submit" id="save">Enviar</button>
                   </div>
@@ -86,7 +85,6 @@
                 </form>
                 <% if (user.state === '2') { %>
                   <form class="" action="/adopta-pets/users/<%= user._id %>/deactiveAccount?_method=put" id="deactivateForm" method="post">
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                   </form>
                 <% } %>
               </div>

@@ -110,7 +110,6 @@
                               <input type="hidden" name="exist" id="exist" value="<%= usr.email %>">
                               <input type="checkbox" class="filled-in" name="status" id="status" <% if (usr.state === '1') { %> checked="checked" <% } %> aria-required="true"  disabled="">
                               <label for="status">¿Es administrador del sistema?</label>
-                              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                             </div>
                           </div>
                           <% } %>
@@ -143,7 +142,6 @@
                 </div>
                 <form action="/adopta-pets/users/<%= usr._id %>?_method=delete" method="post" id="deactivateForm-<%= usr._id %>">
                   <input type="hidden" name="status" id="status-<%= usr._id %>">
-                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 </form>
                 <% } %>
                 <div class="center row">

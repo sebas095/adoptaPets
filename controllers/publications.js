@@ -21,8 +21,7 @@ exports.new = (req, res) => {
     req.user.state.includes("4")
   ) {
     res.render("publications/new", {
-      user: req.user,
-      csrfToken: req.csrfToken()
+      user: req.user
     });
   } else {
     res.redirect("/adopta-pets");
@@ -147,8 +146,7 @@ exports.edit = (req, res) => {
       } else {
         res.render("publications/edit", {
           publication: data,
-          message: req.flash("pubMessage"),
-          csrfToken: req.csrfToken()
+          message: req.flash("pubMessage")
         });
       }
     });
@@ -294,8 +292,7 @@ exports.show = (req, res) => {
       res.redirect("/adopta-pets");
     } else {
       res.render("publications/show", {
-        publication: data,
-        csrfToken: req.csrfToken()
+        publication: data
       });
     }
   });
@@ -328,8 +325,7 @@ exports.getPublications = (req, res) => {
         size: pages.size,
         group: pages.group,
         left: pages.left,
-        right: pages.right,
-        csrfToken: req.csrfToken()
+        right: pages.right
       });
     } else {
       req.flash("indexMessage", "No hay publicaciones disponibles");
@@ -365,8 +361,7 @@ exports.getMyPublications = (req, res) => {
         size: pages.size,
         group: pages.group,
         left: pages.left,
-        right: pages.right,
-        csrfToken: req.csrfToken()
+        right: pages.right
       });
     } else {
       req.flash("indexMessage", "No hay publicaciones disponibles");
@@ -434,20 +429,17 @@ exports.search = (req, res) => {
             lat: lat1,
             lng: lon1,
             total,
-            message: "Se han encontrado resultados exitosamente",
-            csrfToken: req.csrfToken()
+            message: "Se han encontrado resultados exitosamente"
           });
         } else {
           res.render("publications/search", {
             total: 1,
-            message: "No se encontraron resultados",
-            csrfToken: req.csrfToken()
+            message: "No se encontraron resultados"
           });
         }
       } else {
         res.render("publications/search", {
-          message: "No hay publicaciones disponibles",
-          csrfToken: req.csrfToken()
+          message: "No hay publicaciones disponibles"
         });
       }
     });
@@ -465,8 +457,7 @@ exports.search = (req, res) => {
         const total = data.length > 0 ? data.length : 1;
         res.render("publications/search", {
           message: "",
-          total,
-          csrfToken: req.csrfToken()
+          total
         });
       }
     });

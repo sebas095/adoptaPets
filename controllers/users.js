@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport(
 // GET /users/register -- Register form
 exports.newUser = (req, res) => {
   if (!req.isAuthenticated()) {
-    res.render("users/new", { csrfToken: req.csrfToken() });
+    res.render("users/new");
   } else {
     res.redirect("/adopta-pets/profile");
   }
@@ -180,7 +180,6 @@ exports.getUsers = (req, res) => {
             left: pages.left,
             right: pages.right,
             user: req.user,
-            csrfToken: req.csrfToken(),
             message: req.flash("adminMessage")
           });
         } else {
@@ -225,7 +224,6 @@ exports.deactivatePendingAccount = (req, res) => {
           left: pages.left,
           right: pages.right,
           user: req.user,
-          csrfToken: req.csrfToken(),
           message: req.flash("pendingDeactivateUsers")
         });
       } else {

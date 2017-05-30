@@ -54,7 +54,6 @@
               <div class="row">
                 <form action="/adopta-pets/publications/<%= publication._id %>/delete?_method=delete" id="image-form" method="post">
                   <input type="hidden" name="photo" id="photo">
-                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 </form>
                 <form action="/adopta-pets/publications/<%= publication._id %>/edit?_method=put" id="publication-form" enctype="multipart/form-data" method="post">
                   <div class="scrollspy" id="pet">
@@ -233,7 +232,6 @@
                   </div>
                   <div class="row center" id="warnings">
                     <div class="col s12">
-                      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                       <button class="btn waves-effect waves-light blue" id="edit">Editar</button>
                       <button class="btn waves-effect waves-light green" id="save">Enviar</button>
                       <button class="btn waves-effect waves-light red" id="delete">Borrar</button>
@@ -241,7 +239,6 @@
                   </div>
                 </form>
                 <form class="" action="/adopta-pets/publications/<%= publication._id %>?_method=delete" id="deletePublicationForm" method="post">
-                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 </form>
               </div>
             </div>
