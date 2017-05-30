@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const csrf = require("csurf");
+const csrfProtection = csrf({ cookie: true });
 const { sessionController, publicationController } = require("../controllers");
+router.use(csrfProtection);
 
 module.exports = (app, mountPoint) => {
   // GET
@@ -21,7 +24,6 @@ module.exports = (app, mountPoint) => {
     publicationController.edit
   );
 
-  router.get("/:id/facebook", publicationController.facebook);
   router.get("/:id", publicationController.show);
 
   // POST

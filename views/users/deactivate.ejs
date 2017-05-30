@@ -79,6 +79,7 @@
                                     <p>El usuario <%= usr.firstname %> <%= usr.lastname %> solicita la desactivación de su cuenta</p>
                                     <input type="hidden" name="email" id="email" value="<%= usr.email %>">
                                     <input type="hidden" name="account" id="account-<%= usr._id %>">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                   </div>
                                   <div class="col m6 s12 center hide-on-small-only">
                                     <button class="btn waves-effect waves-light green accept" id="accept-<%= usr._id %>">Aprobar</button>

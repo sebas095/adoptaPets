@@ -20,7 +20,10 @@ exports.new = (req, res) => {
     req.user.state.includes("2") ||
     req.user.state.includes("4")
   ) {
-    res.render("publications/new", { user: req.user });
+    res.render("publications/new", {
+      user: req.user,
+      csrfToken: req.csrfToken()
+    });
   } else {
     res.redirect("/adopta-pets");
   }
@@ -144,7 +147,8 @@ exports.edit = (req, res) => {
       } else {
         res.render("publications/edit", {
           publication: data,
-          message: req.flash("pubMessage")
+          message: req.flash("pubMessage"),
+          csrfToken: req.csrfToken()
         });
       }
     });
@@ -289,30 +293,10 @@ exports.show = (req, res) => {
       );
       res.redirect("/adopta-pets");
     } else {
-      res.render("publications/show", { publication: data });
-    }
-  });
-};
-
-// GET /publications/:id/facebook -- Get a specific publication for share with facebook
-exports.facebook = (req, res) => {
-  const { id } = req.params;
-  Publication.findById(id, (err, data) => {
-    if (err) {
-      console.log(err);
-      req.flash(
-        "indexMessage",
-        "Hubo problemas buscando la publicación, intenta más tarde"
-      );
-      res.redirect("/adopta-pets");
-    } else if (!data) {
-      req.flash(
-        "indexMessage",
-        "La publicación solicitada no se encuentra registrada"
-      );
-      res.redirect("/adopta-pets");
-    } else {
-      res.render("publications/facebook", { publication: data });
+      res.render("publications/show", {
+        publication: data,
+        csrfToken: req.csrfToken()
+      });
     }
   });
 };
@@ -344,7 +328,8 @@ exports.getPublications = (req, res) => {
         size: pages.size,
         group: pages.group,
         left: pages.left,
-        right: pages.right
+        right: pages.right,
+        csrfToken: req.csrfToken()
       });
     } else {
       req.flash("indexMessage", "No hay publicaciones disponibles");
@@ -380,7 +365,8 @@ exports.getMyPublications = (req, res) => {
         size: pages.size,
         group: pages.group,
         left: pages.left,
-        right: pages.right
+        right: pages.right,
+        csrfToken: req.csrfToken()
       });
     } else {
       req.flash("indexMessage", "No hay publicaciones disponibles");
@@ -448,17 +434,20 @@ exports.search = (req, res) => {
             lat: lat1,
             lng: lon1,
             total,
-            message: "Se han encontrado resultados exitosamente"
+            message: "Se han encontrado resultados exitosamente",
+            csrfToken: req.csrfToken()
           });
         } else {
           res.render("publications/search", {
             total: 1,
-            message: "No se encontraron resultados"
+            message: "No se encontraron resultados",
+            csrfToken: req.csrfToken()
           });
         }
       } else {
         res.render("publications/search", {
-          message: "No hay publicaciones disponibles"
+          message: "No hay publicaciones disponibles",
+          csrfToken: req.csrfToken()
         });
       }
     });
@@ -474,7 +463,11 @@ exports.search = (req, res) => {
         res.redirect("/adopta-pets");
       } else {
         const total = data.length > 0 ? data.length : 1;
-        res.render("publications/search", { message: "", total });
+        res.render("publications/search", {
+          message: "",
+          total,
+          csrfToken: req.csrfToken()
+        });
       }
     });
   }
