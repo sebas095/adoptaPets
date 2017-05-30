@@ -17,17 +17,19 @@
     <link rel="stylesheet" href="/adopta-pets/css/style.css">
   </head>
   <body>
-  <% if(publication.photos.length > 0) { %>
-    <div class="row">
-      <img src="/adopta-pets/uploads/<%= publication.photos[0] %>">
-    </div>
-  <% } else { %>
-    <% if(publication.features.type === 'gato') { %>
-      <img class="materialboxed" width="100%" src="/adopta-pets/img/default-cat.svg">
+    <meta property="og:title" content="<%= publication.features.name %>"/>
+    <meta property="og:image" content="/adopta-pets/uploads/<%= publication.photos[0] %>"/>
+    <% if(publication.photos.length > 0) { %>
+      <div class="row">
+        <img src="/adopta-pets/uploads/<%= publication.photos[0] %>">
+      </div>
     <% } else { %>
-      <img class="materialboxed" width="100%" src="/adopta-pets/img/default-dog.svg">
+      <% if(publication.features.type === 'gato') { %>
+        <img class="materialboxed" width="100%" src="/adopta-pets/img/default-cat.svg">
+      <% } else { %>
+        <img class="materialboxed" width="100%" src="/adopta-pets/img/default-dog.svg">
+      <% } %>
     <% } %>
-  <% } %>
     <h3 class="light header orange-text"><%= publication.features.name %></h3>
     <p>Todo lo que debes saber sobre esta mascota.</p>
     <footer>
