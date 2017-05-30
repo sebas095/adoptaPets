@@ -5,7 +5,8 @@ const {
   imageFilter,
   renameFiles,
   deleteFiles,
-  getDistance
+  getDistance,
+  paginator
 } = require("../helpers/utils");
 const upload = multer({
   dest: "public/uploads",
@@ -328,7 +329,23 @@ exports.getPublications = (req, res) => {
       );
       res.redirect("/adopta-pets");
     } else if (data.length > 0) {
-      res.render("publications/all", { publications: data });
+      const { page } = req.query;
+      if (!req.query.page || page <= 0) {
+        return res.redirect("/adopta-pets/publications?page=1");
+      }
+
+      const pages = paginator(data, page);
+      if (pages.data.length == 0) {
+        return res.redirect("/adopta-pets/publications?page=1");
+      }
+
+      res.render("publications/all", {
+        publications: pages.data,
+        size: pages.size,
+        group: pages.group,
+        left: pages.left,
+        right: pages.right
+      });
     } else {
       req.flash("indexMessage", "No hay publicaciones disponibles");
       res.redirect("/adopta-pets");
@@ -348,7 +365,23 @@ exports.getMyPublications = (req, res) => {
       );
       res.redirect("/adopta-pets");
     } else if (data.length > 0) {
-      res.render("publications/me", { publications: data });
+      const { page } = req.query;
+      if (!req.query.page || page <= 0) {
+        return res.redirect("/adopta-pets/publications?page=1");
+      }
+
+      const pages = paginator(data, page);
+      if (pages.data.length == 0) {
+        return res.redirect("/adopta-pets/publications?page=1");
+      }
+
+      res.render("publications/me", {
+        publications: pages.data,
+        size: pages.size,
+        group: pages.group,
+        left: pages.left,
+        right: pages.right
+      });
     } else {
       req.flash("indexMessage", "No hay publicaciones disponibles");
       res.redirect("/adopta-pets");

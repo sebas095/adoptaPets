@@ -64,3 +64,26 @@ exports.getDistance = (lat1, lon1, lat2, lon2) => {
   const distance = R * c; // Distance in km
   return distance;
 };
+
+exports.paginator = (info, page) => {
+  const groups = Math.ceil(Math.ceil(info.length / 10) / 5);
+  const group = Math.ceil(page / 5);
+  const size = info.length;
+  const left = group > 1;
+  const right = group < groups;
+  let data = [];
+
+  if (page > 1) {
+    data = info.slice((page - 1) * 10, (page - 1) * 10 + 10);
+  } else {
+    data = info.slice(0, 10);
+  }
+
+  return {
+    data,
+    size,
+    group,
+    left,
+    right
+  };
+};

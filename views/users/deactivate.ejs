@@ -23,81 +23,104 @@
         <div class="col s12 m9 l10" style="padding: 0">
           <% include ../header %>
           <div class="container">
-            <div class="section scrollspy" id="deactivate">
-              <% if (message.length > 0) { %>
-                <div class="row" id="alert_box">
-                  <div class="col s12">
-                    <div class="card red darken-1">
-                      <div class="row">
-                        <div class="col s12 m10">
-                          <div class="white-text">
-                            <blockquote><%= message %></blockquote>
-                          </div>
+            <% if (message.length > 0) { %>
+              <div class="row" id="alert_box">
+                <div class="col s12">
+                  <div class="card red darken-1">
+                    <div class="row">
+                      <div class="col s12 m10">
+                        <div class="white-text">
+                          <blockquote><%= message %></blockquote>
                         </div>
-                        <div class="col s12 m2">
-                          <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
-                        </div>
+                      </div>
+                      <div class="col s12 m2">
+                        <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
                       </div>
                     </div>
                   </div>
                 </div>
-              <% } %>
-              <div class="center row">
-                <ul class="pagination">
-                  <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                  <li class="active"><a href="#!">1</a></li>
-                  <li class="waves-effect"><a href="#!">2</a></li>
-                  <li class="waves-effect"><a href="#!">3</a></li>
-                  <li class="waves-effect"><a href="#!">4</a></li>
-                  <li class="waves-effect"><a href="#!">5</a></li>
-                  <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                </ul>
               </div>
-              <% for (let usr of users) { %>
-                <div class="row">
-                  <form action="/adopta-pets/users/deactivateAccount?_method=put" method="post" id="form-<%= usr._id %>">
-                    <div class="row">
-                      <div class="col m12 s12">
-                        <div class="card">
-                          <div class="card-stacked">
-                            <div class="card-content">
-                              <div class="row">
-                                <div class="col m6 s12">
-                                  <p>El usuario <%= usr.firstname %> <%= usr.lastname %> solicita la desactivación de su cuenta</p>
-                                  <input type="hidden" name="email" id="email" value="<%= usr.email %>">
-                                  <input type="hidden" name="account" id="account-<%= usr._id %>">
-                                </div>
-                                <div class="col m6 s12 center hide-on-small-only">
-                                  <button class="btn waves-effect waves-light green accept" id="accept-<%= usr._id %>">Aprobar</button>
-                                  <button class="btn waves-effect waves-light red reject" id="reject-<%= usr._id %>">Rechazar</button>
-                                </div>
-                                <div class="col m6 s12 center hide-on-med-and-up">
-                                  <br>
-                                  <button class="btn-floating btn-large waves-effect waves-light green accept" id="accept-<%= usr._id %>"><i class="material-icons">done</i></button>
-                                  <button class="btn-floating btn-large waves-effect waves-light red reject" id="reject-<%= usr._id %>"><i class="fa fa-times" aria-hidden="true"></i></button
+            <% } %>
+            <div class="scrollspy" id="deactivate">
+              <div class="section scrollspy">
+                <div class="row center">
+                  <h3 class="light header icon ap-dog-4 orange-text"> Solicitudes de Desactivacion de Cuentas</h3>
+                </div>
+                <div class="center row">
+                  <ul class="pagination">
+                    <% if (left) { %>
+                      <li class="waves-effect"><a href="/adopta-pets/users/pending/deactivate?page=<%= (group - 1) * 5 %>"><i class="material-icons">chevron_left</i></a></li>
+                    <% } %>
+                    <% for (i = 0; i < 5; i++) { %>
+                      <% const page = (i + ((group - 1) * 5 + 1)) * 10; %>
+                      <% if (size - page >= 0 || page - size < 10) { %>
+                        <li class="waves-effect" id="page1-<%= i + ((group - 1) * 5 + 1) %>">
+                          <a href="/adopta-pets/users/pending/deactivate?page=<%= i + ((group - 1) * 5 + 1) %>">
+                            <%= i + ((group - 1) * 5 + 1) %>
+                          </a>
+                        </li>
+                      <% } else break; %>
+                    <% } %>
+                    <% if (right) { %>
+                      <li class="waves-effect"><a href="/adopta-pets/users/pending/deactivate?page=<%= i + ((group - 1) * 5 + 1) %>"><i class="material-icons">chevron_right</i></a></li>
+                    <% } %>
+                  </ul>
+                </div>
+                <% for (let usr of users) { %>
+                  <div class="row">
+                    <form action="/adopta-pets/users/deactivateAccount?_method=put" method="post" id="form-<%= usr._id %>">
+                      <div class="row">
+                        <div class="col m12 s12">
+                          <div class="card">
+                            <div class="card-stacked">
+                              <div class="card-content">
+                                <div class="row">
+                                  <div class="col m6 s12">
+                                    <p>El usuario <%= usr.firstname %> <%= usr.lastname %> solicita la desactivación de su cuenta</p>
+                                    <input type="hidden" name="email" id="email" value="<%= usr.email %>">
+                                    <input type="hidden" name="account" id="account-<%= usr._id %>">
+                                  </div>
+                                  <div class="col m6 s12 center hide-on-small-only">
+                                    <button class="btn waves-effect waves-light green accept" id="accept-<%= usr._id %>">Aprobar</button>
+                                    <button class="btn waves-effect waves-light red reject" id="reject-<%= usr._id %>">Rechazar</button>
+                                  </div>
+                                  <div class="col m6 s12 center hide-on-med-and-up">
+                                    <br>
+                                    <button class="btn-floating btn-large waves-effect waves-light green accept" id="accept-<%= usr._id %>"><i class="material-icons">done</i></button>
+                                    <button class="btn-floating btn-large waves-effect waves-light red reject" id="reject-<%= usr._id %>"><i class="fa fa-times" aria-hidden="true"></i></button
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
+                <% } %>
+                <div class="center row">
+                  <ul class="pagination">
+                    <% if (left) { %>
+                      <li class="waves-effect"><a href="/adopta-pets/users/pending/deactivate?page=<%= (group - 1) * 5 %>"><i class="material-icons">chevron_left</i></a></li>
+                    <% } %>
+                    <% for (i = 0; i < 5; i++) { %>
+                      <% const page = (i + ((group - 1) * 5 + 1)) * 10; %>
+                      <% if (size - page >= 0 || page - size < 10) { %>
+                        <li class="waves-effect" id="page2-<%= i + ((group - 1) * 5 + 1) %>">
+                          <a href="/adopta-pets/users/pending/deactivate?page=<%= i + ((group - 1) * 5 + 1) %>">
+                            <%= i + ((group - 1) * 5 + 1) %>
+                          </a>
+                        </li>
+                      <% } else break; %>
+                    <% } %>
+                    <% if (right) { %>
+                      <li class="waves-effect"><a href="/adopta-pets/users/pending/deactivate?page=<%= i + ((group - 1) * 5 + 1) %>"><i class="material-icons">chevron_right</i></a></li>
+                    <% } %>
+                  </ul>
                 </div>
-              <% } %>
-              <div class="center row">
-                <ul class="pagination">
-                  <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                  <li class="active"><a href="#!">1</a></li>
-                  <li class="waves-effect"><a href="#!">2</a></li>
-                  <li class="waves-effect"><a href="#!">3</a></li>
-                  <li class="waves-effect"><a href="#!">4</a></li>
-                  <li class="waves-effect"><a href="#!">5</a></li>
-                  <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                </ul>
+                <div class="divider"></div>
+                <h1 class="center icon ap-dog-7"></h1>
               </div>
-              <div class="divider"></div>
-              <h1 class="center icon ap-dog-7"></h1>
             </div>
           </div>
         </div>
@@ -122,6 +145,8 @@
           $('.parallax').parallax();
           $('.scrollspy').scrollSpy();
           $("#alert_close").click(() => $("#alert_box").fadeOut("slow"));
+          const page = window.location.href.split("page=")[1];
+          $(`#page1-${page}, #page2-${page}`).addClass("active");
         }); // end of document ready
       })(jQuery); // end of jQuery name space
     </script>

@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const { auth } = require("../config/email");
 const nodemailer = require("nodemailer");
+const { paginator } = require("../helpers/utils");
 const transporter = nodemailer.createTransport(
   `smtps://${auth.user}:${auth.pass}@smtp.gmail.com`
 );
@@ -162,8 +163,22 @@ exports.getUsers = (req, res) => {
           );
           res.redirect("/adopta-pets");
         } else if (users.length > 0) {
+          const { page } = req.query;
+          if (!req.query.page || page <= 0) {
+            return res.redirect("/adopta-pets/users/admin?page=1");
+          }
+
+          const pages = paginator(users, page);
+          if (pages.data.length == 0) {
+            return res.redirect("/adopta-pets/users/admin?page=1");
+          }
+
           res.render("users/admin", {
-            users: users,
+            users: pages.data,
+            size: pages.size,
+            group: pages.group,
+            left: pages.left,
+            right: pages.right,
             user: req.user,
             message: req.flash("adminMessage")
           });
@@ -192,8 +207,22 @@ exports.deactivatePendingAccount = (req, res) => {
         );
         res.redirect("/adopta-pets");
       } else if (users.length > 0) {
+        const { page } = req.query;
+        if (!req.query.page || page <= 0) {
+          return res.redirect("/adopta-pets/users/pending/deactivate?page=1");
+        }
+
+        const pages = paginator(users, page);
+        if (pages.data.length == 0) {
+          return res.redirect("/adopta-pets/users/pending/deactivate?page=1");
+        }
+
         res.render("users/deactivate", {
-          users: users,
+          users: pages.data,
+          size: pages.size,
+          group: pages.group,
+          left: pages.left,
+          right: pages.right,
           user: req.user,
           message: req.flash("pendingDeactivateUsers")
         });

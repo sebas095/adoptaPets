@@ -19,14 +19,14 @@
       <li class="bold"><a href="/adopta-pets/publications/new" class="waves-effect waves-light"><i class="material-icons prefix">add_circle</i>Agregar Mascota</a>
       </li>
       <% } %>
-      <li class="bold"><a href="/adopta-pets/publications" class="waves-effect waves-light"><i class="material-icons prefix">pets</i>Mascotas en Adopción</a>
+      <li class="bold"><a href="/adopta-pets/publications?page=1" class="waves-effect waves-light"><i class="material-icons prefix">pets</i>Mascotas en Adopción</a>
       <li class="bold"><a href="/adopta-pets/publications/search" class="waves-effect waves-light"><i class="material-icons prefix">search</i>Buscar Mascotas</a>
       <% if (typeof(session) == 'object' && session) { %>
         <li class="bold"><a class="collapsible-header  waves-effect waves-light"><i class="material-icons prefix">person</i>USUARIO</a>
           <div class="collapsible-body">
             <ul>
                 <li><a href="/adopta-pets/profile">Perfíl</a></li>
-                <li><a href="/adopta-pets/publications/me">Mis publicaciones</a></li>
+                <li><a href="/adopta-pets/publications/me?page=1">Mis publicaciones</a></li>
             </ul>
           </div>
         </li>
@@ -36,8 +36,8 @@
           <li class="bold"><a class="collapsible-header  waves-effect waves-light"><i class="material-icons prefix">supervisor_account</i>ADMIN</a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="/adopta-pets/users/admin">Usuarios</a></li>
-                <li><a href="/adopta-pets/users/pending/deactivate">Desactivaciones pendientes</a></li>
+                <li><a href="/adopta-pets/users/admin?page=1">Usuarios</a></li>
+                <li><a href="/adopta-pets/users/pending/deactivate?page=1">Desactivaciones pendientes</a></li>
               </ul>
             </div>
           </li>
