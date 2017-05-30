@@ -32,24 +32,12 @@
                       />
                       <meta property="og:type" content="website" />
                       <meta property="og:title" content="<%= publication.features.name %> - Adopta Pets" />
-                      <meta property="og:description" content="¿Te gustaria adoptar a <%= publication.features.name %>?" />
+                      <meta property="og:description" content="¿Te gustaria adoptar a <%= publication.features.name %>?. <%= publication.features.name %> es un <%= publication.features.type %> de <%= publication.features.age %> <% publication.features.time %> y busca una linda familia!"
+                      />
                       <meta property="og:image" content="https://jointdeveloper.com/adopta-pets/<%= img %>" />
 </head>
 
 <body>
-  <!-- Load Facebook SDK for JavaScript -->
-  <div id="fb-root"></div>
-  <div id="fb-root"></div>
-  <script>
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=783297818496760";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
   <header>
     <% include ../menu.ejs %>
   </header>
@@ -238,15 +226,19 @@
                                         </div>
                                         <% } %>
                                           <div class="row center">
-                                            <!--<div class="col offset-m3 m6 s12">
-                            <a href="/adopta-pets/publications/<%= publication._id %>/facebook" class="waves-effect waves-light btn blue darken-4">
-                              <i class="fa fa-facebook" aria-hidden="true"></i> Compartir
-                            </a>-->
-                                            <!--<div class="fb-share-button" data-href="https://lovelace.utp.edu.co/adopta-pets/publications/592b4102436d710160f8540e" data-layout="button" data-size="large" data-mobile-iframe="true">
-                              <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flovelace.utp.edu.co%2Fadopta-pets%2Fpublications%2F592b4102436d710160f8540e&amp;src=sdkpreparse">
-                                Compartir
-                              </a>
-                            </div>-->
+                                            <!-- Load Facebook SDK for JavaScript -->
+                                            <div id="fb-root"></div>
+                                            <script>
+                                              (function (d, s, id) {
+                                                var js, fjs = d.getElementsByTagName(s)[0];
+                                                if (d.getElementById(id)) return;
+                                                js = d.createElement(s);
+                                                js.id = id;
+                                                js.src =
+                                                  "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=783297818496760";
+                                                fjs.parentNode.insertBefore(js, fjs);
+                                              }(document, 'script', 'facebook-jssdk'));
+                                            </script>
                                             <div class="fb-share-button" data-href="https://www.jointdeveloper.com/adopta-pets/publications/<%= publication._id %>" data-layout="button"
                                               data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.jointdeveloper.com/adopta-pets/publications/<%= publication._id %>">Compartir</a></div>
                                           </div>
