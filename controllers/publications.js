@@ -439,7 +439,8 @@ exports.search = (req, res) => {
         }
       } else {
         res.render("publications/search", {
-          message: "No hay publicaciones disponibles"
+          message: "No hay publicaciones disponibles",
+          total: 1
         });
       }
     });
