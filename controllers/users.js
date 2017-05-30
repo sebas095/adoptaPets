@@ -51,7 +51,7 @@ exports.updateUser = (req, res) => {
   if (req.user.state.includes("1")) {
     const { id, rol } = req.params;
     if (rol === "admin-user") {
-      if (req.body.status) {
+      if (req.body[`status-${id}`]) {
         req.body.state = "1";
       } else {
         req.body.state = "2";

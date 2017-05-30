@@ -109,8 +109,8 @@
                           <div class="row">
                             <div class="input-field col m12 s12">
                               <input type="hidden" name="exist" id="exist" value="<%= usr.email %>">
-                              <input type="checkbox" class="filled-in" name="status" id="status" <% if (usr.state === '1') { %> checked="checked" <% } %> aria-required="true"  disabled="">
-                              <label for="status">¿Es administrador del sistema?</label>
+                              <input type="checkbox" class="filled-in" name="status-<%= usr._id %>" id="status2-<%= usr._id %>" <% if (usr.state === '1') { %> checked="checked" <% } %> aria-required="true"  disabled="">
+                              <label for="status2-<%= usr._id %>">¿Es administrador del sistema?</label>
                             </div>
                           </div>
                           <% } %>
