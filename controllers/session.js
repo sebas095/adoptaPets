@@ -19,13 +19,17 @@ exports.new = (req, res) => {
     res.redirect("/adopta-pets/profile");
   else
     res.render("session/new", {
-      message: req.flash("loginMessage")
+      message: req.flash("loginMessage"),
+      csrfToken: req.csrfToken()
     });
 };
 
 // GET /account/newPassword -- Request for new password
 exports.newPassword = (req, res) => {
-  res.render("session/newPassword", { message: req.flash("newPassword") });
+  res.render("session/newPassword", {
+    message: req.flash("newPassword"),
+    csrfToken: req.csrfToken()
+  });
 };
 
 // GET /account/resetPassword/:token -- New password form
@@ -46,6 +50,7 @@ exports.resetPassword = (req, res) => {
       } else {
         res.render("session/resetPassword", {
           token: req.params.token,
+          csrfToken: req.csrfToken(),
           message: req.flash("resetMessage")
         });
       }

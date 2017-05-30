@@ -109,6 +109,19 @@ app.use((req, res, next) => {
   next(err);
 });
 
+app.use((err, req, res, next) => {
+  if (err.code !== "EBADCSRFTOKEN") return next(err);
+
+  // handle CSRF token errors here
+  res.status(403);
+  req.flash(
+    "indexMessage",
+    "EL formulario ha sido manipulado de forma " +
+      "malintencionada y no fue procesado"
+  );
+  res.redirect("/adopta-pets");
+});
+
 // error handler
 app.use((err, req, res, next) => {
   // set locals, only providing error in development

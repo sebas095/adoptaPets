@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const csrf = require("csurf");
+const csrfProtection = csrf({ cookie: true });
 const { sessionController } = require("../controllers");
+router.use(csrfProtection);
 
 module.exports = (app, mountPoint, passport) => {
   // GET
