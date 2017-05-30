@@ -3,9 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="<%= publication.features.name %> - AdoptaPets"/>
-    <meta property="og:image" content="/adopta-pets/uploads/<%= publication.photos[0] %>"/>
-    <title><%= publication.features.name %></title>
+    <meta property="og:url"           content="https://www.jointdeveloper.com/adopta-pets/publications/<%= publication._id %>/facebook" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<%= publication.features.name %> - Adopta Pets" />
+    <meta property="og:description"   content="¿Te gustaria adoptar a <%= publication.features.name %>?" />
+    <meta property="og:image" content="https://jointdeveloper.com/adopta-pets/<%= img %>" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
