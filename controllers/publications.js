@@ -398,6 +398,7 @@ exports.search = (req, res) => {
       ? Number(req.query.dist)
       : 3;
     let filter = {};
+    const amount = req.query.amount > 0 ? req.query.amount : 1;
     if (req.query.type) filter.type = req.query.type;
     if (req.query.size) filter.size = req.query.size;
     if (req.query.age) filter.age = Number(req.query.age);
@@ -441,14 +442,17 @@ exports.search = (req, res) => {
           return flag;
         });
         if (pubs.length > 0) {
+          const total = pubs.length > 0 ? pubs.length : 1;
           res.render("publications/search", {
-            publications: pubs,
+            publications: pubs.slice(0, amount),
             lat: lat1,
             lng: lon1,
+            total,
             message: "Se han encontrado resultados exitosamente"
           });
         } else {
           res.render("publications/search", {
+            total: 1,
             message: "No se encontraron resultados"
           });
         }
@@ -459,7 +463,20 @@ exports.search = (req, res) => {
       }
     });
   } else {
-    res.render("publications/search", { message: "" });
+    Publication.find({ available: true }, (err, data) => {
+      if (err) {
+        console.log(err);
+        req.flash(
+          "indexMessage",
+          "Hubo problemas obteniendo los datos de las publicaciones, " +
+            "intenta de nuevo"
+        );
+        res.redirect("/adopta-pets");
+      } else {
+        const total = data.length > 0 ? data.length : 1;
+        res.render("publications/search", { message: "", total });
+      }
+    });
   }
 };
 
