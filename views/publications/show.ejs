@@ -15,26 +15,25 @@
   <link rel="stylesheet" href="/adopta-pets/css/esri-leaflet-geocoder.css">
   <link rel="stylesheet" href="/adopta-pets/css/Control.OSMGeocoder.css">
   <link rel="stylesheet" href="/adopta-pets/css/adoptapets.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
   <link rel="stylesheet" href="/adopta-pets/css/style.css">
 
   <% let img = ''; %>
     <% if (publication.photos.length > 0) { %>
       <% img = 'uploads/' + publication.photos[0]; %>
-        <% } else { %>
-          <% if(publication.features.type === 'gato') { %>
-            <% img = "img/default-cat.png"; %>
-              <% } else { %>
-                <% img = "img/default-dog.png"; %>
-                  <% } %>
-                    <% } %>
-                      <meta property="fb:app_id" content="783297818496760" />
-                      <meta property="og:url" content="https://www.jointdeveloper.com/adopta-pets/publications/<%= publication._id %>/facebook"
-                      />
-                      <meta property="og:type" content="website" />
-                      <meta property="og:title" content="<%= publication.features.name %> - Adopta Pets" />
-                      <meta property="og:description" content="¿Te gustaria adoptar a <%= publication.features.name %>?. <%= publication.features.name %> es un <%= publication.features.type %> de <%= publication.features.age %> <% publication.features.time %> y busca una linda familia!"
-                      />
-                      <meta property="og:image" content="https://jointdeveloper.com/adopta-pets/<%= img %>" />
+    <% } else { %>
+      <% if(publication.features.type === 'gato') { %>
+        <% img = "img/default-cat.png"; %>
+      <% } else { %>
+        <% img = "img/default-dog.png"; %>
+      <% } %>
+    <% } %>
+    <meta property="fb:app_id" content="783297818496760" />
+    <meta property="og:url" content="https://www.jointdeveloper.com/adopta-pets/publications/<%= publication._id %>"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<%= publication.features.name %> - Adopta Pets" />
+    <meta property="og:description" content="¿Te gustaria adoptar a <%= publication.features.name %>?. <%= publication.features.name %> es un <%= publication.features.type %> de <%= publication.features.age %> <% publication.features.time %> y busca una linda familia!"/>
+    <meta property="og:image" content="https://jointdeveloper.com/adopta-pets/<%= img %>" />
 </head>
 
 <body>
@@ -70,199 +69,185 @@
                     <% } else { %>
                       <% if(publication.features.type === 'gato') { %>
                         <img class="materialboxed" width="100%" src="/adopta-pets/img/default-cat.svg">
-                        <% } else { %>
-                          <img class="materialboxed" width="100%" src="/adopta-pets/img/default-dog.svg">
-                          <% } %>
-                            <% } %>
-                              <div class="card">
-                                <div class="card-stacked">
-                                  <div class="card-content">
-                                    <div class="scrollspy" id="pet">
-                                      <div class="row center">
-                                        <h4 class="light header icon ap-dog-8 amber-text"> Características</h4>
-                                      </div>
-                                      <div class="row">
-                                        <div class="input-field col m6 s12">
-                                          <i class="material-icons prefix">color_lens</i>
-                                          <input type="text" id="pet.color" name="pet.color" readonly="" <% if (publication.features.color==='blanco' ) { %>                                          value="Blanco"
-                                          <% } %>
-                                            <% if (publication.features.color === 'negro') { %> value="Negro"
-                                              <% } %>
-                                                <% if (publication.features.color === 'cafe') { %> value="Café/Chocolate"
-                                                  <% } %>
-                                                    <% if (publication.features.color === 'gris') { %> value="Gris/Plata/Azul"
-                                                      <% } %>
-                                                        <% if (publication.features.color === 'mirlo') { %> value="Mirlo"
-                                                          <% } %>
-                                                            <% if (publication.features.color === 'dorado') { %> value="Dorado/Naranja"
-                                                              <% } %>
-                                                                <% if (publication.features.color === 'gris-cafe') { %> value="Gris y Café"
-                                                                  <% } %>
-                                                                    <% if (publication.features.color === 'amarillo') { %> value="Amarillo/Pardo"
-                                                                      <% } %>
-                                                                        <% if (publication.features.color === 'tricolor') { %> value="Café y Negro y Blanco"
-                                                                          <% } %>
-                                                                            <% if (publication.features.color === 'otro') { %> value="
-                                                                              <%= publication.features.otherColor %>"
-                                                                                <% } %>
-                                                                                  aria-required="true">
-                                                                                  <label for="pet.color">Color</label>
-                                        </div>
-                                        <div class="input-field col m6 s12">
-                                          <i class="material-icons prefix">zoom_out_map</i>
-                                          <input type="text" id="pet.size" name="pet.size" readonly="" <% if (publication.features.size==='pequeño' ) { %>                                          value="Pequeño(11 kg o menos)"
-                                          <% } %>
-                                            <% if (publication.features.size === 'mediano') { %> value="Mediano(12-27 kg)"
-                                              <% } %>
-                                                <% if (publication.features.size === 'grande') { %> value="Grande(28-45 kg)"
-                                                  <% } %>
-                                                    <% if (publication.features.size === 'extra') { %> value="Extra Grande(46 kg o más)"
-                                                      <% } %>
-                                                        aria-required="true">
-                                                        <label for="pet.size">Tamaño</label>
-                                        </div>
-                                      </div>
-                                      <div class="row">
-                                        <div class="input-field col m6 s12">
-                                          <i class="icon ap-dog-3 prefix"></i>
-                                          <input type="text" id="pet.name" name="pet.name" readonly="" value="<%= publication.features.name %>" aria-required="true">
-                                          <label for="pet.name">Nombre</label>
-                                        </div>
-                                        <div class="input-field col l6 m6 s12">
-                                          <div class="col s8">
-                                            <i class="material-icons prefix">add_circle</i>
-                                            <input type="number" id="pet.age" name="pet.age" readonly="" value="<%= publication.features.age %>">
-                                            <label for="pet.age">Edad</label>
-                                          </div>
-                                          <div class="col s4">
-                                            <input name="pet.time" id="pet.time" readonly <% if (publication.features.time==='mes' ) { %>                                            value="Mes(es)"
-                                            <% } %>
-                                              <% if (publication.features.time === 'año') { %> value="Año(s)"
-                                                <% } %>
-                                                  aria-required="true">
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                      <div class="row">
-                                        <div class="input-field col m6 s12">
-                                          <i class="material-icons prefix">pets</i>
-                                          <input type="text" id="pet.gender" name="pet.gender" readonly="" <% if(publication.features.gender==='m' ) { %>                                          value="Macho"
-                                          <% } else { %>
-                                            value="Hembra"
-                                            <% } %>
-                                              aria-required="true">
-                                              <label for="pet.gender">Sexo</label>
-                                        </div>
-                                        <div class="input-field col m6 s12">
-                                          <% if (publication.features.type === 'gato') { %>
-                                            <i class="icon choose ap-cat-6 prefix"></i>
-                                            <% } else { %>
-                                              <i class="icon choose ap-dog-2 prefix"></i>
-                                              <% } %>
-                                                <input type="text" id="pet.type" name="pet.type" readonly="" <% if(publication.features.type==='gato' ) { %>                                                value="Gato"
-                                                <% } else { %>
-                                                  value="Perro"
-                                                  <% } %>
-                                                    aria-required="true">
-                                                    <label for="pet.type">Tipo</label>
-                                        </div>
-                                      </div>
-                                      <div class="row">
-                                        <div class="input-field col m12 s12">
-                                          <i class="material-icons prefix">location_on</i>
-                                          <% if (publication.address) { %>
-                                            <input type="text" id="address" name="address" value="<%= publication.address %>" aria-required="true">
-                                            <label for="address">Ubicación(Aproximada)</label>
-                                            <% } else { %>
-                                              <label for="address">Ubicación</label>
-                                              <% } %>
-                                                <input type="hidden" name="lat" value="<%= publication.lat %>" id="lat">
-                                                <input type="hidden" name="lng" value="<%= publication.lng %>" id="lng">
-                                        </div>
-                                      </div>
-                                      <div class="row">
-                                        <div class="col s12 m12">
-                                          <div id="required-map" style="display: none" class="red">
-                                            <a class="close" onclick="hideAlert()" aria-label="close">&times;</a>
-                                            <p></p><strong>Error!</strong> Debe establecer una ubicacion para el cliente antes
-                                            de registrarlo. Búsque la ubicación en el mapa y haga click alli.
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="row center">
-                                        <div class="input-field col m12 s12">
-                                          <div id="map" style="max-width: 100%"></div>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    <div class="divider"></div>
-                                    <div class="scrollspy" id="contact-info">
-                                      <div class="row center">
-                                        <h4 class="light header icon ap-dog-8 amber-text"> Información del Contacto</h4>
-                                      </div>
-
-                                      <div class="row">
-                                        <div class="input-field col m6 s12">
-                                          <i class="material-icons prefix">phone</i>
-                                          <input type="text" id="phone" name="phone" value="<%= publication.phone %>" readonly="" aria-required="true">
-                                          <label for="phone">Teléfono</label>
-                                        </div>
-                                        <div class="input-field col m6 s12">
-                                          <i class="material-icons prefix">email</i>
-                                          <input type="text" id="email" name="email" value="<%= publication.email %>" readonly="" aria-required="true">
-                                          <label for="email">E-mail</label>
-                                        </div>
-                                      </div>
-
-                                      <% if (publication.description) { %>
-                                        <div class="row">
-                                          <div class="input-field col m12 s12">
-                                            <i class="material-icons prefix">assignment</i>
-                                            <textarea id="description" name="description" class="materialize-textarea" readonly="" aria-required="true"><%= publication.description %></textarea>
-                                            <label for="description">Descripción</label>
-                                          </div>
-                                        </div>
-                                        <% } %>
-                                          <div class="row center">
-                                            <!-- Load Facebook SDK for JavaScript -->
-                                            <div id="fb-root"></div>
-                                            <script>
-                                              (function (d, s, id) {
-                                                var js, fjs = d.getElementsByTagName(s)[0];
-                                                if (d.getElementById(id)) return;
-                                                js = d.createElement(s);
-                                                js.id = id;
-                                                js.src =
-                                                  "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=783297818496760";
-                                                fjs.parentNode.insertBefore(js, fjs);
-                                              }(document, 'script', 'facebook-jssdk'));
-                                            </script>
-                                            <div class="fb-share-button" data-href="https://www.jointdeveloper.com/adopta-pets/publications/<%= publication._id %>" data-layout="button"
-                                              data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.jointdeveloper.com/adopta-pets/publications/<%= publication._id %>">Compartir</a></div>
-                                          </div>
-                                    </div>
-                                  </div>
+                      <% } else { %>
+                        <img class="materialboxed" width="100%" src="/adopta-pets/img/default-dog.svg">
+                      <% } %>
+                    <% } %>
+                    <div class="card">
+                      <div class="card-stacked">
+                        <div class="card-content">
+                          <div class="scrollspy" id="pet">
+                            <div class="row center">
+                              <h4 class="light header icon ap-dog-8 amber-text"> Características</h4>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col m6 s12">
+                                <i class="material-icons prefix">color_lens</i>
+                                <input type="text" id="pet.color" name="pet.color" readonly=""
+                                  <% if (publication.features.color==='blanco' ) { %>  value="Blanco" <% } %>
+                                  <% if (publication.features.color === 'negro') { %> value="Negro" <% } %>
+                                  <% if (publication.features.color === 'cafe') { %> value="Café/Chocolate" <% } %>
+                                  <% if (publication.features.color === 'gris') { %> value="Gris/Plata/Azul" <% } %>
+                                  <% if (publication.features.color === 'mirlo') { %> value="Mirlo" <% } %>
+                                  <% if (publication.features.color === 'dorado') { %> value="Dorado/Naranja" <% } %>
+                                  <% if (publication.features.color === 'gris-cafe') { %> value="Gris y Café" <% } %>
+                                  <% if (publication.features.color === 'amarillo') { %> value="Amarillo/Pardo" <% } %>
+                                  <% if (publication.features.color === 'tricolor') { %> value="Café y Negro y Blanco" <% } %>
+                                  <% if (publication.features.color === 'otro') { %> value="<%= publication.features.otherColor %>" <% } %>
+                                  aria-required="true">
+                                <label for="pet.color">Color</label>
+                              </div>
+                              <div class="input-field col m6 s12">
+                                <i class="material-icons prefix">zoom_out_map</i>
+                                <input type="text" id="pet.size" name="pet.size" readonly=""
+                                  <% if (publication.features.size==='pequeño' ) { %> value="Pequeño(11 kg o menos)" <% } %>
+                                  <% if (publication.features.size === 'mediano') { %> value="Mediano(12-27 kg)" <% } %>
+                                  <% if (publication.features.size === 'grande') { %> value="Grande(28-45 kg)" <% } %>
+                                  <% if (publication.features.size === 'extra') { %> value="Extra Grande(46 kg o más)" <% } %>
+                                  aria-required="true">
+                                <label for="pet.size">Tamaño</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col m6 s12">
+                                <i class="icon ap-dog-3 prefix"></i>
+                                <input type="text" id="pet.name" name="pet.name" readonly="" value="<%= publication.features.name %>" aria-required="true">
+                                <label for="pet.name">Nombre</label>
+                              </div>
+                              <div class="input-field col l6 m6 s12">
+                                <div class="col s8">
+                                  <i class="material-icons prefix">add_circle</i>
+                                  <input type="number" id="pet.age" name="pet.age" readonly="" value="<%= publication.features.age %>">
+                                  <label for="pet.age">Edad</label>
+                                </div>
+                                <div class="col s4">
+                                  <input name="pet.time" id="pet.time" readonly
+                                    <% if (publication.features.time==='mes' ) { %> value="Mes(es)" <% } %>
+                                    <% if (publication.features.time === 'año') { %> value="Año(s)" <% } %>
+                                    aria-required="true">
                                 </div>
                               </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col m6 s12">
+                                <i class="material-icons prefix">pets</i>
+                                <input type="text" id="pet.gender" name="pet.gender" readonly=""
+                                  <% if(publication.features.gender==='m' ) { %> value="Macho"
+                                  <% } else { %>
+                                    value="Hembra"
+                                  <% } %>
+                                  aria-required="true">
+                                <label for="pet.gender">Sexo</label>
+                              </div>
+                              <div class="input-field col m6 s12">
+                                <% if (publication.features.type === 'gato') { %>
+                                  <i class="icon choose ap-cat-6 prefix"></i>
+                                <% } else { %>
+                                  <i class="icon choose ap-dog-2 prefix"></i>
+                                <% } %>
+                                <input type="text" id="pet.type" name="pet.type" readonly=""
+                                  <% if(publication.features.type==='gato' ) { %> value="Gato"
+                                  <% } else { %>
+                                    value="Perro"
+                                  <% } %>
+                                  aria-required="true">
+                                <label for="pet.type">Tipo</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col m12 s12">
+                                <i class="material-icons prefix">location_on</i>
+                                <% if (publication.address) { %>
+                                  <input type="text" id="address" name="address" value="<%= publication.address %>" aria-required="true">
+                                  <label for="address">Ubicación(Aproximada)</label>
+                                <% } else { %>
+                                  <label for="address">Ubicación</label>
+                                <% } %>
+                                <input type="hidden" name="lat" value="<%= publication.lat %>" id="lat">
+                                <input type="hidden" name="lng" value="<%= publication.lng %>" id="lng">
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col s12 m12">
+                                <div id="required-map" style="display: none" class="red">
+                                  <a class="close" onclick="hideAlert()" aria-label="close">&times;</a>
+                                  <p><strong>Error!</strong> Debe establecer una ubicacion para el cliente antes
+                                    de registrarlo. Búsque la ubicación en el mapa y haga click alli.</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row center">
+                              <div class="input-field col m12 s12">
+                                <div id="map" style="max-width: 100%"></div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="divider"></div>
+                          <div class="scrollspy" id="contact-info">
+                            <div class="row center">
+                              <h4 class="light header icon ap-dog-8 amber-text"> Información del Contacto</h4>
+                            </div>
+
+                            <div class="row">
+                              <div class="input-field col m6 s12">
+                                <i class="material-icons prefix">phone</i>
+                                <input type="text" id="phone" name="phone" value="<%= publication.phone %>" readonly="" aria-required="true">
+                                <label for="phone">Teléfono</label>
+                              </div>
+                              <div class="input-field col m6 s12">
+                                <i class="material-icons prefix">email</i>
+                                <input type="text" id="email" name="email" value="<%= publication.email %>" readonly="" aria-required="true">
+                                <label for="email">E-mail</label>
+                              </div>
+                            </div>
+
+                            <% if (publication.description) { %>
+                              <div class="row">
+                                <div class="input-field col m12 s12">
+                                  <i class="material-icons prefix">assignment</i>
+                                  <textarea id="description" name="description" class="materialize-textarea" readonly="" aria-required="true"><%= publication.description %></textarea>
+                                  <label for="description">Descripción</label>
+                                </div>
+                              </div>
+                            <% } %>
+                            <div class="row center">
+                            <!-- Load Facebook SDK for JavaScript -->
+                              <div id="fb-root"></div>
+                              <script>
+                                (function (d, s, id) {
+                                  var js, fjs = d.getElementsByTagName(s)[0];
+                                  if (d.getElementById(id)) return;
+                                  js = d.createElement(s);
+                                  js.id = id;
+                                  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=783297818496760";
+                                  fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));
+                              </script>
+                              <div class="fb-share-button" data-href="https://www.jointdeveloper.com/adopta-pets/publications/<%= publication._id %>" data-layout="button"
+                                data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.jointdeveloper.com/adopta-pets/publications/<%= publication._id %>">Compartir</a></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div class="divider"></div>
+              <h1 class="center icon ap-cat-5  %>"></h1>
             </div>
-            <div class="divider"></div>
-            <h1 class="center icon ap-cat-5  %>"></h1>
+          </div>
+        <div class="col hide-on-small-only m3 l2">
+          <div class="toc-wrapper pinned">
+            <ul class="section table-of-contents">
+              <li><a href="#post">Publicación</a></li>
+              <li><a href="#pet">Características</a></li>
+              <li><a href="#contact-info">Información Contacto</a></li>
+              <li><a href="#contact">Contacto</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="col hide-on-small-only m3 l2">
-        <div class="toc-wrapper pinned">
-          <ul class="section table-of-contents">
-            <li><a href="#post">Publicación</a></li>
-            <li><a href="#pet">Características</a></li>
-            <li><a href="#contact-info">Información Contacto</a></li>
-            <li><a href="#contact">Contacto</a></li>
-          </ul>
-        </div>
-      </div>
       </div>
   </main>
   <% include ../footer %>

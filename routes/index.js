@@ -15,8 +15,7 @@ module.exports = (app, mountPoint) => {
   router.get("/profile", sessionController.loginRequired, (req, res) => {
     res.render("users/edit", {
       user: req.user,
-      message: req.flash("userMessage"),
-      csrfToken: req.csrfToken()
+      message: req.flash("userMessage")
     });
   });
 
