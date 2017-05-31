@@ -33,10 +33,15 @@ ul.side-nav.fixed li a {
   width: 70vw;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 768px) {
   #map, #map2 {
     height: 65vh;
     width: 94vw;
+    z-index: -999;
+  }
+
+  #facebook {
+    display: none;
   }
 }
 
