@@ -19,7 +19,7 @@ exports.newUser = (req, res) => {
 exports.createUser = (req, res) => {
   User.find({}, (err, users) => {
     if (err) {
-      console.log("Error: ", err);
+      console.log("Error: ", err.code);
       req.flash(
         "indexMessage",
         "Hubo problemas en el registro, intenta de nuevo"
@@ -34,10 +34,17 @@ exports.createUser = (req, res) => {
     User.create(req.body, (err, user) => {
       if (err) {
         console.log(err);
-        req.flash(
-          "indexMessage",
-          "Hubo problemas en el registro, intenta de nuevo"
-        );
+        if (err.code === 11000) {
+          req.flash(
+            "indexMessage",
+            "Ya existe un usuario registrado con ese correo, intenta con otro"
+          );
+        } else {
+          req.flash(
+            "indexMessage",
+            "Hubo problemas en el registro, intenta de nuevo"
+          );
+        }
         return res.redirect("/adopta-pets");
       }
       req.flash("loginMessage", "Tu cuenta ha sido creada exitosamente");
