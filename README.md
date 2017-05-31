@@ -19,3 +19,13 @@ npm install or yarn install
 ```bash
 npm start or yarn start
 ```
+## Run Docker container
+### Mongo db
+```bash
+docker run -d --restart always --name mongoAdoptaPets mongo
+```
+
+### App
+```bash
+docker run --link=mongoAdoptaPets:mongodb --name adoptaPets -d --restart always -p 9999:3000 -v /home/ubuntu/adoptaPets/uploads:/home/adoptaPets/public/uploads labsirius/adopta-pets ./run.sh
+```
