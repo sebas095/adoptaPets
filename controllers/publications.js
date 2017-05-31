@@ -300,74 +300,84 @@ exports.show = (req, res) => {
 
 // GET /publications -- All publications
 exports.getPublications = (req, res) => {
-  Publication.find({ available: true }, (err, data) => {
-    if (err) {
-      console.log(err);
-      req.flash(
-        "indexMessage",
-        "Hubo problemas obteniendo los datos de las publicaciones, " +
-          "intenta de nuevo"
-      );
-      res.redirect("/adopta-pets");
-    } else if (data.length > 0) {
-      const { page } = req.query;
-      if (!req.query.page || page <= 0) {
-        return res.redirect("/adopta-pets/publications?page=1");
-      }
+  Publication.find(
+    { available: true },
+    null,
+    { sort: { createdAt: -1 } },
+    (err, data) => {
+      if (err) {
+        console.log(err);
+        req.flash(
+          "indexMessage",
+          "Hubo problemas obteniendo los datos de las publicaciones, " +
+            "intenta de nuevo"
+        );
+        res.redirect("/adopta-pets");
+      } else if (data.length > 0) {
+        const { page } = req.query;
+        if (!req.query.page || page <= 0) {
+          return res.redirect("/adopta-pets/publications?page=1");
+        }
 
-      const pages = paginator(data, page);
-      if (pages.data.length == 0) {
-        return res.redirect("/adopta-pets/publications?page=1");
-      }
+        const pages = paginator(data, page);
+        if (pages.data.length == 0) {
+          return res.redirect("/adopta-pets/publications?page=1");
+        }
 
-      res.render("publications/all", {
-        publications: pages.data,
-        size: pages.size,
-        group: pages.group,
-        left: pages.left,
-        right: pages.right
-      });
-    } else {
-      req.flash("indexMessage", "No hay publicaciones disponibles");
-      res.redirect("/adopta-pets");
+        res.render("publications/all", {
+          publications: pages.data,
+          size: pages.size,
+          group: pages.group,
+          left: pages.left,
+          right: pages.right
+        });
+      } else {
+        req.flash("indexMessage", "No hay publicaciones disponibles");
+        res.redirect("/adopta-pets");
+      }
     }
-  });
+  );
 };
 
 // GET /publications -- All me publications
 exports.getMyPublications = (req, res) => {
-  Publication.find({ createdBy: req.user.email }, (err, data) => {
-    if (err) {
-      console.log(err);
-      req.flash(
-        "indexMessage",
-        "Hubo problemas obteniendo los datos de las publicaciones, " +
-          "intenta de nuevo"
-      );
-      res.redirect("/adopta-pets");
-    } else if (data.length > 0) {
-      const { page } = req.query;
-      if (!req.query.page || page <= 0) {
-        return res.redirect("/adopta-pets/publications?page=1");
-      }
+  Publication.find(
+    { createdBy: req.user.email },
+    null,
+    { sort: { createdAt: -1 } },
+    (err, data) => {
+      if (err) {
+        console.log(err);
+        req.flash(
+          "indexMessage",
+          "Hubo problemas obteniendo los datos de las publicaciones, " +
+            "intenta de nuevo"
+        );
+        res.redirect("/adopta-pets");
+      } else if (data.length > 0) {
+        const { page } = req.query;
+        if (!req.query.page || page <= 0) {
+          return res.redirect("/adopta-pets/publications?page=1");
+        }
 
-      const pages = paginator(data, page);
-      if (pages.data.length == 0) {
-        return res.redirect("/adopta-pets/publications?page=1");
-      }
+        const pages = paginator(data, page);
+        if (pages.data.length == 0) {
+          return res.redirect("/adopta-pets/publications?page=1");
+        }
 
-      res.render("publications/me", {
-        publications: pages.data,
-        size: pages.size,
-        group: pages.group,
-        left: pages.left,
-        right: pages.right
-      });
-    } else {
-      req.flash("indexMessage", "No hay publicaciones disponibles");
-      res.redirect("/adopta-pets");
+        res.render("publications/me", {
+          publications: pages.data,
+          size: pages.size,
+          group: pages.group,
+          left: pages.left,
+          right: pages.right
+        });
+      } else {
+        req.flash("indexMessage", "No hay publicaciones disponibles");
+        res.redirect("/adopta-pets");
+      }
     }
-  });
+  );
 };
 
 // GET /publications/search -- Search publications
