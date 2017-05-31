@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
-// const csrf = require("csurf");
-// const csrfProtection = csrf({ cookie: true });
 const { sessionController } = require("../controllers");
-// router.use(csrfProtection);
 
 module.exports = (app, mountPoint, passport) => {
   // GET
@@ -13,7 +10,7 @@ module.exports = (app, mountPoint, passport) => {
   router.post(
     "/login",
     passport.authenticate("local-login", {
-      successRedirect: "/adopta-pets/profile",
+      successRedirect: "/adopta-pets/publications",
       failureRedirect: "/adopta-pets/session/login",
       failureFlash: true
     })

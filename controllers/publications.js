@@ -89,10 +89,10 @@ exports.create = (req, res) => {
                 res.redirect("/adopta-pets");
               } else {
                 req.flash(
-                  "indexMessage",
+                  "pubMessage",
                   "Su publicación ha sido creada exitosamente"
                 );
-                res.redirect("/adopta-pets");
+                res.redirect(`/adopta-pets/publications/${pub._id}/edit`);
               }
             });
           });
@@ -107,10 +107,10 @@ exports.create = (req, res) => {
               res.redirect("/adopta-pets");
             } else {
               req.flash(
-                "indexMessage",
+                "pubMessage",
                 "Su publicación ha sido creada exitosamente"
               );
-              res.redirect("/adopta-pets");
+              res.redirect(`/adopta-pets/publications/${pub._id}/edit`);
             }
           });
         }
