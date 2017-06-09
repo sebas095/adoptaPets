@@ -17,6 +17,24 @@
           </div>
           <div class="container">
             <div class="section scrollspy" id="session">
+              <% if (message.length > 0) { %>
+                <div class="row" id="alert_box">
+                  <div class="col s12">
+                    <div class="card red">
+                      <div class="row">
+                        <div class="col s12 m10">
+                          <div class="white-text">
+                            <blockquote><%= message %></blockquote>
+                          </div>
+                        </div>
+                        <div class="col s12 m2">
+                          <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
               <div class="row center">
                 <h3 class="light header icon ap-dog-7 orange-text"> Registro</h3>
                 <p class="col s12 m8 offset-m2 caption">Regístrate para poder publicar tu mascota en nuestra aplicación.</p>
@@ -48,10 +66,15 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="input-field col m6 s12 offset-m3">
+                    <div class="input-field col m6 s12">
                       <i class="material-icons prefix">lock</i>
                       <input type="password" id="pwd" name="password" class="validate" required="" aria-required="true">
                       <label for="pwd">Contraseña </label>
+                    </div>
+                    <div class="input-field col m6 s12">
+                      <i class="material-icons prefix">lock</i>
+                      <input type="password" id="cpwd" name="cpassword" class="validate" required="" aria-required="true">
+                      <label for="cpwd">Confirmar Contraseña </label>
                     </div>
                   </div>
                   <div class="row center">
@@ -85,6 +108,7 @@
           $('.button-collapse').sideNav();
           $('.parallax').parallax();
           $('.scrollspy').scrollSpy();
+          $("#alert_close").click(() => $("#alert_box").fadeOut("slow"));
         }); // end of document ready
       })(jQuery); // end of jQuery name space
     </script>

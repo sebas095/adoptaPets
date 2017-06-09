@@ -45,7 +45,7 @@
                       <div class="input-field col m6 s12">
                         <i class="choose icon ap-dog-2 prefix"></i>
                         <select name="pet.type" id="type" class="validate" required="">
-                          <option value="" disabled selected>Tipo</option>
+                          <option value="" disabled selected>Especie</option>
                           <option value="gato">Gato</option>
                           <option value="perro">Perro</option>
                         </select>
@@ -64,7 +64,7 @@
                     <div class="row">
                       <div class="input-field col m6 s12">
                         <i class="icon ap-dog-3 prefix"></i>
-                        <input type="text" id="pet.name" name="pet.name" class="validate" autocomplete="off" required="" aria-required="true">
+                        <input type="text" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" id="pet.name" name="pet.name" class="validate" autocomplete="off" required="" aria-required="true">
                         <label for="pet.name">Nombre</label>
                       </div>
                       <div class="input-field col m6 s12">

@@ -91,7 +91,7 @@
                           <i class="icon choose ap-dog-2 prefix"></i>
                         <% } %>
                         <select name="pet.type" id="type" class="validate" required="" disabled="">
-                          <option value="" disabled selected>Tipo</option>
+                          <option value="" disabled selected>Especie</option>
                           <option value="gato" <% if (publication.features.type === 'gato') { %> selected <% } %> >Gato</option>
                           <option value="perro" <% if (publication.features.type === 'perro') { %> selected <% } %> >Perro</option>
                         </select>
@@ -110,7 +110,7 @@
                     <div class="row">
                       <div class="input-field col m6 s12">
                         <i class="icon ap-dog-3 prefix"></i>
-                        <input type="text" id="pet.name" name="pet.name" class="validate" autocomplete="off" required="" disabled="" value="<%= publication.features.name %>" aria-required="true">
+                        <input type="text" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" id="pet.name" name="pet.name" class="validate" autocomplete="off" required="" disabled="" value="<%= publication.features.name %>" aria-required="true">
                         <label for="pet.name">Nombre</label>
                       </div>
                       <div class="input-field col m6 s12">

@@ -81,9 +81,13 @@
       if (!document.getElementById("size").value) {
         warnings.push("<li>* Tamaño</li>");
       }
-      if (!document.getElementById("pet.name").value) {
-        warnings.push("<li>* Nombre</li>");
+      if (
+        !document.getElementById("pet.name").value ||
+        document.getElementById("pet.name").value.length < 2
+      ) {
+        warnings.push("<li>* Nombre (mínimo 2 letras) </li>");
       }
+
       if (!document.getElementById("pet.age").value) {
         warnings.push("<li>* Edad</li>");
       }

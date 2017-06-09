@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport(
 // GET /users/register -- Register form
 exports.newUser = (req, res) => {
   if (!req.isAuthenticated()) {
-    res.render("users/new");
+    res.render("users/new", { message: req.flash("registerMessage") });
   } else {
     res.redirect("/adopta-pets/profile");
   }
@@ -17,40 +17,45 @@ exports.newUser = (req, res) => {
 
 // POST /users/register -- Create a new user
 exports.createUser = (req, res) => {
-  User.find({}, (err, users) => {
-    if (err) {
-      console.log("Error: ", err.code);
-      req.flash(
-        "indexMessage",
-        "Hubo problemas en el registro, intenta de nuevo"
-      );
-      return res.redirect("/adopta-pets");
-    } else if (users.length == 0) {
-      req.body.state = "1";
-    } else {
-      req.body.state = "2";
-    }
-
-    User.create(req.body, (err, user) => {
+  if (req.body.password !== req.body.cpassword) {
+    req.flash("registerMessage", "Las contraseñas no coinciden");
+    res.redirect("/adopta-pets/users/register");
+  } else {
+    User.find({}, (err, users) => {
       if (err) {
-        console.log(err);
-        if (err.code === 11000) {
-          req.flash(
-            "indexMessage",
-            "Ya existe un usuario registrado con ese correo, intenta con otro"
-          );
-        } else {
-          req.flash(
-            "indexMessage",
-            "Hubo problemas en el registro, intenta de nuevo"
-          );
-        }
+        console.log("Error: ", err.code);
+        req.flash(
+          "indexMessage",
+          "Hubo problemas en el registro, intenta de nuevo"
+        );
         return res.redirect("/adopta-pets");
+      } else if (users.length == 0) {
+        req.body.state = "1";
+      } else {
+        req.body.state = "2";
       }
-      req.flash("loginMessage", "Tu cuenta ha sido creada exitosamente");
-      return res.redirect("/adopta-pets/session/login");
+
+      User.create(req.body, (err, user) => {
+        if (err) {
+          console.log(err);
+          if (err.code === 11000) {
+            req.flash(
+              "indexMessage",
+              "Ya existe un usuario registrado con ese correo, intenta con otro"
+            );
+          } else {
+            req.flash(
+              "indexMessage",
+              "Hubo problemas en el registro, intenta de nuevo"
+            );
+          }
+          return res.redirect("/adopta-pets");
+        }
+        req.flash("loginMessage", "Tu cuenta ha sido creada exitosamente");
+        return res.redirect("/adopta-pets/session/login");
+      });
     });
-  });
+  }
 };
 
 // PUT /users/:id -- Modifies user data
