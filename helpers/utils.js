@@ -4,7 +4,7 @@ const path = require("path");
 
 exports.imageFilter = (req, file, cb) => {
   // accept image only
-  if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+  if (!file.originalname.toLowerCase().match(/\.(jpg|jpeg|png|gif)$/)) {
     return cb(new Error("Only image files are allowed!"), false);
   }
   cb(null, true);
