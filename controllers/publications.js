@@ -155,6 +155,37 @@ exports.edit = (req, res) => {
   }
 };
 
+// GET /publications/admin/:id/edit -- Edit publication form
+exports.adminEdit = (req, res) => {
+  if (req.user.state.includes("1")) {
+    const { id } = req.params;
+    Publication.findById(id, (err, data) => {
+      if (err) {
+        console.log(err);
+        req.flash(
+          "indexMessage",
+          "Hubo problemas buscando la publicación, intenta más tarde"
+        );
+        res.redirect("/adopta-pets");
+      } else if (!data) {
+        req.flash(
+          "indexMessage",
+          "La publicación solicitada no se encuentra registrada"
+        );
+        res.redirect("/adopta-pets");
+      } else {
+        res.render("publications/update", {
+          publication: data,
+          message: req.flash("adminPubMessage")
+        });
+      }
+    });
+  } else {
+    req.flash("indexMessage", "No tienes permisos para acceder");
+    res.redirect("/adopta-pets");
+  }
+};
+
 // PUT /publications/:id/edit -- Edit publication
 exports.update = (req, res) => {
   if (
@@ -273,6 +304,122 @@ exports.update = (req, res) => {
   }
 };
 
+// PUT /publications/admin/:id/edit -- Edit publication from admin
+exports.adminUpdate = (req, res) => {
+  if (req.user.state.includes("1")) {
+    upload(req, res, err => {
+      if (err) {
+        console.log(err);
+        req.flash(
+          "indexMessage",
+          "Hubo problemas guardando la publicación, intenta de nuevo"
+        );
+        res.redirect("/adopta-pets");
+      } else {
+        const { id } = req.params;
+
+        const pet = {
+          color: req.body["pet.color"],
+          otherColor: req.body["pet.color"] === "otro"
+            ? `${req.body["otherColor"]
+                .trim()[0]
+                .toUpperCase()}${req.body["otherColor"]
+                .slice(1)
+                .toLowerCase()
+                .trim()}`
+            : "",
+          size: req.body["pet.size"],
+          name: req.body["pet.name"].toUpperCase().trim(),
+          age: Number(req.body["pet.age"]),
+          time: req.body["pet.time"],
+          gender: req.body["pet.gender"],
+          type: req.body["pet.type"]
+        };
+
+        const publication = {
+          phone: req.body["phone"],
+          description: req.body["description"] ? req.body["description"] : "",
+          email: req.body["email"],
+          createdBy: req.user.email,
+          address: req.body["address"],
+          lat: req.body["lat"],
+          lng: req.body["lng"],
+          features: pet,
+          available: req.body.available ? false : true
+        };
+
+        Publication.findByIdAndUpdate(
+          id,
+          publication,
+          { new: true },
+          (err, data) => {
+            if (err) {
+              console.log(err);
+              req.flash(
+                "indexMessage",
+                "Hubo problemas actualizando los datos " +
+                  "de la publicación, intenta más tarde"
+              );
+              res.redirect("/adopta-pets");
+            } else {
+              if (req.files) {
+                renameFiles(
+                  data._id,
+                  req.files,
+                  data.photos.length,
+                  (err, photos) => {
+                    if (err) {
+                      console.log(err);
+                      req.flash(
+                        "indexMessage",
+                        "Hubo problemas actualizando los datos " +
+                          "de la publicación, intenta más tarde"
+                      );
+                      res.redirect("/adopta-pets");
+                    } else {
+                      Publication.findByIdAndUpdate(
+                        id,
+                        { photos: data.photos.concat(photos) },
+                        { new: true },
+                        (err, pub) => {
+                          if (err) {
+                            console.log(err);
+                            req.flash(
+                              "indexMessage",
+                              "Hubo problemas actualizando los datos " +
+                                "de la publicación, intenta más tarde"
+                            );
+                            return res.redirect("/adopta-pets");
+                          }
+                          req.flash(
+                            "adminPubMessage",
+                            "Los datos han sido actualizados exitosamente"
+                          );
+                          res.redirect(
+                            `/adopta-pets/publications/admin/${id}/edit`
+                          );
+                        }
+                      );
+                    }
+                  }
+                );
+              } else {
+                req.flash(
+                  "adminPubMessage",
+                  "Los datos han sido actualizados exitosamente"
+                );
+                res.redirect(`/adopta-pets/publications/admin/${id}/edit`);
+              }
+            }
+          }
+        );
+      }
+    });
+  } else {
+    res.redirect("/adopta-pets");
+  }
+};
+
 // GET /publications/:id -- Get a specific publication
 exports.show = (req, res) => {
   const { id } = req.params;
@@ -296,6 +443,52 @@ exports.show = (req, res) => {
       });
     }
   });
+};
+
+// GET /publications/admin -- All publications for admin
+exports.admin = (req, res) => {
+  if (req.user.state.includes("1")) {
+    Publication.find(
+      { createdBy: { $ne: req.user.email } },
+      null,
+      { sort: { createdAt: -1 } },
+      (err, data) => {
+        if (err) {
+          console.log(err);
+          req.flash(
+            "indexMessage",
+            "Hubo problemas obteniendo los datos de las publicaciones, " +
+              "intenta de nuevo"
+          );
+          res.redirect("/adopta-pets");
+        } else if (data.length > 0) {
+          const { page } = req.query;
+          if (!req.query.page || page <= 0) {
+            return res.redirect("/adopta-pets/publications/admin?page=1");
+          }
+
+          const pages = paginator(data, page);
+          if (pages.data.length == 0) {
+            return res.redirect("/adopta-pets/publications/admin?page=1");
+          }
+
+          res.render("publications/admin", {
+            publications: pages.data,
+            size: pages.size,
+            group: pages.group,
+            left: pages.left,
+            right: pages.right
+          });
+        } else {
+          req.flash("indexMessage", "No hay publicaciones disponibles");
+          res.redirect("/adopta-pets");
+        }
+      }
+    );
+  } else {
+    req.flash("indexMessage", "No tienes permisos para acceder");
+    res.redirect("/adopta-pets");
+  }
 };
 
 // GET /publications -- All publications
@@ -512,6 +705,42 @@ exports.delete = (req, res) => {
       }
     );
   } else {
+    req.flash("indexMessage", "No hay publicaciones disponibles");
+    res.redirect("/adopta-pets");
+  }
+};
+
+// DELETE /publications/admin/:id -- Delete a specific publication
+exports.adminDelete = (req, res) => {
+  if (req.user.state.includes("1")) {
+    const { id } = req.params;
+    Publication.findByIdAndRemove(id, (err, data) => {
+      if (err) {
+        console.log(err);
+        req.flash(
+          "indexMessage",
+          "Hubo problemas para eliminar la publicación, intenta más tarde"
+        );
+        res.redirect("/adopta-pets");
+      } else {
+        deleteFiles(data.photos, err => {
+          if (err) {
+            req.flash(
+              "indexMessage",
+              "Hubo problemas para eliminar la publicación, intenta más tarde"
+            );
+            return res.redirect("/adopta-pets");
+          }
+          req.flash(
+            "indexMessage",
+            "La publicación ha sido eliminada exitosamente"
+          );
+          res.redirect("/adopta-pets");
+        });
+      }
+    });
+  } else {
+    req.flash("indexMessage", "No hay publicaciones disponibles");
     res.redirect("/adopta-pets");
   }
 };
@@ -572,6 +801,64 @@ exports.deleteImg = (req, res) => {
       }
     });
   } else {
+    req.flash("indexMessage", "No hay publicaciones disponibles");
+    res.redirect("/adopta-pets");
+  }
+};
+
+exports.adminDeleteImg = (req, res) => {
+  if (req.user.state.includes("1")) {
+    const { id } = req.params;
+    Publication.findById(id, (err, data) => {
+      if (err) {
+        console.log(err);
+        req.flash(
+          "indexMessage",
+          "Hubo problemas para eliminar la publicación, intenta más tarde"
+        );
+        res.redirect("/adopta-pets");
+      } else {
+        const index = data.photos.indexOf(req.body.photo);
+        if (index > -1) {
+          data.photos.splice(index, 1);
+          const { photos } = data;
+          Publication.findByIdAndUpdate(
+            id,
+            { photos },
+            { new: true },
+            (err, pub) => {
+              if (err) {
+                console.log(err);
+                req.flash(
+                  "indexMessage",
+                  "Hubo problemas actualizando los datos " +
+                    "de la publicación, intenta más tarde"
+                );
+                return res.redirect("/adopta-pets");
+              }
+              deleteFiles([req.body.photo], err => {
+                if (err) {
+                  console.log(err);
+                  req.flash(
+                    "indexMessage",
+                    "Hubo problemas actualizando los datos " +
+                      "de la publicación, intenta más tarde"
+                  );
+                  return res.redirect("/adopta-pets");
+                }
+                req.flash(
+                  "adminPubMessage",
+                  "Los datos han sido actualizados exitosamente"
+                );
+                res.redirect(`/adopta-pets/publications/admin/${id}/edit`);
+              });
+            }
+          );
+        }
+      }
+    });
+  } else {
+    req.flash("indexMessage", "No hay publicaciones disponibles");
     res.redirect("/adopta-pets");
   }
 };

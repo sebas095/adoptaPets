@@ -13,7 +13,19 @@ module.exports = (app, mountPoint) => {
     publicationController.new
   );
 
+  router.get(
+    "/admin",
+    sessionController.loginRequired,
+    publicationController.admin
+  );
+
   router.get("/search", publicationController.search);
+
+  router.get(
+    "/admin/:id/edit",
+    sessionController.loginRequired,
+    publicationController.adminEdit
+  );
 
   router.get(
     "/:id/edit",
@@ -32,6 +44,12 @@ module.exports = (app, mountPoint) => {
 
   // PUT
   router.put(
+    "/admin/:id/edit",
+    sessionController.loginRequired,
+    publicationController.adminUpdate
+  );
+
+  router.put(
     "/:id/edit",
     sessionController.loginRequired,
     publicationController.update
@@ -39,10 +57,23 @@ module.exports = (app, mountPoint) => {
 
   // DELETE
   router.delete(
+    "/admin/:id/delete",
+    sessionController.loginRequired,
+    publicationController.adminDeleteImg
+  );
+
+  router.delete(
+    "/admin/:id",
+    sessionController.loginRequired,
+    publicationController.adminDelete
+  );
+
+  router.delete(
     "/:id/delete",
     sessionController.loginRequired,
     publicationController.deleteImg
   );
+
   router.delete(
     "/:id",
     sessionController.loginRequired,
